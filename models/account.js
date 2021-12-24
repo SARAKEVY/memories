@@ -24,7 +24,6 @@ const accountSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 3000,
   },
   manager: {
     type: String,
@@ -56,7 +55,7 @@ function validateAccount(account) {
     name: Joi.string().min(2).max(255).required(),
     type: Joi.string().min(2).max(255).required(),
     target: Joi.string().min(2).max(1000),
-    description: Joi.string().min(2).max(3000).required(),
+    description: Joi.string().min(2).required(),
     manager: Joi.string().max(2).max(255).required(),
     users: Joi.array().required(),
     tags: Joi.array().required(),
