@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express' )
 const app = express()
 const port = 3500
@@ -25,3 +26,6 @@ mongoose.set('debug','true');
 app.listen(port,()=>{
     console.log(`example app listening at http://localhost:${port}`)
 })
+=======
+
+>>>>>>> c8ff00c65b1671e059d51f1ecf5d8589b82ae29a
