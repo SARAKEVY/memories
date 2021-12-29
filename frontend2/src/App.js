@@ -1,8 +1,10 @@
-import logo from "./logo.svg";
-import "./App.css";
+import Account from "./components/account";
+import './sass/main.css';
 
 function App() {
-  return <div className="App"></div>;
+  return <div className="App">
+    <Account></Account>
+  </div>;
 }
 
 export default App;

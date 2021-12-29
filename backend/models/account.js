@@ -2,47 +2,60 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 
 const accountSchema = new mongoose.Schema({
-  name: {
+  acName: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 255,
   },
-  type: {
+  acType: {
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 255,
+    maxlength: 30,
   },
-  target: {
+  acTarget: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 1000,
   },
-  description: {
+  acDescription: {
     type: String,
     required: true,
     minlength: 2,
+    maxlength:5000,
   },
-  manager: {
+  acManagerName: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 255,
   },
-  users: {
+  acManagerEmail: {
+    type: String,
+    required: true,
+    minlength: 11,
+    maxlength: 255,
+  },
+  acManagerPassword: {
+    type: String,
+    required: true,
+    minlength: 8,
+    maxlength:10
+  },
+  acUsers: {
     type: Array,
   },
-  tags: {
+  acTags: {
     type: Array,
   },
-  properties: {
+  acProperties: {
     type: Array,
     required: true,
     minlength: 1,
   },
-  createdDate: {
+  acCreatedDate: {
     type: Date,
     default: Date.now,
   },

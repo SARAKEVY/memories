@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-
+import {addAccount} from '../services/accountService';
+import axios from 'axios';
 
 function Account(props) {
-  let type_ar = ["family", "Freindly", "Company", "Other"];
+  let type_ar = ["Family", "Freindly", "Company", "Recipes", "Other"];
   let tags_ar = ["Joys", "parties", "documentation from the past", "daily documentation", "other"];
   let properties_ar = ["bfb","fdfgs"];
 
@@ -18,9 +19,29 @@ function Account(props) {
     }
   }
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit =  async (data) => {
+      console.log(data);
+     try{
+        await addAccount(data);
+    }
+    catch(ex){
+        console.log(ex);
+    }
   };
+
+
+  /* var expanded = false;
+
+   function showCheckboxes(){
+    var checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+      checkboxes.style.display = "block";
+      expanded = true;
+    } else {
+      checkboxes.style.display = "none";
+      expanded = false;
+    }
+  } */
 
 
   return (
@@ -74,15 +95,40 @@ function Account(props) {
         {errors.acName && <span style={styleTags.span}>This field is required*</span>}
         <br></br>
 
-        <label>Tags</label>
-        <select className="form-select"
-        {...register("acTags", { required: true, minlength: 2, maxlength: 30,})}>
+        {/* <label>Tags</label>
+        <input type="checkbox" id="scales" checked/>
+        <label for="scales">Scales</label>
+        <input type="checkbox" id="scales" checked/>
+        <label for="scales">Scales</label>
+        <input type="checkbox" id="scales" checked/>
+        <label for="scales">Scales</label>
+        <input type="checkbox" id="scales" checked/>
+        <label for="scales">Scales</label> */}
+
+{/* <div class="multiselect">
+    <div class="selectBox" onClick={ () => showCheckboxes}>
+      <select>
+        <option>Select an option</option>
+      </select>
+      <div class="overSelect"></div>
+    </div>
+    <div id="checkboxes">
+      <label for="one">
+        <input type="checkbox" id="one" />First checkbox</label>
+      <label for="two">
+        <input type="checkbox" id="two" />Second checkbox</label>
+      <label for="three">
+        <input type="checkbox" id="three" />Third checkbox</label>
+    </div>
+  </div> */}
+        {/* <select className="form-select"
+        {...register("acTags", { required: true, minlength: 2, maxlength: 30,})} multiple>
           <option className="text-center">choose tags...</option>
           {tags_ar.map((tag, index) => (
           <option className="text-center" key={index} value={tag}>{tag}</option>))}
         </select>
         {errors.acType && <span style={styleTags.span}>This field is required*</span>}
-        <br></br>
+        <br></br> */}
 
         <label>Properties</label>
         <input className="form-control" 

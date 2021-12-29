@@ -1,17 +1,20 @@
 
 const express = require('express' )
 const app = express()
+const mongoose = require('mongoose');
+const cors = require('cors');
 const port = 3500
 
-const mongoose = require('mongoose');
+const accountsRouter = require ('./routes/accounts');
 
 
 
 //const usersRouter = require('./routes/usersRoute');
+app.use(cors());
 app.use(express.json());
-
+app.use(express.static('public'));
 //app.use('/api/user',usersRouter);
-
+app.use('/api/accounts', accountsRouter)
 
 mongoose.connect('mongodb://localhost:27017/memories', {
   useNewUrlParser: true,
