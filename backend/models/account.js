@@ -42,13 +42,15 @@ const accountSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 8,
-    maxlength:10
+    maxlength:15
   },
   acUsers: {
     type: Array,
+    required: true,
   },
   acTags: {
     type: Array,
+    required: true,
   },
   acProperties: {
     type: Array,
@@ -65,14 +67,16 @@ const Account = mongoose.model("Account", accountSchema);
 
 function validateAccount(account) {
   const schema = Joi.object({
-    name: Joi.string().min(2).max(255).required(),
-    type: Joi.string().min(2).max(255).required(),
-    target: Joi.string().min(2).max(1000),
-    description: Joi.string().min(2).required(),
-    manager: Joi.string().max(2).max(255).required(),
-    users: Joi.array().required(),
-    tags: Joi.array().required(),
-    properties: Joi.array().min(1).required(),
+    acName: Joi.string().min(2).max(255).required(),
+    acType: Joi.string().min(2).max(255).required(),
+    acTarget: Joi.string().min(2).max(1000),
+    acDescription: Joi.string().min(2).required(),
+    acManagerName: Joi.string().max(2).max(255).required(),
+    acManagerEmail:Joi.string().min(11).max(255).email().required(),
+    acManagerPassword: Joi.string().min(8).max(15).required(),
+    acUsers: Joi.array().required(),
+    acTags: Joi.array().required(),
+    acProperties: Joi.array().min(1).required(),
   });
 
   return schema.validate(account);
