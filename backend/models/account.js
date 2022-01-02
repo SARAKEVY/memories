@@ -44,19 +44,11 @@ const accountSchema = new mongoose.Schema({
     minlength: 8,
     maxlength:15
   },
-  users: {
+  /* users: {
     type: Array,
     required: true,
-  },
-  tags: {
-    type: Array,
-    required: true,
-  },
-  properties: {
-    type: Array,
-    required: true,
-    minlength: 1,
-  },
+  }, */
+  
   createdDate: {
     type: Date,
     default: Date.now,
@@ -74,9 +66,8 @@ function validateAccount(account) {
     managerName: Joi.string().max(2).max(255).required(),
     managerEmail:Joi.string().min(11).max(255).email().required(),
     managerPassword: Joi.string().min(8).max(15).required(),
-    users: Joi.array().required(),
-    tags: Joi.array().required(),
-    properties: Joi.array().min(1).required(),
+    /* users: Joi.array().required(),
+     */
   });
 
   return schema.validate(account);
