@@ -1,5 +1,6 @@
-// const Joi = require("joi");
+const Joi = require("joi");
 const mongoose = require("mongoose");
+
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -62,7 +63,6 @@ function validateUser(user) {
    return schema.validate(user);
 }
 
- exports.User = User;
+ //exports.User = User;
  exports.validate = validateUser;
-module.exports = mongoose.model('User', userSchema, 'User');
-
+ module.exports = User;

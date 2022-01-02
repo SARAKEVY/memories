@@ -7,7 +7,9 @@ export function addAccount ( data ){
 }
 
 
+const service = {
+    addAccount,
+}
 
-
-
+export default service;
 

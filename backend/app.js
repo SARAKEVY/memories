@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const port = 3500
 
- const accountsRouter = require ('./routes/accounts');
- 
+const accountsRouter = require ('./routes/accounts');
+const usersRouter = require ('./routes/users');
 app.use(express.json());
+
 
 
 //const usersRouter = require('./routes/usersRoute');
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.static('public'));
 //app.use('/api/user',usersRouter);
 app.use('/api/accounts', accountsRouter)
+app.use('/api/users', usersRouter)
 
 mongoose.connect('mongodb://localhost/memories', {
   useNewUrlParser: true,

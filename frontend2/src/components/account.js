@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import {addAccount} from '../services/accountService';
+import accountService from '../services/accountService';
 import axios from 'axios';
 
 function Account(props) {
@@ -22,7 +22,7 @@ function Account(props) {
   const onSubmit =  async (data) => {
       console.log(data);
      try{
-        await addAccount(data);
+        await accountService.addAccount(data);
     }
     catch(ex){
         console.log(ex);
@@ -51,48 +51,48 @@ function Account(props) {
       <form className="container col-lg-4" onSubmit={handleSubmit(onSubmit)}>
         <label>Account Name</label>
         <input className="form-control"
-        {...register("acName", {required: true, minlength: 2, maxlength: 255,})}/>
-        {errors.acName && <span style={styleTags.span}>This field is required*</span>}
+        {...register("name", {required: true, minlength: 2, maxlength: 255,})}/>
+        {errors.name && <span style={styleTags.span}>This field is required*</span>}
         <br></br>
 
         <label>Account Type</label>
         <select
           className="form-select"
-          {...register("acType", { required: true, minlength: 2, maxlength: 30,})}>
-            {errors.acType && <span style={styleTags.span}>This field is required*</span>}
+          {...register("type", { required: true, minlength: 2, maxlength: 30,})}>
+            {errors.type && <span style={styleTags.span}>This field is required*</span>}
           <option className="text-center">choose type...</option>
           {type_ar.map((type, index) => (
             <option className="text-center" key={index} value={type}>{type}</option>))}
         </select>
-        {errors.acType && <span style={styleTags.span}>This field is required*</span>}
+        {errors.type && <span style={styleTags.span}>This field is required*</span>}
         <br></br>
 
         <label className="">Account Target</label>
         <input className="form-control"
-        {...register("acTarget", { required: true, minlength: 2, maxlength: 1000 })}/>
-        {errors.acTarget && <span style={styleTags.span}>This field is required*</span>}
+        {...register("target", { required: true, minlength: 2, maxlength: 1000 })}/>
+        {errors.target && <span style={styleTags.span}>This field is required*</span>}
         <br></br>
 
         <label>Account Description</label>
         <input className="form-control"
-        {...register("acDescription", { required: true, minlength: 2, maxlength: 5000 })}/>
-        {errors.acDescription && <span style={styleTags.span}>This field is required*</span>}
+        {...register("description", { required: true, minlength: 2, maxlength: 5000 })}/>
+        {errors.description && <span style={styleTags.span}>This field is required*</span>}
         <br></br>
 
         <label>Manager Name</label>
         <input className="form-control"
-        {...register("acManagerName", { required: true, minlength: 2, maxlength: 255 })}/>
-        {errors.acManagerName && <span style={styleTags.span}>This field is required*</span>}
+        {...register("managerName", { required: true, minlength: 2, maxlength: 255 })}/>
+        {errors.managerName && <span style={styleTags.span}>This field is required*</span>}
         <br></br>
 
         <label>Manager Email</label>
         <input type="email" className="form-control"
-        {...register("acManagerEmail", { required: true, minlength: 2, maxlength: 255 })} />
+        {...register(" managerEmail", { required: true, minlength: 2, maxlength: 255 })} />
         {errors.acEmail && <span style={styleTags.span}>Enater invalid email*</span>}
         <label>Manager Password</label>
         <input placeholder="8 caracters, lowercase and uppercase letters and numbers" className="form-control mb-2"
-        {...register("acManagerPassword", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ })} />
-        {errors.acName && <span style={styleTags.span}>This field is required*</span>}
+        {...register("managerPassword", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ })} />
+        {errors.name && <span style={styleTags.span}>This field is required*</span>}
         <br></br>
 
         {/* <label>Tags</label>
@@ -122,21 +122,21 @@ function Account(props) {
     </div>
   </div> */}
         {/* <select className="form-select"
-        {...register("acTags", { required: true, minlength: 2, maxlength: 30,})} multiple>
+        {...register("tags", { required: true, minlength: 2, maxlength: 30,})} multiple>
           <option className="text-center">choose tags...</option>
           {tags_ar.map((tag, index) => (
           <option className="text-center" key={index} value={tag}>{tag}</option>))}
         </select>
-        {errors.acType && <span style={styleTags.span}>This field is required*</span>}
+        {errors.type && <span style={styleTags.span}>This field is required*</span>}
         <br></br> */}
 
-        <label>Properties</label>
+         <label>Properties</label>
         <input className="form-control" 
-        {...register("acProperties", {})} />
+        {...register("properties", {})} />
         <br></br>
 
         <label>Participants in the account</label>
-        <input className="form-control" {...register("acUsers", {})} />
+        <input className="form-control" {...register("users", {})} />
         <button className="btn btn-danger m-4">Submit</button>
       </form>
     </div>

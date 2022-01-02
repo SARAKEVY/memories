@@ -2,62 +2,62 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 
 const accountSchema = new mongoose.Schema({
-  acName: {
+  name: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 255,
   },
-  acType: {
+   type: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 30,
   },
-  acTarget: {
+  target: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 1000,
   },
-  acDescription: {
+  description: {
     type: String,
     required: true,
     minlength: 2,
     maxlength:5000,
   },
-  acManagerName: {
+  managerName: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 255,
   },
-  acManagerEmail: {
+  managerEmail: {
     type: String,
     required: true,
     minlength: 11,
     maxlength: 255,
-  },
-  acManagerPassword: {
-    type: String,
+  }, 
+  managerPassword: {
+   type: String,
     required: true,
     minlength: 8,
     maxlength:15
   },
-  acUsers: {
+  users: {
     type: Array,
     required: true,
   },
-  acTags: {
+  tags: {
     type: Array,
     required: true,
   },
-  acProperties: {
+  properties: {
     type: Array,
     required: true,
     minlength: 1,
   },
-  acCreatedDate: {
+  createdDate: {
     type: Date,
     default: Date.now,
   },
@@ -67,20 +67,21 @@ const Account = mongoose.model("Account", accountSchema);
 
 function validateAccount(account) {
   const schema = Joi.object({
-    acName: Joi.string().min(2).max(255).required(),
-    acType: Joi.string().min(2).max(255).required(),
-    acTarget: Joi.string().min(2).max(1000),
-    acDescription: Joi.string().min(2).required(),
-    acManagerName: Joi.string().max(2).max(255).required(),
-    acManagerEmail:Joi.string().min(11).max(255).email().required(),
-    acManagerPassword: Joi.string().min(8).max(15).required(),
-    acUsers: Joi.array().required(),
-    acTags: Joi.array().required(),
-    acProperties: Joi.array().min(1).required(),
+    name: Joi.string().min(2).max(255).required(),
+    type: Joi.string().min(2).max(255).required(),
+    target: Joi.string().min(2).max(1000),
+    description: Joi.string().min(2).required(),
+    managerName: Joi.string().max(2).max(255).required(),
+    managerEmail:Joi.string().min(11).max(255).email().required(),
+    managerPassword: Joi.string().min(8).max(15).required(),
+    users: Joi.array().required(),
+    tags: Joi.array().required(),
+    properties: Joi.array().min(1).required(),
   });
 
   return schema.validate(account);
 }
 
-exports.Account = Account;
-exports.validateAccount = validateAccount;
+//exports.Account = Account;
+exports.validate = validateAccount;
+module.exports = Account;
