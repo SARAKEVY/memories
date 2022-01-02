@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
-const {Account, validateAccount } = require('../models/account');
+const accountModel = require('../models/account');
 
 
 router.get('/', async (req, res) => {
-    const accounts = await Account.find();
+    const accounts = await accountModel.find();
 
     try {
         res.send(accounts);
@@ -26,26 +26,22 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-
-
-
-
-router.post('/', async (req, res) => {
+/* router.post('/', async (req, res) => {
     console.log('hi')
     const { error} = validateAccount(req.body);
-    if ( error ) return res.status(400).send(error.details[0].massage);
+    if ( error ) return res.status(400).send(error.details[0].message);
     try{
         let account = new Account({ 
-            acName:req.body.acName,
-            acType:req.body.acType,
-            acTarget:req.body.acTarget,
-            asDescription:req.body.asDescription,
-            acManagerName:req.body.acManagerName,
-            acManagerEmail:req.body.acManagerEmail,
-            asManagerPassword:req.body.acManagerPassword,
-            acUsers:req.body.acUsers,
-            acTags:req.body.acTags,
-            acProperties:req.body.acProperties
+            name:req.body.name,
+            type:req.body.type,
+            target:req.body.target,
+            description:req.body.description,
+            managerName:req.body.managerName,
+            managerEmail:req.body.managerEmail,
+            managerPassword:req.body.managerPassword,
+            users:req.body.users,
+            tags:req.body.tags,
+            properties:req.body.properties
         });
         await Account.save();
         res.send(account)
@@ -54,12 +50,12 @@ router.post('/', async (req, res) => {
         console.log( e);
     }
 });
-
-/* router.post('/', async (req, res) => {
-    const { error } = validateAccount(req.body);
-    if ( error) return res.status(400).send(error.datails[0].message);
+ */
+router.post('/', async (req, res) => {
+    
+    
     const newAccount = req.body
-    const updateaccount = await Account.insertMany(newAccount)
+    const updateaccount = await accountModel.insertMany(newAccount)
 
     try {
         res.send("success:",newAccount);        
@@ -67,7 +63,7 @@ router.post('/', async (req, res) => {
     catch (error) {
         res.status(500).send(error);
     }
-}) */
+});
 
 
 router.put('/:id', async (req, res) => {
