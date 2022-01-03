@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
-const accountModel = require('../models/account');
+const {Account, validateAccount} = require('../models/account');
 
 
 router.get('/', async (req, res) => {
@@ -26,12 +26,12 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-/* router.post('/', async (req, res) => {
+ router.post('/', async (req, res) => {
     console.log('hi')
     const { error} = validateAccount(req.body);
     if ( error ) return res.status(400).send(error.details[0].message);
     try{
-        let account = new Account({ 
+        let new_account = new Account({ 
             name:req.body.name,
             type:req.body.type,
             target:req.body.target,
@@ -39,19 +39,19 @@ router.get('/:id', async (req, res) => {
             managerName:req.body.managerName,
             managerEmail:req.body.managerEmail,
             managerPassword:req.body.managerPassword,
-            users:req.body.users,
-            tags:req.body.tags,
-            properties:req.body.properties
+            
         });
-        await Account.save();
-        res.send(account)
+        await new_account.save();
+        res.send(new_account)
     }
     catch(e){
         console.log( e);
+        res.status(500).send(e.massege);
     }
+
 });
- */
-router.post('/', async (req, res) => {
+
+/* router.post('/', async (req, res) => {
     
     
     const newAccount = req.body
@@ -65,7 +65,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-
+ */
 router.put('/:id', async (req, res) => {
     const accountUpdate = req.body;
     const account = await Account.findByIdAndUpdate((req.params.id), accountUpdate).exec();

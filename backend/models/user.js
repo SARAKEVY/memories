@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
-
+const PasswordComplexity = require("joi-password-complexity");
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 11,
     maxlength: 255,
     unique: true,
   },
@@ -36,8 +36,13 @@ const userSchema = new mongoose.Schema({
     maxlength: 10,
     required: true,
   },
+  adress:{
+    type:String,
+    minlength:2,
+    maxlength:300
+  },
 
-  createAt: {
+  createDate: {
     type: Date,
     default: Date.now,
   },
@@ -49,7 +54,7 @@ function validateUser(user) {
    const schema = Joi.object({
      firstName: Joi.string().min(2).max(255).required(),
      lastName: Joi.string().min(2).max(255).required(),
-     email: Joi.string().min(2).max(255).email().required(),
+     email: Joi.string().min(11).max(255).email().required(),
      password: new PasswordComplexity({
        min: 8,
        max: 25,
@@ -58,11 +63,12 @@ function validateUser(user) {
        numeric: 1,
      }),
      phone: Joi.string().min(2).max(10).required(),
+     adress:Joi.string()
   });
 
    return schema.validate(user);
 }
 
- //exports.User = User;
+ exports.User = User;
  exports.validate = validateUser;
- module.exports = User;
+ 

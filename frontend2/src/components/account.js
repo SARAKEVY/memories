@@ -71,12 +71,12 @@ function Account(props) {
 
         <label>Manager Email</label>
         <input type="email" className="form-control"
-        {...register(" managerEmail", { required: true, minlength: 2, maxlength: 255 })} />
-        {errors.acEmail && <span style={styleTags.span}>Enater invalid email*</span>}
+        {...register(" managerEmail", { required: true, minlength: 11, maxlength: 255 })} />
+        {errors.managerEmail && <span style={styleTags.span}>Enater invalid email*</span>}
         <label>Manager Password</label>
         <input className="form-control mb-2"
         {...register("managerPassword", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ })} />
-        {errors.name && <span style={styleTags.span}>Must contain lowercase and uppercase letters and numbers *</span>}
+        {errors.managerPassword && <span style={styleTags.span}>Must contain lowercase and uppercase letters and numbers *</span>}
         <br></br>
 
         {/* <label>Participants in the account</label>

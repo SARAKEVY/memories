@@ -8,7 +8,7 @@ export function addAccount ( data ){
 
 
 const service = {
-    addAccount,
+    addAccount
 }
 
 export default service;
