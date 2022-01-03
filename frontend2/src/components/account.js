@@ -30,9 +30,9 @@ function Account(props) {
 
   return (
     <div className="container">
-      <h1>Open Account</h1>
+      <h1 className="text-center">Open Account</h1>
 
-      <form className="container col-lg-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="container text-center col-lg-4" onSubmit={handleSubmit(onSubmit)}>
         <label>Account Name</label>
         <input className="form-control"
         {...register("name", {required: true, minlength: 2, maxlength: 255,})}/>
@@ -71,7 +71,7 @@ function Account(props) {
 
         <label>Manager Email</label>
         <input type="email" className="form-control"
-        {...register(" managerEmail", { required: true, minlength: 11, maxlength: 255 })} />
+        {...register("managerEmail", { required: true, minlength: 11, maxlength: 255})} />
         {errors.managerEmail && <span style={styleTags.span}>Enater invalid email*</span>}
         <label>Manager Password</label>
         <input className="form-control mb-2"

@@ -38,7 +38,6 @@ const accountSchema = new mongoose.Schema({
     required: true,
     minlength: 11,
     maxlength: 255,
-    unique: true,
   }, 
   managerPassword: {
    type: String,

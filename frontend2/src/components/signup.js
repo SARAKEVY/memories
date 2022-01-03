@@ -27,8 +27,8 @@ function Signup(props){
 
     return(
         <div>
-            <h1>Signup</h1>
-            <form className="container col-lg-4" onSubmit={handleSubmit(onSubmit)}>
+            <h1 className="text-center">Signup</h1>
+            <form className="container text-center col-lg-4" onSubmit={handleSubmit(onSubmit)}>
         <label>First Name</label>
         <input className="form-control"
         {...register("firstName", {required: true, minlength: 2, maxlength: 255,})}/>
