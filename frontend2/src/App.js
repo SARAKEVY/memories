@@ -11,12 +11,9 @@ import ItemProperty from "./components/itemProperty";
 import './App.css';
 
 
-
 function App() {
 
-
-  
-  return (
+return (
     <BrowserRouter>
       <Routes>
         <Route path = "item" element={<Item/>}/>
