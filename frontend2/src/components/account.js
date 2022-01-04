@@ -69,7 +69,7 @@ function Account(props) {
         <br></br>
 
         <label>Manager Email</label>
-        <input type="email" className="form-control"
+        <input type="email" className="form-control mb-2"
         {...register("managerEmail", { required: true, minlength: 11, maxlength: 255})} />
         {errors.managerEmail && <span style={styleTags.span}>Enater invalid email*</span>}
         <label>Manager Password</label>
