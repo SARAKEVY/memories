@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import accountService from '../services/accountService';
-import axios from 'axios';
 
 function Account(props) {
   let type_ar = ["Family", "Freindly", "Company", "Recipes", "Other"];

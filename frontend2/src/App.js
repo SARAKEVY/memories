@@ -4,7 +4,8 @@ import React from "react";
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Item from "./components/item";
 //import Upload from "./components/upload";
-//import Signup from "./components/signup";
+import Signup from "./components/signup";
+import FormikFormDemo from "./components/login";
 
 
 
@@ -13,13 +14,9 @@ function App() {
     
     
   <div className="App">
-   
+    <FormikFormDemo></FormikFormDemo>
     <Account></Account>
-<<<<<<< HEAD
-    {/* <Signup></Signup>  */}
-=======
-    <Item></Item>
->>>>>>> 44476d99420e434f6b972bf00859b67a32ef5f3c
+    <Signup></Signup> 
     {/* <Routes>
       <Route path = "/upload" component={Upload}/>
       <Route path = "/signup" component={Signup}/>
