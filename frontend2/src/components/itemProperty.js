@@ -12,16 +12,16 @@ const optionsArry = [
 ]
 
 
- class   ItemProperty extends React.Component{
+export default function  ItemProperty(props){
 
-  constructor(props){
-    super(props)
-    this.state = {
-      file: null
-    }
+  // constructor(props){
+  //   super(props)
+  //   this.state = {
+  //     file: null
+  //   }
 
 
-}
+//}
 
   //   render: function() {
 
@@ -34,7 +34,7 @@ const optionsArry = [
   //     return <select>{Data.map(MakeItem)}</select>;
 
   // }
-  render(){
+
     return (
       <div>
     <Select  
@@ -47,6 +47,5 @@ const optionsArry = [
     );
   
   }
- }
+ 
 
- export default ItemProperty;

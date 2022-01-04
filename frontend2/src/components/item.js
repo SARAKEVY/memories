@@ -3,12 +3,11 @@ import ItemProperty from "./itemProperty";
 
 const React = require('react')
 
-
-class Item extends React.Component {
+export default function Item() {
   
 
 
-  render() {
+ 
     return (
       <div>
     <ImageUpload></ImageUpload>
@@ -16,5 +15,3 @@ class Item extends React.Component {
       </div>
     );
   }
-}
-export default  Item;
