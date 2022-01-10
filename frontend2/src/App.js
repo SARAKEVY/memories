@@ -19,8 +19,7 @@ return (
         <Route path = "item" element={<Item/>}/>
         <Route path = "signup" element={<Signup/>} />
         <Route path = "account" element={<Account/>}/>
-        <Route path = "imageUpload" element={<ImageUpload/>} />
-        <Route path = "itemProperty" element={<ItemProperty/>} />
+       
       </Routes> 
     </BrowserRouter>
   )};
