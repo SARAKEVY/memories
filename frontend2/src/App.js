@@ -4,9 +4,8 @@ import React from "react";
 import {
   BrowserRouter, Routes, Route } from "react-router-dom";
 import Item from "./components/item";
-import ImageUpload from "./components/imageUpload";
 import Signup from "./components/signup";
-import ItemProperty from "./components/itemProperty";
+
 //import FormikFormDemo from "./components/login";
 import './App.css';
 
