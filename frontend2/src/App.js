@@ -9,6 +9,7 @@ import Signup from "./components/signup";
 import ItemProperty from "./components/itemProperty";
 //import FormikFormDemo from "./components/login";
 import './App.css';
+import Galery from "./components/galery";
 
 
 function App() {
@@ -19,7 +20,7 @@ return (
         <Route path = "item" element={<Item/>}/>
         <Route path = "signup" element={<Signup/>} />
         <Route path = "account" element={<Account/>}/>
-       
+        <Route path = "galery" element={<Galery/>}/>
       </Routes> 
     </BrowserRouter>
   )};
