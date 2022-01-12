@@ -50,5 +50,5 @@ function validateItem(item) {
 
 // exports.Item = Item;
 // exports.validateItem = validateItem;
-module.exports.Array = mongoose.model('Item', itemSchema, 'Item');
+module.exports = mongoose.model('Item', itemSchema, 'Item');
 
