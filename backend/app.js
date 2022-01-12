@@ -16,7 +16,7 @@ app.use(express.json());
 //const usersRouter = require('./routes/usersRoute');
 app.use(cors());
 app.use(express.json());
-עע
+
 app.use(express.static('public'));
 //app.use('/api/user',usersRouter);
 app.use('/api/accounts', accountsRouter)

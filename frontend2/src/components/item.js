@@ -10,29 +10,31 @@ const React = require('react')
 export default function Item() {
   
 
-  const myPersonArray = [
+  const myFiguresArray = [
     { value: 'chocolate', label: 'סבא נתן' },
     { value: 'strawberry', label: 'סבתא נחמה' },
     { value: 'vanilla', label: 'דודה יהודית' }
   ]
 
-  const myAreaArray = [
+  const myLocationArray = [
     { value: 'chocolate', label: 'ישראל - ירושלים' },
     { value: 'strawberry', label: 'הונגריה - בודפסט' },
     { value: 'vanilla', label: 'צרפת - פריס' }
   ]
-  const [personArray,setPersonArray] = useState(myPersonArray); 
-  const [personPlaceHolder,setPersonPlaceHolder] =useState('הדמות/יות המשויכות ?'); 
+  const [figuresArray,setFiguresArray] = useState(myFiguresArray); 
+  const [figuresPlaceHolder,setPersonPlaceHolder] =useState('הדמות/יות המשויכות ?'); 
 
-  const [areaArray,setareaArray] = useState(myAreaArray); 
-  const [areaPlaceHolder,setAreaPlaceHolder]= useState("מיקום ?");
+  const [locationArray,setLocationArray] = useState(myLocationArray); 
+  const [locationPlaceHolder,setLocationPlaceHolder]= useState("מיקום ?");
 
+  
+  
     return (
-      <div>
+      <div className="container">
     <ImageUpload></ImageUpload>
-    <ItemProperty optionsArray={personArray} place_holder={personPlaceHolder}></ItemProperty>
+    <ItemProperty optionsArray={figuresArray} place_holder={figuresPlaceHolder}></ItemProperty>
     <br/>
-    <ItemProperty optionsArray={areaArray} place_holder={areaPlaceHolder}></ItemProperty>
+    <ItemProperty optionsArray={locationArray} place_holder={areaLocationHolder}></ItemProperty>
       </div>
-    );
+    );;
   }
