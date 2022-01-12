@@ -46,7 +46,7 @@ router.get('/:id', async (req, res) => {
 
 
  router.post('/', async (req, res) => {
-    // const { error } = validate(req.body)
+    const { error } = validate(req.body)
 
     const newitem = req.body
     const updateitem = await itemModel.insertMany(newitem)
