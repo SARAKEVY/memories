@@ -13,12 +13,11 @@ app.use(express.json());
 
 
 
-//const usersRouter = require('./routes/usersRoute');
 app.use(cors());
 app.use(express.json());
 
 app.use(express.static('public'));
-//app.use('/api/user',usersRouter);
+
 app.use('/api/accounts', accountsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/items', itemsRouter)
