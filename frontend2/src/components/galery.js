@@ -88,6 +88,7 @@ export default function Galery ()  {
                     autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
             </div>
 
+
             <div className="card">
                 <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
                     itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
