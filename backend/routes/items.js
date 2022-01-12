@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-    const item = await itemModel.findById(req.params.id).exec();
+  const item = await itemModel.findById(req.params.id).exec();
   
     try {
         res.json(item)
@@ -28,25 +28,25 @@ router.get('/:id', async (req, res) => {
     }
 })
 
- router.post('/', async (req, res) => {
-     console.log('hi');
-    const { error } = validate(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+//  router.post('/', async (req, res) => {
+//      console.log('hi');
+//     const { error } = validate(req.body);
+//     if(error) return res.status(400).send(error.details[0].message);
 
-    let item = await Item.findOne({ email: req.body.email});
-    if (item) return res.status(400).send('משתמש רשום');
+//     // let item = await Item.findOne({ email: req.body.email});
+//     // if (item) return res.status(400).send('משתמש רשום');
     
-    item = new Item (req.body);
-    const salt = await bcrypt.genSalt(10);
-    item.password = await bcrypt.hash(item.password, salt);
-    await item.save();
-    res.send(_.pick(item, ['_id', 'name', 'last', 'email']));
+//     item = new Item (req.body);
+//     const salt = await bcrypt.genSalt(10);
+//     item.password = await bcrypt.hash(item.password, salt);
+//     await item.save();
+//     res.send(_.pick(item, ['_id', 'name', 'last', 'email']));
 
-    }); 
+//     }); 
 
 
-/* router.post('/', async (req, res) => {
-    const { error } = validate(req.body)
+ router.post('/', async (req, res) => {
+    // const { error } = validate(req.body)
 
     const newitem = req.body
     const updateitem = await itemModel.insertMany(newitem)
@@ -56,8 +56,9 @@ router.get('/:id', async (req, res) => {
     }
     catch (error) {
         res.status(500).send(error);
+        done();
     }
-}); */
+}); 
 
 
 router.put('/:id', async (req, res) => {

@@ -59,7 +59,7 @@ const accountSchema = new mongoose.Schema({
   },
 });
 
-const Account = mongoose.model("Account", accountSchema);
+// const Account = mongoose.model("Account", accountSchema);
 
 function validateAccount(account) {
   const schema = Joi.object({
@@ -77,6 +77,7 @@ function validateAccount(account) {
   return schema.validate(account);
 }
 
-exports.Account = Account;
-exports.validateAccount = validateAccount;
+// exports.Account = Account;
+// exports.validateAccount = validateAccount;
+module.exports = mongoose.model('Account', accountSchema, 'Account');
 
