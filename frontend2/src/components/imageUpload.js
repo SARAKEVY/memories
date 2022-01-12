@@ -1,8 +1,10 @@
 
 const React = require('react')
 
-class ImageUpload extends React.Component {
 
+
+
+class Upload extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -14,11 +16,11 @@ class ImageUpload extends React.Component {
     this.setState({
       file: URL.createObjectURL(event.target.files[0])
     })
-{/* <img src={this.state.file} height="300" />
+// {/* <img src={this.state.file} height="300" />
 
-<img src={this.state.file} class="widthSet" />
+// <img src={this.state.file} class="widthSet" />
 
-<img src={this.state.file} class="heightSet" /> */}
+// <img src={this.state.file} class="heightSet" /> */}
 
 }
 
@@ -34,4 +36,4 @@ class ImageUpload extends React.Component {
     );
   }
 }
-export default  ImageUpload;
+export default  Upload;
