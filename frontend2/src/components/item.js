@@ -34,7 +34,7 @@ export default function Item() {
     <ImageUpload></ImageUpload>
     <ItemProperty optionsArray={figuresArray} place_holder={figuresPlaceHolder}></ItemProperty>
     <br/>
-    <ItemProperty optionsArray={locationArray} place_holder={areaLocationHolder}></ItemProperty>
+    <ItemProperty optionsArray={locationArray} place_holder={locationPlaceHolder}></ItemProperty>
       </div>
     );;
   }

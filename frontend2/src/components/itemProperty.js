@@ -1,9 +1,15 @@
-//import reactSelect from 'react-select';
-import Select from 'react-select';
+import reactSelect from 'react-select'
+import Select from 'react-select'
 //import makeAnimated from 'react-select/animated';
 
 const React = require('react')
 
+
+const optionsArry = [
+  { value: 'chocolate', label: 'סבא נתן' },
+  { value: 'strawberry', label: 'סבתא נחמה' },
+  { value: 'vanilla', label: 'דודה יהודית' }
+]
 
 
 export default function  ItemProperty(props){
@@ -32,9 +38,9 @@ export default function  ItemProperty(props){
     return (
       <div>
     <Select  
-      options={props.optionsArray}
+      options={optionsArry}
       isMulti
-      placeholder={props.place_holder}
+      placeholder="הדמות/יות המשויכות ?"
       autoFocus
       isSearchable></Select><button>+</button>
       </div>

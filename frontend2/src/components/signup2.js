@@ -11,18 +11,17 @@ import { classNames } from 'primereact/utils';
 import  "../App.css";
 import "../index.css";
 
-const ReactHookFormDemo = () => {
+const Signup2 = () => {
     
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
 
     const defaultValues = {
-        name: '',
+        fullName: '',
         email: '',
         password: '',
-        date: null,
-        country: null,
-        accept: false
+        phone:'',
+        
     }
 
    
@@ -74,7 +73,7 @@ const ReactHookFormDemo = () => {
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                             <div className="p-field">
                                 <span className="p-float-label">
-                                    <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
+                                    <Controller fullName="fullName" control={control} rules={{ required: 'Full Name is required.' }} render={({ field, fieldState }) => (
                                         <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
@@ -104,19 +103,20 @@ const ReactHookFormDemo = () => {
                             </div>
                             <div className="p-field">
                                 <span className="p-float-label">
-                                    <Controller name="date" control={control} render={({ field }) => (
-                                        <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
+                                    <Controller phone="phone" control={control} rules={{   }} render={({ field, fieldState }) => (
+                                        <InputText id={field.phone} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="date">Birthday</label>
+                                    <label htmlFor="phone" className={classNames({ 'p-error': errors.phone })}>Phone*</label>
                                 </span>
+                                {getFormErrorMessage('phone')}
                             </div>
                             
-                            <div className="p-field-checkbox">
+                            {/* <div className="p-field-checkbox">
                                 <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
                                     <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                 )} />
                                 <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
-                            </div>
+                            </div> */}
 
                             <Button type="submit" label="Submit" className="p-mt-2" />
                         </form>
@@ -126,4 +126,4 @@ const ReactHookFormDemo = () => {
         </div>  
     );
 }
-export default ReactHookFormDemo ;
+export default Signup2 ;
