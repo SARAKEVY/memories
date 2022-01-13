@@ -14,6 +14,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";        
 import 'primeflex/primeflex.css';
+import Galery from "./components/galery";
 import Signup2 from "./components/signup2";
 import NavButtons from './components/navButtons';
 import Home from './components/home';
@@ -42,7 +43,7 @@ return (
           <Route path = "login" element={<ReactHookFormDemo/>}/>
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
-
+          <Route path = "galery" element={<Galery/>}/>
         </Routes> 
       </BrowserRouter>
     </React.Fragment>
