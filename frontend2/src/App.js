@@ -6,23 +6,46 @@ import {
 import Item from "./components/item";
 import ImageUpload from "./components/imageUpload";
 import Signup from "./components/signup";
+import Header from "./components/header";
 import ItemProperty from "./components/itemProperty";
-//import FormikFormDemo from "./components/login";
+import ReactHookFormDemo from "./components/login";
+import Page404 from "./components/page404";
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";        
+import 'primeflex/primeflex.css';
+import Signup2 from "./components/signup2";
+import NavButtons from './components/navButtons';
+import Home from './components/home';
 import './App.css';
-
 
 function App() {
 
+
+  
+
 return (
-    <BrowserRouter>
-      <Routes>
-        <Route path = "item" element={<Item/>}/>
-        <Route path = "signup" element={<Signup/>} />
-        <Route path = "account" element={<Account/>}/>
-        <Route path = "imageUpload" element={<ImageUpload/>} />
-        <Route path = "itemProperty" element={<ItemProperty/>} />
-      </Routes> 
-    </BrowserRouter>
+    <React.Fragment>
+      <header>
+        <Header/>
+        <NavButtons/>
+        
+      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path = '/' element={<Home/>}/>
+          <Route path = "item" element={<Item/>}/>
+          <Route path = "signup" element={<Signup/>} />
+          <Route path = "account" element={<Account/>}/>
+          <Route path = "imageUpload" element={<ImageUpload/>} />
+          <Route path = "itemProperty" element={<ItemProperty/>} />
+          <Route path = "login" element={<ReactHookFormDemo/>}/>
+          <Route path = "signup2" element={<Signup2/>}/>
+          <Route path = "page404" element={<Page404/>}/>
+
+        </Routes> 
+      </BrowserRouter>
+    </React.Fragment>
   )};
 
 export default App;
