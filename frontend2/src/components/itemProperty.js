@@ -6,7 +6,7 @@ const React = require('react')
 
 
 
-export default function  ItemProperty(props){
+export default function ItemProperty(props) {
 
   // constructor(props){
   //   super(props)
@@ -15,7 +15,7 @@ export default function  ItemProperty(props){
   //   }
 
 
-//}
+  //}
 
   //   render: function() {
 
@@ -29,17 +29,19 @@ export default function  ItemProperty(props){
 
   // }
 
-    return (
-      <div>
-    <Select  
-      options={props.optionsArray}
-      isMulti
-      placeholder={props.place_holder}
-      autoFocus
-      isSearchable></Select><button>+</button>
-      </div>
-    );
-  
-  }
- 
+  return (
+    <div>
+        
+      <Select
+        options={props.optionsArray}
+        isMulti
+        placeholder={props.place_holder}
+        autoFocus
+        isSearchable></Select><button>+</button>
+        </div>
+     
+  );
+
+}
+
 
