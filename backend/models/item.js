@@ -1,6 +1,7 @@
 import { Calendar } from 'primereact/calendar';
 
 // const Joi = require("joi");
+const Joi = require("joi");
 const mongoose = require("mongoose");
 
 const itemSchema = new mongoose.Schema({
@@ -36,7 +37,7 @@ const itemSchema = new mongoose.Schema({
   },
 });
 
-// const Item = mongoose.model("Item", itemSchema);
+const Item = mongoose.model("Item", itemSchema);
 
 function validateItem(item) {
   const schema = Joi.object({
@@ -50,7 +51,6 @@ function validateItem(item) {
   return schema.validate(item);
 }
 
-// exports.Item = Item;
-// exports.validateItem = validateItem;
-module.exports = mongoose.model('Item', itemSchema, 'Item');
+exports.Item = Item;
+exports.validateItem = validateItem;
 
