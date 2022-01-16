@@ -1,15 +1,8 @@
-import reactSelect from 'react-select'
+//import reactSelect from 'react-select'
 import Select from 'react-select'
 //import makeAnimated from 'react-select/animated';
 
-const React = require('react')
-
-
-const optionsArry = [
-  { value: 'chocolate', label: 'סבא נתן' },
-  { value: 'strawberry', label: 'סבתא נחמה' },
-  { value: 'vanilla', label: 'דודה יהודית' }
-]
+//const React = require('react')
 
 
 export default function ItemProperty(props) {
@@ -34,10 +27,10 @@ export default function ItemProperty(props) {
   //     return <select>{Data.map(MakeItem)}</select>;
 
   // }
-
+return(
     <div>
         
-      <Select
+        <Select
         options={props.optionsArray}
         isMulti
         placeholder={props.place_holder}
@@ -45,7 +38,7 @@ export default function ItemProperty(props) {
         isSearchable></Select><button>+</button>
         </div>
      
- // );
+  );
 
 }
 

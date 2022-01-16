@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ItemProperty from "./itemProperty";
+ import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
-import CalendarItem from "./calendarItem";
+ import CalendarItem from "./calendarItem";
 
 const React = require('react')
 
@@ -53,5 +53,5 @@ export default function Item() {
       </div>
       </div>
     </div>
-  );;
+  );
 }
