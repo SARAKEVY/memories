@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 router.use(express.json());
-const itemModel = require('../models/item');
-const {Item, validate} = require('../models/item');
+const { Item, validateItem } = require('../models/item');
+
 const bcrypt = require('bcrypt');
 
 router.get('/', async (req, res) => {
-    const items = await itemModel.find({});
+    const items = await Item.find({});
 
     try {
         res.send(items);
@@ -18,8 +18,8 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-  const item = await itemModel.findById(req.params.id).exec();
-  
+    const item = await Item.findById(req.params.id).exec();
+
     try {
         res.json(item)
     }
@@ -28,42 +28,25 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-//  router.post('/', async (req, res) => {
-//      console.log('hi');
-//     const { error } = validate(req.body);
-//     if(error) return res.status(400).send(error.details[0].message);
+router.post('/', async (req, res) => {
+    const { error } = validateItem(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-//     // let item = await Item.findOne({ email: req.body.email});
-//     // if (item) return res.status(400).send('משתמש רשום');
-    
-//     item = new Item (req.body);
-//     const salt = await bcrypt.genSalt(10);
-//     item.password = await bcrypt.hash(item.password, salt);
-//     await item.save();
-//     res.send(_.pick(item, ['_id', 'name', 'last', 'email']));
+    // let item = await Item.findOne({ email: req.body.email});
+    // if (item) return res.status(400).send('משתמש רשום');
 
-//     }); 
+    item = new Item(req.body);
+    const salt = await bcrypt.genSalt(10);
+    await item.save();
+    res.send(_.pick(item, ['tags', 'title', 'description',]));
 
+});
 
- router.post('/', async (req, res) => {
-    const { error } = validate(req.body)
-
-    const newitem = req.body
-    const updateitem = await itemModel.insertMany(newitem)
-
-    try {
-        res.send(newitem);
-    }
-    catch (error) {
-        res.status(500).send(error);
-        done();
-    }
-}); 
 
 
 router.put('/:id', async (req, res) => {
     const itemUpdate = req.body;
-    const item = await itemModel.findByIdAndUpdate((req.params.id), itemUpdate).exec();
+    const item = await Item.findByIdAndUpdate((req.params.id), itemUpdate).exec();
 
     try {
         res.send('item is Update')
@@ -75,8 +58,8 @@ router.put('/:id', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-    const item = await itemModel.findByIdAndDelete(req.params.id)
-  
+    const item = await Item.findByIdAndDelete(req.params.id)
+
     try {
         res.send('item is Delete')
     }

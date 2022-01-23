@@ -1,18 +1,11 @@
-import reactSelect from 'react-select'
+//import reactSelect from 'react-select'
 import Select from 'react-select'
 //import makeAnimated from 'react-select/animated';
 
-const React = require('react')
+//const React = require('react')
 
 
-const optionsArry = [
-  { value: 'chocolate', label: 'סבא נתן' },
-  { value: 'strawberry', label: 'סבתא נחמה' },
-  { value: 'vanilla', label: 'דודה יהודית' }
-]
-
-
-export default function  ItemProperty(props){
+export default function ItemProperty(props) {
 
   // constructor(props){
   //   super(props)
@@ -21,7 +14,7 @@ export default function  ItemProperty(props){
   //   }
 
 
-//}
+  //}
 
   //   render: function() {
 
@@ -34,18 +27,19 @@ export default function  ItemProperty(props){
   //     return <select>{Data.map(MakeItem)}</select>;
 
   // }
+return(
+    <div>
+        
+        <Select
+        options={props.optionsArray}
+        isMulti
+        placeholder={props.place_holder}
+        autoFocus
+        isSearchable></Select><button>+</button>
+        </div>
+     
+  );
 
-    return (
-      <div>
-    <Select  
-      options={optionsArry}
-      isMulti
-      placeholder="הדמות/יות המשויכות ?"
-      autoFocus
-      isSearchable></Select><button>+</button>
-      </div>
-    );
-  
-  }
- 
+}
+
 
