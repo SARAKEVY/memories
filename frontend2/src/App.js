@@ -13,7 +13,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";        
 import 'primeflex/primeflex.css';
- //import Galery from "./components/galery";
+ import Galery from "./components/galery";
  import Signup2 from "./components/signup2";
 
  import Home from './components/home';
@@ -24,7 +24,7 @@ import './App.css';
 function App() {
 
  
-  // <Route path = "galery" element={<Galery/>}/>
+
   
 
 return (
@@ -43,6 +43,7 @@ return (
           <Route path = "imageUpload" element={<ImageUpload/>} />
           <Route path = "itemProperty" element={<ItemProperty/>} />
           <Route path = "login" element={<ReactHookFormDemo/>}/>
+          <Route path = "galery" element={<Galery/>}/>]\
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
         </Routes> 

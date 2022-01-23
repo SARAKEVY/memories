@@ -7,11 +7,9 @@ import Select from 'react-select'
 
 export default function ItemProperty(props) {
 
-  // constructor(props){
-  //   super(props)
-  //   this.state = {
-  //     file: null
-  //   }
+  //const { onChangeItemProperty }= this.props.onChangeItemProperty;
+  //const [selectedValue, setSelectedValue] = useState(this.props.selectedValue);
+ 
 
 
   //}
@@ -27,6 +25,9 @@ export default function ItemProperty(props) {
   //     return <select>{Data.map(MakeItem)}</select>;
 
   // }
+
+  // onChange={(e)=>onChangeItemProperty(e.value)}
+  // onChange={props.onChangeItemProperty}
 return(
     <div>
         
