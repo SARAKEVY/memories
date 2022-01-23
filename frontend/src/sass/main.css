@@ -1,0 +1,267 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Licorice&family=Mochiy+Pop+P+One&display=swap");
+.divAc {
+  border: 1px solid #9c9999;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+.divAc .accountH1 {
+  color: #21b1b1;
+}
+
+.form-demo .card {
+  min-width: 450px;
+}
+
+.form-demo .card form {
+  margin-top: 2rem;
+}
+
+.form-demo .card .p-field {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 960px) {
+  .form-demo .card {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .form-demo .card {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.divSin {
+  border: 1px solid #9c9999;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+.divSin .signH1 {
+  color: #a3a0a0;
+}
+
+.dHeader {
+  background-color: #eeeeee;
+  font-family: 'Indie Flower', cursive;
+  font-weight: bold;
+  color: #21b1b1;
+}
+
+.dHeader .bShAcconuts2 {
+  color: #21b1b1;
+  font-size: 30px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #eeeeee;
+  margin: 0 auto;
+}
+
+.dHeader .headerH1 {
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 1200px) {
+  .dHeader .headerH1 {
+    font-size: 40px;
+  }
+  .dHeader .hMemories {
+    font-size: 17px;
+    margin: -10px;
+  }
+  .dHeader .userName {
+    font-size: 15px;
+    text-align: right;
+    margin: auto;
+  }
+  .dHeader .projectName {
+    font-size: 20px;
+  }
+  .dHeader .bShAcconuts2 {
+    margin-top: 15px;
+    margin-right: 15px;
+    /* .userA{
+            padding-right: 20px;
+        }
+     */
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1200px) {
+  .dHeader {
+    /* 
+    .userA{
+        padding-right: 20px;
+    } */
+  }
+  .dHeader .headerH1 {
+    font-size: 40px !important;
+  }
+  .dHeader .hMemories {
+    font-size: 17px;
+    margin-top: -20px;
+  }
+  .dHeader .userName {
+    font-size: 15px;
+    text-align: right;
+    margin: auto;
+  }
+  .dHeader .projectName {
+    font-size: 25px;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 767px) {
+  .dHeader .headerH1 {
+    font-size: 35px;
+    color: red;
+  }
+  .dHeader .hMemories {
+    font-size: 15px;
+    margin-top: -20px;
+  }
+  .dHeader .userName {
+    font-size: 10px;
+    text-overflow: inherit;
+    text-align: right;
+    margin: auto;
+    margin-right: 10px;
+  }
+  .dHeader .projectName {
+    font-size: 20px;
+    margin: auto;
+  }
+  .dHeader .bShAcconuts2 {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 575px) {
+  .dHeader .headerH1 {
+    font-size: 20px;
+  }
+  .dHeader .hMemories {
+    font-size: 12px;
+    margin-top: -20px;
+  }
+  .dHeader .userName {
+    font-size: 10px;
+    text-overflow: inherit;
+    text-align: right;
+    margin: auto;
+    margin-right: 10px;
+  }
+  .dHeader .projectName {
+    font-size: 15px;
+    margin: auto;
+  }
+  .dHeader .bShAcconuts2 {
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+}
+
+.bShAcconuts {
+  background-color: #41d3d3;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.bShAcconuts2 {
+  color: #21b1b1;
+  font-size: 25px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #fff;
+}
+
+.sideNav {
+  position: fixed;
+  left: 0;
+}
+
+.sideNav a:hover {
+  color: #0c0c0b;
+}
+
+.sideNav a {
+  background-color: #e7ebeb;
+  border-radius: 0px 25px 25px 0px;
+  padding: 8px 8px 8px 32px;
+  display: block;
+  color: #41d3d3;
+  border: 1px solid white;
+}
+
+.sideNav a i {
+  margin: 3px;
+  font-size: 30px;
+}
+
+/*   
+@media  screen and (max-width:575){
+    .sideNav a{
+        font-size:20px !important;
+    }
+    
+} */
+.btn-google-login {
+  border: 1px solid #d8d7d7;
+  background-color: white;
+  height: 70px;
+}
+
+.btn-signin {
+  font-size: 14px;
+  text-decoration: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.div-home {
+  margin-top: 50px;
+}
+
+.page404H1 {
+  font-family: 'Indie Flower', cursive;
+  font-weight: bold;
+  color: #21b1b1;
+  font-size: 100px;
+}
+
+.btn-google {
+  border: none;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  background-color: white;
+}
+
+.btn-google-login {
+  border: 1px solid #d8d7d7;
+  background-color: white;
+  height: 70px;
+}
+
+.btn-signin {
+  font-size: 14px;
+  text-decoration: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.div-home {
+  margin-top: 50px;
+}
+/*# sourceMappingURL=main.css.map */
