@@ -14,17 +14,10 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";        
 import 'primeflex/primeflex.css';
-<<<<<<< HEAD:frontend2/src/App.js
- import Galery from "./components/galery";
- import Signup2 from "./components/signup2";
-
- import Home from './components/home';
-=======
 import Galery from "./components/galery";
 import SideNav from "./components/sideNav";
 import Signup2 from "./components/signup2";
 import Home from './components/home';
->>>>>>> e108fb67d2de24ba089088d660a20156e63ce7e4:frontend/src/App.js
 import NavButtons from './components/navButtons';
 import Header from "./components/header";
 import './App.css';
@@ -43,13 +36,6 @@ function App() {
   },[]); */
 
 
- 
-<<<<<<< HEAD:frontend2/src/App.js
-=======
-  // <Route path = "galery" element={<Galery/>}/>
->>>>>>> e108fb67d2de24ba089088d660a20156e63ce7e4:frontend/src/App.js
-
-  
 
 return (
     <React.Fragment>

@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { addLocale } from 'primereact/api';
- 
+
 export default function CalendarItem() {
 
     let today = new Date();
@@ -68,8 +68,10 @@ export default function CalendarItem() {
              
                
                         <label htmlFor="date_calender">Date</label>
-                        <Calendar id="date_calender" value={myDate} onChange={(e) => setMyDate(e.value)} mask="99/99/9999" showIcon monthNavigator yearNavigator yearRange="1800:2050"
+                        <Calendar id="date_calender" value={myDate} onChange={(e) => setMyDate(e.value)}  dateFormat="dd/mm/yy" mask="99/99/9999" showIcon monthNavigator yearNavigator yearRange="1800:2050"
                             monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />
+                   
+  
                     </div>
                   
                     

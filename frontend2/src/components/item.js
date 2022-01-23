@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import ItemProperty from "./itemProperty";
+ import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
-//import SideNav from "./sideNav";
-import React from "react";
-import CalendarItem from "./calendarItem";
+ import CalendarItem from "../../../frontend/src/components/calendarItem";
+
+const React = require('react')
+
 
 
 export default function Item() {
@@ -22,9 +23,11 @@ export default function Item() {
     { value: 'strawberry', label: 'הונגריה - בודפסט' },
     { value: 'vanilla', label: 'צרפת - פריס' }
   ]
+  const [figuresArray, setFiguresArray] = useState(myFiguresArray);
+  const [figuresPlaceHolder, setPersonPlaceHolder] = useState('הדמות/יות המשויכות ?');
 
-  const [figuresArray,setFiguresArray] = useState(myFiguresArray); 
-  const [figuresPlaceHolder,setPersonPlaceHolder] =useState('הדמות/יות המשויכות ?'); 
+  const [locationArray, setLocationArray] = useState(myLocationArray);
+  const [locationPlaceHolder, setLocationPlaceHolder] = useState("מיקום ?");
 
 
 //  const onChangeItemProperty = () => {
@@ -38,8 +41,6 @@ export default function Item() {
 //onChangeItemProperty={onChangeItemProperty}
 
  // const [itemTitle,setItemTitle] = useState('');
-  const [locationArray,setLocationArray] = useState(myLocationArray); 
-  const [locationPlaceHolder,setLocationPlaceHolder]= useState("מיקום ?");
 
 
 
@@ -58,7 +59,7 @@ export default function Item() {
       <br />
       <ItemProperty optionsArray={locationArray} place_holder={locationPlaceHolder}></ItemProperty>
       <br/>
-     <CalendarItem></CalendarItem>
+      <CalendarItem></CalendarItem>
 
 
       </div>
