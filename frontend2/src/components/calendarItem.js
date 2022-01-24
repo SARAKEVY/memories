@@ -1,14 +1,13 @@
+import React, { useState } from 'react';
+import { Calendar } from 'primereact/calendar';
+import { Dropdown } from 'primereact/dropdown';
+
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
-// import '../../index.css';
 
-import React, { useState } from 'react';
-import { Calendar } from 'primereact/calendar';
-import { Dropdown } from 'primereact/dropdown';
-import { addLocale } from 'primereact/api';
- 
+
 export default function CalendarItem() {
 
     let today = new Date();
