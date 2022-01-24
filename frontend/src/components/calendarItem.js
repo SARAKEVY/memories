@@ -10,7 +10,7 @@ import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { addLocale } from 'primereact/api';
 
-export default function CalendarItem() {
+export default function CalendarItem(props) {
 
     let today = new Date();
     let month = today.getMonth();
@@ -20,7 +20,7 @@ export default function CalendarItem() {
     let nextMonth = (month === 11) ? 0 : month + 1;
     let nextYear = (nextMonth === 0) ? year + 1 : year;
 
-    const [myDate, setMyDate] = useState(null);
+    const [myDate, setMyDate] = useState(props.defaultValue);
    
     let minDate = new Date();
     minDate.setMonth(prevMonth);

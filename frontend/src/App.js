@@ -14,7 +14,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";        
 import 'primeflex/primeflex.css';
-import Galery from "./components/galery";
+// import Galery from "./components/galery";
 import SideNav from "./components/sideNav";
 import Signup2 from "./components/signup2";
 import Home from './components/home';
@@ -68,7 +68,7 @@ return (
           <Route path = "page404" element={<Page404/>}/>
          <Route path = "navButtons" element={<NavButtons/>}/>
             <Route path ="openAccount" element = {<Account/>}/>
-            <Route path = "galery" element={<Galery/>}/> 
+            {/* <Route path = "galery" element={<Galery/>}/>  */}
        
          </Routes> 
       
