@@ -1,7 +1,7 @@
 import React,{ useState } from "react";
 import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
-//import SideNav from "./sideNav";
+import SideNav from "./sideNav";
 import CalendarItem from "./calendarItem";
 
 

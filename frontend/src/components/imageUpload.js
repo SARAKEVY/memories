@@ -14,9 +14,9 @@ class Upload extends React.Component {
     })
 // {/* <img src={this.state.file} height="300" />
 
-// <img src={this.state.file} class="widthSet" />
+// <img src={this.state.file} className="widthSet" />
 
-// <img src={this.state.file} class="heightSet" /> */}
+// <img src={this.state.file} className="heightSet" /> */}
 
 }
 
@@ -28,7 +28,7 @@ class Upload extends React.Component {
 
         <input type="file" wi   onChange={this.handleChange} />
         
-<div><img src={this.state.file} class="divPic-border" alt="" /></div>
+<div><img src={this.state.file} className="divPic-border" alt="" /></div>
 
 
       </div>
