@@ -1,6 +1,6 @@
 
 import './sass/main.css';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { Routes, Route } from "react-router-dom";
 import Item from "./components/item";
 import Account from "./components/account";
@@ -20,29 +20,24 @@ import Signup2 from "./components/signup2";
 import Home from './components/home';
 import NavButtons from './components/navButtons';
 import Header from "./components/header";
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
- 
-    /*  const [ user, setUser] = useState([])
 
-    useEffect(() => {
-        const myUser = JSON.parse(localStorage.getItem('user'));
-        console.log("myuser", myUser);
-        setUser(myUser);
-       
-        
-    }, []);  */
-    const [ user, setUser] = useState([]);
+  const [ user, setUser] = useState([]);
   
- 
-  // <Route path = "galery" element={<Galery/>}/>
+  const history = useNavigate();
+  
+  
   const changeUser= ()=>{
-    const myUser = JSON.parse(localStorage.getItem('user'));
+   const myUser = JSON.parse(localStorage.getItem('user'));
    if (myUser !== user)
     setUser(myUser);
+    if ( myUser === undefined ){
+     history('/home')
     }
-    
+  }
   
 
 return (

@@ -31,7 +31,7 @@ export default function Item() {
   return (
     <div className="container">
       <SideNav/>
-       <div className="card">
+       <div className="container text-center card">
        <div className="p-fluid p-grid p-formgrid">
                     
                     <div className="p-field p-col-12 p-md-4">

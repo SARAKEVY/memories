@@ -32,7 +32,7 @@ function LoginWithGoogle(props) {
   localStorage.setItem("user",  JSON.stringify(data));
     props.changeUser();
     setLoading();
-    history('/item');
+    /* history('/item'); */
   }
  
   const handleLoginFailure = error => {
