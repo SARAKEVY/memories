@@ -13,7 +13,8 @@ export default function ItemProperty(props){
       placeholder={props.place_holder}
       autoFocus
       isSearchable
-      ></Select><button>+</button>
+      ></Select>
+     {/*  <button>+</button> */}
 <button onClick={props.onChildClick}>ggggggggggg</button>
 
       </div>
