@@ -68,6 +68,7 @@ return (
           <Route path = "imageUpload" element={<ImageUpload/>} />
           <Route path = "itemProperty" element={<ItemProperty/>} />
           <Route path = "login" element={<ReactHookFormDemo/>}/>
+          <Route path = "galery" element={<Galery/>}/>
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
           <Route path = "galery" element={<Galery/>}/>

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
 import SideNav from "./sideNav";
-
-//import CalendarItem from "./calendarItem";
+import CalendarItem from "./calendarItem";
 
 
 export default function Item() {
@@ -45,8 +44,8 @@ export default function Item() {
       <br />
       <ItemProperty optionsArray={locationArray} place_holder={locationPlaceHolder}></ItemProperty>
       <br/>
-     {/* <CalendarItem></CalendarItem>
- */}
+     <CalendarItem></CalendarItem>
+
 
       </div>
       </div>
