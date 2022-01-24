@@ -1,12 +1,12 @@
 
-import './sass/main.css';
+
 import React, {useState} from 'react';
 import { Routes, Route } from "react-router-dom";
+
 import Item from "./components/item";
 import Account from "./components/account";
 import ImageUpload from "./components/imageUpload";
 import Signup from "./components/signup";
-import NewLogin from "./components/newLogin";
 import ItemProperty from "./components/itemProperty";
 import ReactHookFormDemo from "./components/login";
 import Page404 from "./components/page404";
@@ -22,6 +22,7 @@ import NavButtons from './components/navButtons';
 import Header from "./components/header";
 import { useNavigate } from 'react-router-dom';
 import './App.css';
+import './sass/main.css';
 
 function App() {
 
@@ -63,14 +64,13 @@ return (
           <Route path = "imageUpload" element={<ImageUpload/>} />
           <Route path = "itemProperty" element={<ItemProperty/>} />
           <Route path = "login" element={<ReactHookFormDemo/>}/>
-          <Route path = "galery" element={<Galery/>}/>
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
-          <Route path = "galery" element={<Galery/>}/>
-          <Route path = "navButtons" element={<NavButtons/>}/>
-          <Route path = "newLogin" element={<NewLogin changeUser={changeUser}/>}/>
+         <Route path = "navButtons" element={<NavButtons/>}/>
             <Route path ="openAccount" element = {<Account/>}/>
-        </Routes> 
+            <Route path = "galery" element={<Galery/>}/> 
+       
+         </Routes> 
       
       </main>
     </React.Fragment>

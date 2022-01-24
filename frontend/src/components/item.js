@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React,{ useState } from "react";
 import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
-import SideNav from "./sideNav";
+//import SideNav from "./sideNav";
 import CalendarItem from "./calendarItem";
 
 
@@ -26,7 +26,9 @@ export default function Item() {
   const [locationArray,setLocationArray] = useState(myLocationArray); 
   const [locationPlaceHolder,setLocationPlaceHolder]= useState("מיקום ?");
 
-
+  function clickAlert(){
+    alert("I am working")
+}
 
   return (
     <div className="container">
@@ -40,7 +42,7 @@ export default function Item() {
       <input></input>
       <label>Description</label>
       <input></input>
-      <ItemProperty optionsArray={figuresArray} place_holder={figuresPlaceHolder}></ItemProperty>
+      <ItemProperty optionsArray={figuresArray} place_holder={figuresPlaceHolder}  onChildClick={clickAlert}></ItemProperty>
       <br />
       <ItemProperty optionsArray={locationArray} place_holder={locationPlaceHolder}></ItemProperty>
       <br/>
