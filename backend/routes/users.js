@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log('hi');
+    console.log('hi', req.body);
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -40,6 +40,22 @@ router.post('/', async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
     res.send(_.pick(user, ['_id', 'name', 'last', 'email']));
+
+});
+
+
+router.post('/google', async (req, res) => {
+    console.log('be', req.body);
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    let user = await User.findOne({ email: req.body.email });
+    if (user) return res.status(400).send({ "errorMassege": "user exists" });
+
+    user = new User(req.body);
+   
+    await user.save();
+    res.send(user);
 
 });
 

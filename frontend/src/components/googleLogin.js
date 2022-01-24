@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import loginService from '../services/loginService';
+import { useNavigate } from 'react-router-dom';
  
 const clientId = "481632294387-umm3jhqq9qctmmg115sj0rkrc6arf6ki.apps.googleusercontent.com";
  
-function LoginWithGoogle() {
+function LoginWithGoogle(props) {
  
   const [loading, setLoading] = useState('Loading...');
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState();
  
+  const history = useNavigate();
 
-  const handleLoginSuccess = (response) => {
+  const handleLoginSuccess = async (response) => {
     console.log("Login Success ", response);
-    setUser(response.profileObj);
-    const user = response.profileObj;
-    localStorage.setItem("user",  JSON.stringify(user));
+    
+    const data = {
+      name: response.profileObj.name,
+      googleId: response.profileObj.googleId,
+      email: response.profileObj.email,
+
+    }
+    console.log(data);
+    
+    try{
+      await loginService.addWithGoogle (data)
+    }
+    catch(ex) {
+        console.log(ex);
+    }
+  localStorage.setItem("user",  JSON.stringify(data));
+    props.changeUser();
     setLoading();
+    history('/item');
   }
  
   const handleLoginFailure = error => {

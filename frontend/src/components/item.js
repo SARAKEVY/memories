@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
-//import SideNav from "./sideNav";
-import React from "react";
+import SideNav from "./sideNav";
+
 //import CalendarItem from "./calendarItem";
 
 
@@ -31,6 +31,7 @@ export default function Item() {
 
   return (
     <div className="container">
+      <SideNav/>
        <div className="card">
        <div className="p-fluid p-grid p-formgrid">
                     
