@@ -14,7 +14,7 @@ function Home(props){
         <div className="container div-home">
         
             <div className="container d-flex justify-content-center col-lg-6">
-            <button className="btn-google-login col-lg-6"><LoginWithGoogle changeUser={props.changeUser}/></button>
+            <LoginWithGoogle changeUser={props.changeUser}/>
            
             <Link to="/newLogin" className="btn-primary col-lg-6 btn-signin text-center">Sign in </Link>
             </div>
