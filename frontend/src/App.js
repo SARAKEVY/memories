@@ -1,8 +1,7 @@
 
-import './sass/main.css';
-
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Item from "./components/item";
 import Account from "./components/account";
 import ImageUpload from "./components/imageUpload";
@@ -20,6 +19,7 @@ import Signup2 from "./components/signup2";
 import Home from './components/home';
 import NavButtons from './components/navButtons';
 import Header from "./components/header";
+import './sass/main.css';
 import './App.css';
 
 function App() {
@@ -47,6 +47,7 @@ return (
       <main>
 
         <Routes>
+        <Route path = "galery" element={<Galery/>}/>
           <Route path = '/' element={<Home/>}/>
           <Route path = "sideNav" element={<SideNav/>}/>
           <Route path = "account" element={<Account/>}/>
@@ -55,13 +56,13 @@ return (
           <Route path = "imageUpload" element={<ImageUpload/>} />
           <Route path = "itemProperty" element={<ItemProperty/>} />
           <Route path = "login" element={<ReactHookFormDemo/>}/>
-          <Route path = "galery" element={<Galery/>}/>]\
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
-          <Route path = "galery" element={<Galery/>}/>
-          <Route path = "navButtons" element={<NavButtons/>}/>
+         <Route path = "navButtons" element={<NavButtons/>}/>
             <Route path ="openAccount" element = {<Account/>}/>
-        </Routes> 
+            {/* <Route path = "galery" element={<Galery/>}/> */}
+       
+         </Routes> 
       
       </main>
     </React.Fragment>
