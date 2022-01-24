@@ -32,6 +32,7 @@ export default function Item() {
 
   return (
     <div className="container">
+      <SideNav/>
        <div className="card">
        <div className="p-fluid p-grid p-formgrid">
                     

@@ -1,18 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import { Link } from "react-router-dom";
+
+import React, {useEffect, useState, useD} from 'react';
 function Header(props){
 
-    const [ user, setUser] = useState();
+    /* const [ user, setUser] = useState([]); */
 
-  useEffect(() => {
-      const myUser = JSON.parse(localStorage.getItem('user'));
-      console.log(myUser);
-      setUser(myUser);
-      console.log("user",user);
-      
-  },[]);
+
+    useEffect(() => {
+        props.changeUser()
+    }, []);
+
+    /* useEffect(() => {
+        const myUser = JSON.parse(localStorage.getItem('user'));
+        console.log("myuser", myUser);
+        setUser(myUser);
+       
+        
+    }, [  ]);   */
  
-
+    /* useDidUpdate(() => {
+        useEffect()
+      }, [user ]) */
     
 
     return(
@@ -36,7 +43,7 @@ function Header(props){
                 <div className="h3 align-items-center col-lg-6 errow d-flex justify-content-end"><i className="fas fa-chevron-down" style={{color:"rgb(33, 177, 177)"}}></i></div>
                 <div className="userA m-1 h2"><i className="far fa-user"></i></div>
             </div>
-            <div className="userName">user</div>
+            <div className="userName">{props.user.name}</div>
             </div>
 
             {/* <div className="col-lg-4">
