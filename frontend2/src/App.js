@@ -20,6 +20,7 @@ import 'primeflex/primeflex.css';
 import NavButtons from './components/navButtons';
 import Header from "./components/header";
 import './App.css';
+import TimeLine from './components/timeLine';
 
 function App() {
 
@@ -45,6 +46,9 @@ return (
           <Route path = "login" element={<ReactHookFormDemo/>}/>
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
+          <Route path = "timel" element={<TimeLine/>}/>          
+
+
         </Routes> 
       </BrowserRouter>
     </React.Fragment>
