@@ -1,0 +1,156 @@
+.dHeader {
+    background-color: rgb(238, 238, 238);
+    font-family: 'Indie Flower', cursive;
+    font-weight: bold;
+    color: rgb(33, 177, 177);
+
+    .bShAcconuts2 {
+        color: rgb(33, 177, 177);
+        font-size: 30px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: rgb(238, 238, 238);
+        margin :0 auto;
+    
+    }
+
+    
+    .headerH1 {
+        margin-left: 10px;
+    }
+
+    
+
+
+
+@media screen and (min-width:1200px) {
+
+    .headerH1 {
+        font-size: 40px;
+    }
+
+    .hMemories {
+        font-size: 17px;
+        margin: -10px;
+    }
+
+    .userName {
+        font-size: 15px;
+        text-align: right;
+        margin: auto;
+    }
+
+    .projectName {
+        font-size: 20px;
+        
+}
+    .bShAcconuts2 {
+        margin-top: 15px;
+        margin-right: 15px;
+
+        /* .userA{
+            padding-right: 20px;
+        }
+     */
+
+}
+
+
+@media screen and (max-width:1200px) {
+
+    .headerH1 {
+        font-size: 40px !;
+    }
+
+    .hMemories {
+        font-size: 17px;
+        margin-top: -20px;
+    }
+
+    .userName {
+        font-size: 15px;
+        text-align: right;
+        margin: auto;
+    }
+
+    .projectName {
+        font-size: 25px;
+        margin: auto;
+
+    }
+/* 
+    .userA{
+        padding-right: 20px;
+    } */
+
+}
+
+@media screen and (max-width:767px) {
+
+    .headerH1 {
+        font-size: 35px;
+    }
+
+    .hMemories {
+        font-size: 15px;
+        margin-top: -20px;
+    }
+
+    .userName {
+        font-size: 10px;
+        text-overflow: inherit;
+        text-align: right;
+        margin: auto;
+        margin-right: 10px;
+
+    }
+
+    .projectName {
+        font-size: 20px;
+        margin: auto;
+
+    }
+
+    .bShAcconuts2 {
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width:575px) {
+
+    .headerH1 {
+        font-size: 20px;
+    }
+
+    .hMemories {
+        font-size: 12px;
+        margin-top: -20px;
+    }
+
+    .userName {
+        font-size: 10px;
+        text-overflow: inherit;
+        text-align: right;
+        margin: auto;
+        margin-right: 10px;
+
+    }
+
+    .projectName {
+        font-size: 15px;
+        margin: auto;
+
+    }
+
+    .bShAcconuts2 {
+        margin-top: 5px;
+        margin-right: 5px;
+
+}
+}
+}
+
+}
