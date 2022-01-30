@@ -38,11 +38,11 @@ export default function Item() {
 
   function clickFigures(value){
     setFiguresSelectValue(value);
-    alert(JSON.stringify(figuresSelectValue));
+    // alert(JSON.stringify(figuresSelectValue));
 } 
 function clickLocation(value){
   setLocationSelectValue(value);
-  alert(JSON.stringify(locationSelectValue));
+  // alert(JSON.stringify(locationSelectValue));
 }
 
 const htmlTextArea =  writerArry.map((writer)=>

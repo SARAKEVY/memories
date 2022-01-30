@@ -23,7 +23,7 @@ import Header from "./components/header";
 import NewLogin from "./components/newLogin";
 import { useNavigate } from 'react-router-dom';
 import './App.css';
-import './sass/main.css';
+import TimeLine from './components/timeLine';
 
 function App() {
 
@@ -70,6 +70,7 @@ return (
           <Route path = "page404" element={<Page404/>}/>
          <Route path = "navButtons" element={<NavButtons/>}/>
             <Route path ="openAccount" element = {<Account/>}/>
+            <Route path = "timel" element={<TimeLine/>}/>  
             {/* <Route path = "galery" element={<Galery/>}/>  */}
        
          </Routes> 
