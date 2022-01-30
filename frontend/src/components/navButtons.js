@@ -7,7 +7,7 @@ function NavButtons(props){
 
 
     return(
-        <div className="container d-flex m-3 col-lg-2">
+        <div className="container d-flex m-3 col-lg-2 z-index-1cd">
             
             <div className="container col-lg-6">
             <i className="fas fa-chevron-down" style={{color:"rgb(33, 177, 177)"}}></i>

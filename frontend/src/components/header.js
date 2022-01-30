@@ -32,7 +32,7 @@ function Header(props){
                 <div className="userA m-1 h2"><i className="far fa-user"></i></div>
             </div>
             { props.user &&
-            <div className="userName">{props.user.name}</div>}
+            <div className="userName userNameStyle text-right">{props.user.name}</div>}
             </div>
 
           

@@ -20,6 +20,7 @@ import Signup2 from "./components/signup2";
 import Home from './components/home';
 import NavButtons from './components/navButtons';
 import Header from "./components/header";
+import NewLogin from "./components/newLogin";
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 import './sass/main.css';
@@ -64,6 +65,7 @@ return (
           <Route path = "imageUpload" element={<ImageUpload/>} />
           <Route path = "itemProperty" element={<ItemProperty/>} />
           <Route path = "login" element={<ReactHookFormDemo/>}/>
+          <Route path = "newLogin" element={<NewLogin changeUser={changeUser}/>}/>
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
          <Route path = "navButtons" element={<NavButtons/>}/>
