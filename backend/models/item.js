@@ -8,11 +8,6 @@ const itemSchema = new mongoose.Schema({
   fileUrl: {
     type: String,
   },
-  tags: {
-    type: Array,
-    minlength: 1,
-    required: true,
-  },
   figures: {
     type: Array,
   },
@@ -26,10 +21,8 @@ const itemSchema = new mongoose.Schema({
     minlength: 2,
     required: true,
   },
-  location: {
-    type: String,
-    minlength: 2,
-    maxlength: 1000,
+  locations: {
+    type: Array,
   },
   createdDate: {
     type: Date,
@@ -42,11 +35,10 @@ const Item = mongoose.model("Item", itemSchema);
 function validateItem(item) {
   const schema = Joi.object({
     fileUrl: Joi.string(),
-    tags: Joi.array().min(1).required(),
-    figures: Joi.string(),
-    title: Joi.string().min(2).required(),
-    description: Joi.string().min(2).required(),
-    location: Joi.string().min(2).max(1000),
+    figures: Joi.array(),
+    title: Joi.string().min(2),
+    description: Joi.string().min(2),
+    locations: Joi.array,
   });
   return schema.validate(item);
 }
