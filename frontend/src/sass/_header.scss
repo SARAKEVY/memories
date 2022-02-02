@@ -2,29 +2,45 @@
     background-color: rgb(238, 238, 238);
     font-family: 'Indie Flower', cursive;
     font-weight: bold;
-    color: rgb(33, 177, 177);
+    color: $dTurquoise;
 
-    .bShAcconuts2 {
-        color: rgb(33, 177, 177);
-        font-size: 30px;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        border: none;
-        background-color: rgb(238, 238, 238);
-        margin :0 auto;
-    
-    }
+   .navBtn{
+       
+    align-items: center;
+    margin-left: 10px;
+    display:contents;
+   }
 
-    
-    
+  
+
+  
+  
     .headerH1 {
         margin-left: 10px;
     }
 
+    .userAvatar{
+       justify-content: end;
+    }
+
+   .serchStyle{
+       border-radius: 5px;
+   }
+
+   .serchStyle1{
+       background-color:$dTurquoise;
+       border-radius: 5px;
+      
     
+   }
 
+   .search1{
+    display:contents;
+   }
 
+   .search2{
+    display:none;
+   }
 
 @media screen and (min-width:1200px) {
 
@@ -39,22 +55,14 @@
 
     .userName {
         font-size: 15px;
-        text-align: right;
-        margin: auto;
+        display: block;
+        align-items:end;
     }
 
     .projectName {
         font-size: 20px;
         
 }
-    .bShAcconuts2 {
-        margin-top: 15px;
-        margin-right: 15px;
-
-        /* .userA{
-            padding-right: 20px;
-        }
-     */
 
 }
 
@@ -62,7 +70,7 @@
 @media screen and (max-width:1200px) {
 
     .headerH1 {
-        font-size: 40px !;
+        font-size: 40px;
     }
 
     .hMemories {
@@ -72,7 +80,7 @@
 
     .userName {
         font-size: 15px;
-        text-align: right;
+        /* text-align: right; */
         margin: auto;
     }
 
@@ -81,24 +89,45 @@
         margin: auto;
 
     }
-/* 
-    .userA{
-        padding-right: 20px;
-    } */
 
+   
+
+}
+
+@media screen and (max-width:1000px) {
+    
+    .navBtn{
+        display: none;
+   
+     }
+
+     .search1{
+         display: none;
+     }  
+
+     .search2{
+         display:contents;
+     }
+
+     .headerH1{
+         font-size:20px;
+     }
+     .hMemories{
+         font-size:15px;
+         margin-top: -5px;
+     }
+    
 }
 
 @media screen and (max-width:767px) {
 
-    .headerH1 {
-        font-size: 35px;
+    .headerH1{
+        font-size:20px;
     }
-
-    .hMemories {
-        font-size: 15px;
-        margin-top: -20px;
+    .hMemories{
+        font-size:15px;
+        margin-top: -5px;
     }
-
     .userName {
         font-size: 10px;
         text-overflow: inherit;
@@ -114,10 +143,18 @@
 
     }
 
-    .bShAcconuts2 {
-        margin-top: 10px;
-        margin-right: 10px;
+    .navBtn{
+        display: none;
+   
+     }
+     .search1{
+         display: none;
+     } 
+
+     .search2{
+        display:contents;
     }
+ 
 }
 
 @media screen and (max-width:575px) {
@@ -128,7 +165,7 @@
 
     .hMemories {
         font-size: 12px;
-        margin-top: -20px;
+        margin-top: -10px;
     }
 
     .userName {
@@ -146,12 +183,18 @@
 
     }
 
-    .bShAcconuts2 {
-        margin-top: 5px;
-        margin-right: 5px;
+    .navBtn{
+        display: none;
+   
+     }
+     .search1{
+         display: none;
+     } 
+
+     .search2{
+        display:contents;
+    }
+}
 
 }
-}
-}
 
-}

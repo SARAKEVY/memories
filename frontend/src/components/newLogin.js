@@ -1,4 +1,4 @@
-import  React, {useState} from 'react';
+import  React, {useState, useEffect} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -8,7 +8,7 @@ import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import loginService from '../services/loginService';
 import { useNavigate } from 'react-router-dom';
- 
+
 import  "../App.css";
 import "../index.css";
 
@@ -18,7 +18,7 @@ function NewLogin(props){
 
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-
+    const [user ,setUser] = useState(null);
     const history = useNavigate();
 
     const defaultValues = {
@@ -28,9 +28,11 @@ function NewLogin(props){
         
     }
 
-   
+   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
-    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+   /*  useEffect(()=>{
+     setUser(user)
+    },[]) */
 
     const onSubmit =  async(data) => {
         setFormData(data);

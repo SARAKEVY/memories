@@ -14,8 +14,9 @@ export default function TimeLine() {
     >
       <h1>CDTN </h1>
       <VerticalTimeline>
-        {events.map(event => (
+        {events.map((event, i) => (
           <VerticalTimelineElement
+            key={i}
             className="vertical-timeline-element--education"
             date={event.date}
             iconStyle={{ background: "rgb(13, 150, 243)", color: "#fff" }}

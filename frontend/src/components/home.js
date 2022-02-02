@@ -4,7 +4,12 @@ import {Link} from "react-router-dom";
 
 function Home(props){
 
-   
+    const onDeleteUser = ()=> {
+        console.log(props.user);
+        localStorage.setItem('user', null);
+        props.changeUser();
+ 
+    }
 
    
 
@@ -14,9 +19,12 @@ function Home(props){
         <div className="container div-home">
         
             <div className="container d-flex justify-content-center col-lg-6">
-            <LoginWithGoogle changeUser={props.changeUser} />
-           
-            <Link to="/newLogin" className="btn-primary col-lg-6 btn-signin text-center">Sign in </Link>
+            <LoginWithGoogle className="btn-google-logout" changeUser={props.changeUser} user={props.user} />
+           { !props.user ?
+            <Link to="/newLogin" className="btn-primary col-lg-6 btnSignin text-center">Sign in </Link>
+           :
+            <button to="/newLogin" onClick={()=> onDeleteUser() }  className="btn-primary col-lg-6 btnSignin text-center">Logout </button>
+           }
             </div>
         </div> 
     )

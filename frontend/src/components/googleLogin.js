@@ -8,8 +8,7 @@ const clientId = "481632294387-umm3jhqq9qctmmg115sj0rkrc6arf6ki.apps.googleuserc
 function LoginWithGoogle(props) {
  
   const [loading, setLoading] = useState('Loading...');
-  const [user, setUser] = useState();
- 
+  
   const history = useNavigate();
 
   const handleLoginSuccess = async (response) => {
@@ -29,10 +28,12 @@ function LoginWithGoogle(props) {
     catch(ex) {
         console.log(ex);
     }
-  /* localStorage.setItem("user",  JSON.stringify(data));
+   localStorage.setItem("user",  JSON.stringify(data));
+   
     props.changeUser();
     setLoading();
-    history('/item'); */
+    
+   /*  history('/item'); */
   }
  
   const handleLoginFailure = error => {
@@ -42,7 +43,9 @@ function LoginWithGoogle(props) {
  
   const handleLogoutSuccess = (response) => {
     console.log("Logout Success ", response);
-    setUser(null);
+    localStorage.setItem("user", null);
+    props.changeUser()
+    
   }
  
   const handleLogoutFailure = error => {
@@ -57,18 +60,20 @@ function LoginWithGoogle(props) {
     setLoading();
   }
  
+  
 
   return (
     <div>
       
-      {user ? <div>
-        <div className="name">Welcome {user.name}!</div>
+      {props.user ? <div>
+       
         <GoogleLogout
           clientId={clientId}
           onLogoutSuccess={handleLogoutSuccess}
           onFailure={handleLogoutFailure}
+          className="btn-google-logout"
         />
-        <pre>{JSON.stringify(user, null, 2)}</pre>
+       
       </div> :
         <GoogleLogin className="btn-google-login" 
           clientId={clientId}
@@ -78,6 +83,8 @@ function LoginWithGoogle(props) {
           onRequest={handleRequest}
           onAutoLoadFinished={handleAutoLoadFinished}
           isSignedIn={true}
+        
+
         />}
     </div>
   );

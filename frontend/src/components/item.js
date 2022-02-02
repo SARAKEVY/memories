@@ -45,8 +45,8 @@ function clickLocation(value){
   // alert(JSON.stringify(locationSelectValue));
 }
 
-const htmlTextArea =  writerArry.map((writer)=>
-<div className="row "><label>{writer.writerName}</label><textarea name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
+const htmlTextArea =  writerArry.map((writer, index)=>
+<div className="row " key={index}><label>{writer.writerName}</label><textarea name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
   );
 
 

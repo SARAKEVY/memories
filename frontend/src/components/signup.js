@@ -79,7 +79,7 @@ function Signup(props){
         {errors.adress && <span style={styleTags.span}></span>}
         <br></br>
 
-        <button style={{backgroundColor:'rgb(33, 177, 177)'}} className="btn mb-5 col-lg-12">Submit</button>
+        <button style={{backgroundColor:'$dTurquoise'}} className="btn mb-5 col-lg-12">Submit</button>
 
       </form>
         </div> 
