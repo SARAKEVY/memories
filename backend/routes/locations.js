@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const location = await Location.find({});
 
     try {
-        res.send(Location);
+        res.send(location);
     } catch (error) {
         res.status(500).send(error);
     }
@@ -32,18 +32,16 @@ router.post('/', async (req, res) => {
 
     console.log('hi location' ,req.body)
     const { error } =validateLocation(req.body);
+    
     if (error) return res.status(400).send(error.details[0].message);
-
+    console.log('error',error);
     try {
         let new_location = new Location({
             name: req.body.name,
             description: req.body.description
         });
-
-        const { error } = validateLocation(new_location);
-        console.log(error);
-        if (error) return res.status(400).send(error.details[0].message);
-
+        console.log('new_location1111111111',new_location);
+        
         await new_location.save();
         res.send(new_location)
       }catch (e) {
