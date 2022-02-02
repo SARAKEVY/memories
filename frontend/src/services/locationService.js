@@ -8,14 +8,16 @@ export function addLocation( data ){
 }
 
 export function getLocations(){
-  
-    return axios.get (`${API_URL}/locations`);
-}
+    const a = axios.get (`${API_URL}/locations`).then(res=>res.data);
+    return a;
+    
+   }
 
 
 
 const locationService = {
-    addLocation
+    addLocation,
+    getLocations
 }
 
 export default locationService;

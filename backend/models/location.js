@@ -12,8 +12,7 @@ const locationSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    minlength: 2,
-    required: true,
+    required: false,
   },
 });
 
@@ -22,7 +21,7 @@ const Location = mongoose.model("Location", locationSchema);
 function validateLocation(location) {
   const schema = Joi.object({
     name: Joi.string().min(2).required(),
-    description: Joi.string().min(2),
+    description: Joi.string().optional().allow(''),
     });
   return schema.validate(location);
 }
