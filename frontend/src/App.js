@@ -24,6 +24,7 @@ import NewLogin from "./components/newLogin";
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 import TimeLine from './components/timeLine';
+// import ImageT from './components/imageTable';
 
 function App() {
 
@@ -46,10 +47,7 @@ return (
   
   
     <React.Fragment>
-
-      
       <header>
-        
         <Header changeUser={changeUser} user={user}/>
 
       </header>
