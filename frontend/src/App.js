@@ -3,9 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Item from "./components/item";
 import Account from "./components/account";
-import ImageUpload from "./components/imageUpload";
 import Signup from "./components/signup";
-import ItemProperty from "./components/itemProperty";
 import ReactHookFormDemo from "./components/login";
 import Page404 from "./components/page404";
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
@@ -20,11 +18,10 @@ import NavButtons from './components/navButtons';
 import Header from "./components/header";
 import NewLogin from "./components/newLogin";
 import TimeLine from './components/timeLine';
-import { useNavigate } from 'react-router-dom';
+
 import './App.css';
-import './sass/main.css';
 
-
+import Location from './components/location';
 
 function App() {
 
@@ -69,8 +66,7 @@ return (
           <Route path = "account" element={<Account/>}/>
           <Route path = "signup" element={<Signup/>} />
           <Route path = "item" element={<Item/>}/>
-          <Route path = "imageUpload" element={<ImageUpload/>} />
-          <Route path = "itemProperty" element={<ItemProperty/>} />
+          <Route path = "location" element={<Location/>}/>
           <Route path = "login" element={<ReactHookFormDemo/>}/>
           <Route path = "newLogin" element={<NewLogin changeUser={changeUser}/>}/>
           <Route path = "signup2" element={<Signup2/>}/>

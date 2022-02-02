@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
+import axios from 'axios';
+// import { useHistory } from "react-router-dom"
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import events from "./events.json";
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+
+import { Button } from 'primereact/button';
 
 
 export default function TimeLine() {
+  // const history = useHistory();
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:3500/api/items`)
+      .then(function (response) {
+        setItems(response.data)
+
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+
+  }, [])
 
   return (
     <div
@@ -14,20 +35,35 @@ export default function TimeLine() {
     >
       <h1>CDTN </h1>
       <VerticalTimeline>
+<<<<<<< HEAD
         {events.map((event, i) => (
           <VerticalTimelineElement
             key={i}
+=======
+
+        {items.map(item => (
+          <VerticalTimelineElement
+            key={item.id}
+>>>>>>> 418daaaf2074666ba129fba4296cc3679700793b
             className="vertical-timeline-element--education"
-            date={event.date}
+            date={item.date}
             iconStyle={{ background: "rgb(13, 150, 243)", color: "#fff" }}
           >
-            <h3
+            <h2
               className="vertical-timeline-element-title"
-              dangerouslySetInnerHTML={{ __html: event.event }}
+              dangerouslySetInnerHTML={{ __html: item.title }} 
+              />
+            <h6
+              className="vertical-timeline-element-subtitle"
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            /* <img src={item.image[1]}></img> */
+
             />
+            <Button > More</Button>
           </VerticalTimelineElement>
         ))}
       </VerticalTimeline>
+
     </div>
   );
 }
