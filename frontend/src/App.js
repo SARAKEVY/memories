@@ -18,7 +18,7 @@ import NavButtons from './components/navButtons';
 import Header from "./components/header";
 import NewLogin from "./components/newLogin";
 import TimeLine from './components/timeLine';
-
+import './sass/main.css';
 import './App.css';
 
 import Location from './components/location';
