@@ -1,14 +1,19 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm} from "react-hook-form";
+
 import accountService from '../services/accountService';
 
 function Account(props) {
   let type_ar = ["Family", "Freindly", "Company", "Recipes", "Other"];
   
 
-
-  let { register, handleSubmit, formState: { errors } } = useForm();
   
+  const {  register, handleSubmit, formState: { errors } } = useForm();
+  /* const { fields, append, prepend, remove, swap, move, insert} = useFieldArray({
+    control,
+    name: "participants",
+    // keyName: "id", default to "id", you can change the key name
+  }); */
   const styleTags = {
     span:{
       color:"red"
@@ -78,6 +83,19 @@ function Account(props) {
         {...register("managerPassword", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ })} />
         {errors.managerPassword && <span style={styleTags.span}>Must contain lowercase and uppercase letters and numbers *</span>}
         <br></br>
+
+
+        <input className="form-control" placeholder="participants"
+        {...register("participants", {} )}/>
+       
+{/* 
+       {fields.map((field, index) => <input key={field.id} className="form-control" placeholder="participants"
+        {...register("partocipants", {} )}/>)} */}
+        <br></br>
+
+      
+      
+    
 
         {/* <label>Participants in the account</label>
         <input className="form-control" {...register("users", {})} /> */}

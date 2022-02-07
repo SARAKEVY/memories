@@ -48,6 +48,9 @@ const accountSchema = new mongoose.Schema({
     upperCase: 1,
     numeric: 1,
   },
+  participants:{
+    type:String,
+  },
   /* users: {
     type: Array,
     required: true,
@@ -69,6 +72,7 @@ function validateAccount(account) {
     description: Joi.string().min(2).max(5000).required(),
     managerName: Joi.string().max(2).max(255).required(),
     managerEmail:Joi.string().min(11).max(255).email().required(),
+    participants:Joi.string(),
     managerPassword: new PasswordComplexity({min:8 ,max:25, lowerCase: 1, upperCase: 1, numeric: 1,}),
     /* users: Joi.array().required(),
      */

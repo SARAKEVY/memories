@@ -3,18 +3,25 @@ import { Link } from "react-router-dom";
 
 function NavButtons(props){
 
-    /* let history = useHistory(); */
-
+  
+    
+ 
 
     return(
-        <div className="container d-flex m-3 col-lg-2 z-index-1cd">
+        <div className="d-flex align-items-end">
             
-            <div className="container col-lg-6">
-            <i className="fas fa-chevron-down" style={{color:"rgb(33, 177, 177)"}}></i>
-            <button className="bShAcconuts2"><i className="far fa-user"></i></button>
-            </div>
-            <div>
-            <Link to="/account"className="btn bShAcconuts">+Add Account</Link>
+            
+            <div className="navBtn">
+            { (!props.user) &&
+            <Link to="/home"className="btn bShAcconuts">Login</Link> 
+            }
+
+            { props.user &&
+            <Link to="/home"  className="btn bShAcconuts btnLogout ">Logout</Link>  
+            }
+           
+           <Link to="/account"  className="btn bShAcconuts2 btnLogout ">+Add Account</Link>
+
             </div>
             <div>
 
@@ -27,3 +34,5 @@ function NavButtons(props){
     )
 }
 export default NavButtons;
+
+ 

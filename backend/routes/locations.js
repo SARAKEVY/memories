@@ -7,7 +7,6 @@ const { Location, validateLocation} = require('../models/location');
 
 router.get('/', async (req, res) => {
     const location = await Location.find({});
-
     try {
         res.send(location);
     } catch (error) {
@@ -32,7 +31,7 @@ router.post('/', async (req, res) => {
 
     console.log('hi location' ,req.body)
     const { error } =validateLocation(req.body);
-    
+    console.log('error',error);
     if (error) return res.status(400).send(error.details[0].message);
     console.log('error',error);
     try {

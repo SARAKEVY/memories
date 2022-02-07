@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
             managerName: req.body.managerName,
             managerEmail: req.body.managerEmail,
             managerPassword: req.body.managerPassword,
-
+            participants: req.body.participants,
         });
         await new_account.save();
         res.send(new_account)

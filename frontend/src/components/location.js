@@ -20,18 +20,22 @@ function Location(){
     const [formData, setFormData] = useState({});
     const [locationArray, setLocationArray] = useState({});
 
-//     useEffect(()=>{
-//         setLocationArray(locationService.getlocation());
-//   });
+    useEffect(()=>{
+        //console.log('sssssss');
+      locationService.getLocations().then(data=>{setLocationArray(data);});
+  //console.log('a',locationArray);
+    });
+//   useEffect(()=>{
+//     utilsService.getItemsById("https://jsonplaceholder.typicode.com/users",props.userId).then(data=>{setUserName(data.name);});
+// },[props.userId]);
 
-//   const htmlLocation =  locationArray.map((l)=>
-//      <React.Fragment key={l.id}>
-//         <div className="row "><h5>{l.id}- {l.name}</h5></div>
-//     </React.Fragment>
-//   );
+  const htmlLocation = Array.from( locationArray).map((l)=>
+     <React.Fragment key={l.id}>
+        <div className="row "><h5>{l.id}- {l.name}<small>, {l.description}</small></h5></div>
+    </React.Fragment>
+  );
    
     const defaultValues = {
-     //   id:'',
         name: '',
         description:''
     }
@@ -41,11 +45,12 @@ function Location(){
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit =  async(data) => {
-        setFormData(data);
-       // setShowMessage(true);
+       setFormData(data);
+       
         console.log("form", data);
        try{
         await locationService.addLocation (data)
+        setShowMessage(true);
         }
        catch(ex) {
         console.log(ex);
@@ -82,7 +87,10 @@ function Location(){
 
                 <div className="p-d-flex p-jc-center">
                     <div className="card">
-                        <h5 className="p-text-center h1">Add Location</h5>
+                    
+                        {htmlLocation}
+                        <br></br>
+                        <h5 className="p-text-center h1">Add New Location</h5>
                         <br></br>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                             <div className="p-field">
@@ -96,10 +104,10 @@ function Location(){
                             </div>
                             <div className="p-field">
                                 <span className="p-float-label">
-                                    <Controller name="description" control={control} rules={{ required: 'description is required.' }} render={({ field, fieldState }) => (
+                                    <Controller name="description" control={control}  render={({ field, fieldState }) => (
                                     <InputText id={field.description} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="description" className={classNames({ 'p-error': errors.description })}>description*</label>
+                                    <label htmlFor="description" className={classNames({ 'p-error': errors.description })}>description</label>
                                 </span>
                                 {getFormErrorMessage('description')}
                             </div>
@@ -108,7 +116,7 @@ function Location(){
                            
                             <Button type="submit" label="Submit" className="p-mt-2" />
                         </form>
-                        {/* {htmlLocation} */}
+                        
                     </div>
                 </div>
             </div>
