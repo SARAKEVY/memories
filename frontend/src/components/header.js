@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import NavButtons from './navButtons';
 
 
-function Header(props){
+function Header( props ){
 
-   
+    
+
+   useEffect(() => {
+    const header1= props.account;
+       console.log("header",header1)
+   }, [])
 
 
     return(
@@ -13,7 +18,7 @@ function Header(props){
            
             <div className="col-lg-3">
                 <div className="headerH1">Memories</div>
-                <div className="hMemories">Memories, Events and Experiences</div>
+                <div className="hMemories m-1">Memories, Events and Experiences</div>
                
             </div>
 
@@ -29,7 +34,7 @@ function Header(props){
             </div>
 
             <div className="col-lg-2 projectName d-flex align-content-center flex-wrap justify-content-center">
-                <div>project name</div>
+                <div></div>
             </div>
 
             

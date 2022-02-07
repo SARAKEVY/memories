@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useState} from "react";
 import { useForm} from "react-hook-form";
-
+import { useNavigate } from 'react-router-dom';
 import accountService from '../services/accountService';
 
 function Account(props) {
   let type_ar = ["Family", "Freindly", "Company", "Recipes", "Other"];
   
+  const history = useNavigate();
+const [ accountData, setAccountData] = useState();
 
   
   const {  register, handleSubmit, formState: { errors } } = useForm();
-  /* const { fields, append, prepend, remove, swap, move, insert} = useFieldArray({
-    control,
-    name: "participants",
-    // keyName: "id", default to "id", you can change the key name
-  }); */
+
   const styleTags = {
     span:{
       color:"red"
@@ -21,13 +19,18 @@ function Account(props) {
   }
 
   const onSubmit =  async (data) => {
-      console.log(data);
+     
      try{
         await accountService.addAccount(data);
     }
     catch(ex){
         console.log(ex);
     }
+    setAccountData(data);
+    localStorage.setItem("account", JSON.stringify(data));
+    alert("Success Open Account");
+    history('/item');
+    console.log(data);
   };
 
 

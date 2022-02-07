@@ -26,13 +26,15 @@ import Location from './components/location';
 function App() {
 
   const [ user, setUser] = useState();
+  const [ acconut, setAcconut] = useState();
   
   
   useEffect(() =>{
-    changeUser()
+    changeUser();
+    updateAccount();
   },[]); 
 
-
+  
 
 
 
@@ -44,7 +46,11 @@ function App() {
   
     } 
   
-  
+    function updateAccount(){
+      const cAccount =JSON.parse(localStorage.getItem('account'));
+      setAcconut(cAccount);
+     console.log("account:" ,cAccount);
+    }
 
 return (
   
@@ -54,7 +60,8 @@ return (
       
       <header>
         
-        <Header changeUser={changeUser} user={user}/>
+        <Header changeUser={changeUser} user={user} 
+         updateAccount={updateAccount} acconut={acconut}/>
 
       </header>
     
@@ -65,7 +72,7 @@ return (
           <Route path = "sideNav" element={<SideNav/>}/>
           <Route path = "account" element={<Account/>}/>
           <Route path = "signup" element={<Signup/>} />
-          <Route path = "item" element={<Item/>}/>
+          <Route path = "item" element={<Item updateAccount={updateAccount}/> }/>
           <Route path = "location" element={<Location/>}/>
           <Route path = "login" element={<ReactHookFormDemo/>}/>
           <Route path = "newLogin" element={<NewLogin changeUser={changeUser}/>}/>

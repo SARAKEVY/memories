@@ -15,19 +15,24 @@ import { Button } from 'primereact/button';
 export default function TimeLine() {
   // const history = useHistory();
   const [items, setItems] = useState([]);
+/* 
   useEffect(() => {
-    axios.get(`http://localhost:3500/api/items`)
-      .then(function (response) {
-        setItems(response.data)
-
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-
+   getApi()
   }, [])
 
+const getApi = async () => {
+  axios.get(`http://localhost:3500/api/items`)
+  .then(function (response) {
+    setItems(response.data)
+
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+
+} */
+  
   return (
     <div
       className="App"

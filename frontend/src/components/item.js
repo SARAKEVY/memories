@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
@@ -10,9 +10,11 @@ import { classNames } from 'primereact/utils';
 
 
 
-export default function Item() {
+export default function Item(props) {
 
-
+useEffect(() => {
+  props.updateAccount();
+});
 
   const defaultValues = {
     id: '',

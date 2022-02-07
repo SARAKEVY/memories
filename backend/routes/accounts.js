@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 router.use(express.json());
 const { Account, validateAccount } = require('../models/account');
 
@@ -32,16 +33,9 @@ router.post('/', async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     try {
-        let new_account = new Account({
-            name: req.body.name,
-            type: req.body.type,
-            target: req.body.target,
-            description: req.body.description,
-            managerName: req.body.managerName,
-            managerEmail: req.body.managerEmail,
-            managerPassword: req.body.managerPassword,
-            participants: req.body.participants,
-        });
+        let new_account = new Account (req.body);
+        const salt = await bcrypt.genSalt(10);
+        new_account.managerPassword = await bcrypt.hash(new_account.managerPassword, salt);
         await new_account.save();
         res.send(new_account)
     }
