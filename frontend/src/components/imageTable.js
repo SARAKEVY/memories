@@ -30,7 +30,6 @@ export default function ImageT  ()  {
         image: null,
         description: '',
         category: null,
-        price: 0,
         quantity: 0,
         rating: 0,
         inventoryStatus: 'INSTOCK'
@@ -47,23 +46,45 @@ export default function ImageT  ()  {
     const toast = useRef(null);
     const dt = useRef(null);
     const productService = new ProductService();
-
-    useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const sd = [
+        {"id": "1000","code": "f230fh0g3","name": "Bamboo Watch","description": "Product Description","image": "bamboo-watch.jpg","price": 65,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1001","code": "nvklal433","name": "Black Watch","description": "Product Description","image": "black-watch.jpg","price": 72,"category": "Accessories","quantity": 61,"inventoryStatus": "INSTOCK","rating": 4},
+        {"id": "1002","code": "zz21cz3c1","name": "Blue Band","description": "Product Description","image": "blue-band.jpg","price": 79,"category": "Fitness","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 3},
+        {"id": "1003","code": "244wgerg2","name": "Blue T-Shirt","description": "Product Description","image": "blue-t-shirt.jpg","price": 29,"category": "Clothing","quantity": 25,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1004","code": "h456wer53","name": "Bracelet","description": "Product Description","image": "bracelet.jpg","price": 15,"category": "Accessories","quantity": 73,"inventoryStatus": "INSTOCK","rating": 4},
+        {"id": "1005","code": "av2231fwg","name": "Brown Purse","description": "Product Description","image": "brown-purse.jpg","price": 120,"category": "Accessories","quantity": 0,"inventoryStatus": "OUTOFSTOCK","rating": 4},
+        {"id": "1006","code": "bib36pfvm","name": "Chakra Bracelet","description": "Product Description","image": "chakra-bracelet.jpg","price": 32,"category": "Accessories","quantity": 5,"inventoryStatus": "LOWSTOCK","rating": 3},
+        {"id": "1007","code": "mbvjkgip5","name": "Galaxy Earrings","description": "Product Description","image": "galaxy-earrings.jpg","price": 34,"category": "Accessories","quantity": 23,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1008","code": "vbb124btr","name": "Game Controller","description": "Product Description","image": "game-controller.jpg","price": 99,"category": "Electronics","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 4},
+        {"id": "1009","code": "cm230f032","name": "Gaming Set","description": "Product Description","image": "gaming-set.jpg","price": 299,"category": "Electronics","quantity": 63,"inventoryStatus": "INSTOCK","rating": 3},
+        {"id": "1010","code": "plb34234v","name": "Gold Phone Case","description": "Product Description","image": "gold-phone-case.jpg","price": 24,"category": "Accessories","quantity": 0,"inventoryStatus": "OUTOFSTOCK","rating": 4},
+        {"id": "1011","code": "4920nnc2d","name": "Green Earbuds","description": "Product Description","image": "green-earbuds.jpg","price": 89,"category": "Electronics","quantity": 23,"inventoryStatus": "INSTOCK","rating": 4},
+        {"id": "1012","code": "250vm23cc","name": "Green T-Shirt","description": "Product Description","image": "green-t-shirt.jpg","price": 49,"category": "Clothing","quantity": 74,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1013","code": "fldsmn31b","name": "Grey T-Shirt","description": "Product Description","image": "grey-t-shirt.jpg","price": 48,"category": "Clothing","quantity": 0,"inventoryStatus": "OUTOFSTOCK","rating": 3},
+         {"id": "1028","code": "tx125ck42","name": "Yoga Mat","description": "Product Description","image": "yoga-mat.jpg","price": 20,"category": "Fitness","quantity": 15,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1029","code": "gwuby345v","name": "Yoga Set","description": "Product Description","image": "yoga-set.jpg","price": 20,"category": "Fitness","quantity": 25,"inventoryStatus": "INSTOCK","rating": 8}
+    ];
 
     // useEffect(() => {
-    //     axios.get(`http://localhost:3500/api/items`)
-    //       .then(function (response) {
-    //         setProduct(response.data)
+    //     productService.getProducts(sd)
+    //     .then(data1 => setProducts(data1.data)).catch(function (error) {
+    //                 // handle error
+    //                 console.log(error);
+    //               });
+    // }, []);  
+
+    useEffect(() => {
+        axios.get(`http://localhost:3500/api/items`)
+          .then(function (response) {
+            setProduct(response.data)
     
-    //       })
-    //       .catch(function (error) {
-    //         // handle error
-    //         console.log(error);
-    //       })
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
     
-    //   }, [])
+      }, [])
     
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -244,9 +265,7 @@ export default function ImageT  ()  {
         return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
     }
 
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    }
+  
 
     const ratingBodyTemplate = (rowData) => {
         return <Rating value={rowData.rating} readOnly cancel={false} />;
@@ -274,12 +293,12 @@ export default function ImageT  ()  {
             </span>
         </div>
     );
-    const productDialogFooter = (
+     const productDialogFooter = (
         <React.Fragment>
-            <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
+             <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
             <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={saveProduct} />
-        </React.Fragment>
-    );
+       </React.Fragment>
+     );
     const deleteProductDialogFooter = (
         <React.Fragment>
             <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteProductDialog} />
@@ -292,13 +311,13 @@ export default function ImageT  ()  {
             <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteSelectedProducts} />
         </React.Fragment>
     );
-
+    
     return (
         <div className="datatable-crud-demo">
             <Toast ref={toast} />
 
             <div className="card">
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                {/* <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar> */}
 
                 <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
@@ -309,7 +328,6 @@ export default function ImageT  ()  {
                     <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
                     <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
                     <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
                     <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
                     <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
@@ -351,16 +369,7 @@ export default function ImageT  ()  {
                     </div>
                 </div>
 
-                <div className="formgrid grid">
-                    <div className="field col">
-                        <label htmlFor="price">Price</label>
-                        <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
-                    </div>
-                    <div className="field col">
-                        <label htmlFor="quantity">Quantity</label>
-                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
-                    </div>
-                </div>
+                
             </Dialog>
 
             <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>

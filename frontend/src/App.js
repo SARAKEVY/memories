@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import './App.css';
 import TimeLine from './components/timeLine';
 import Location from './components/location';
+import ImageT from './components/imageTable';
 
 function App() {
 
@@ -66,6 +67,8 @@ return (
          <Route path = "navButtons" element={<NavButtons/>}/>
             <Route path ="openAccount" element = {<Account/>}/>
             <Route path = "timel" element={<TimeLine/>}/>  
+            <Route path = "t" element={<ImageT/>}/>  
+
             {/* <Route path = "galery" element={<Galery/>}/>  */}
        
          </Routes> 
