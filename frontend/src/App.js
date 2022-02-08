@@ -22,6 +22,7 @@ import './sass/main.css';
 import './App.css';
 
 import Location from './components/location';
+import ImageT from './components/imageTable';
 
 function App() {
 
@@ -56,12 +57,8 @@ return (
   
   
     <React.Fragment>
-
-      
       <header>
-        
-        <Header changeUser={changeUser} user={user} 
-         updateAccount={updateAccount} acconut={acconut}/>
+        <Header changeUser={changeUser} user={user}/>
 
       </header>
     
@@ -78,6 +75,11 @@ return (
           <Route path = "newLogin" element={<NewLogin changeUser={changeUser}/>}/>
           <Route path = "signup2" element={<Signup2/>}/>
           <Route path = "page404" element={<Page404/>}/>
+         <Route path = "navButtons" element={<NavButtons/>}/>
+            <Route path ="openAccount" element = {<Account/>}/>
+            <Route path = "timel" element={<TimeLine/>}/>  
+            <Route path = "t" element={<ImageT/>}/>  
+
           <Route path = "navButtons" element={<NavButtons/>}/>
           <Route path ="openAccount" element = {<Account/>}/>
           <Route path = "timel" element={<TimeLine/>}/>  

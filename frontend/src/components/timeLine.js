@@ -8,7 +8,6 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
-
 import { Button } from 'primereact/button';
 
 
@@ -38,26 +37,27 @@ const getApi = async () => {
       className="App"
       style={{ background: "#333", fontFamily: "Trebuchet Ms" }}
     >
-      <h1>CDTN </h1>
+      <h1>TIME LINE </h1>
       <VerticalTimeline>
 
         {items.map(item => (
           <VerticalTimelineElement
             key={item.id}
-            className="vertical-timeline-element--education"
+            className="vertical-timeline-element--work"
             date={item.date}
             iconStyle={{ background: "rgb(13, 150, 243)", color: "#fff" }}
           >
             <h2
               className="vertical-timeline-element-title"
-              dangerouslySetInnerHTML={{ __html: item.title }} 
-              />
+              dangerouslySetInnerHTML={{ __html: item.title }}
+            />
             <h6
               className="vertical-timeline-element-subtitle"
               dangerouslySetInnerHTML={{ __html: item.description }}
-            /* <img src={item.image[1]}></img> */
 
             />
+            <img src={item.fileUrl}></img>
+
             <Button > More</Button>
           </VerticalTimelineElement>
         ))}
