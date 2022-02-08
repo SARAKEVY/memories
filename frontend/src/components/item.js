@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useForm, Controller } from "react-hook-form";
 import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
@@ -7,6 +7,7 @@ import CalendarItem from "./calendarItem";
 import itemService from '../services/itemService';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
+import locationService from "../services/locationService";
 
 
 
@@ -26,32 +27,39 @@ export default function Item() {
 
 
   const myFiguresArray = [
-    { value: 'chocolate', label: 'סבא נתן' },
-    { value: '324', label: 'סבתא נחמה' },
-    { value: 'strawberry', label: 'ישי יום הולדת שמח' },
-    { value: 'vanilla', label: 'דודה יהודית' }
+    { id: 'chocolate', name: 'סבא נתן' },
+    { id: '324', name: 'סבתא נחמה' },
+    { id: 'strawberry', name: 'ישי יום הולדת שמח' },
+    { id: 'vanilla', name: 'דודה יהודית' }
   ]
 
-  const myLocationArray = [
-    { value: 'chocolate', label: 'ישראל - ירושלים' },
-    { value: 'strawberry', label: 'הונגריה - בודפסט' },
-    { value: 'vanilla', label: 'צרפת - פריס' }
-  ]
+
 
   const [figuresArray, setFiguresArray] = useState(myFiguresArray);
   const [figuresPlaceHolder, setPersonPlaceHolder] = useState('הדמות/יות המשויכות ?');
-  const [figuresSelectValue, setFiguresSelectValue] = useState(figuresArray[2]);
+  const [figuresSelectValue, setFiguresSelectValue] = useState([]);//figuresArray[2]);
 
-  const [locationArray, setLocationArray] = useState(myLocationArray);
+  const [locationArray, setLocationArray] = useState([]);
   const [locationPlaceHolder, setLocationPlaceHolder] = useState("מיקום ?");
-  const [locationSelectValue, setLocationSelectValue] = useState([locationArray[0], locationArray[2]]);
+  const [locationSelectValue, setLocationSelectValue] = useState([]);
 
   const [calenderDefaultValue, setCalenderDefaultValue] = useState(null);
+
+  
 
   const writerArry = [{ id: '1', writerName: 'chaya', text: 'התמונה הצטלמה בגן ליד הבית' }, { id: '2', writerName: 'ahova', text: 'זה היה ביום ההולדת הרביעי של סבתא' },
   { id: '3', writerName: 'sari', text: 'ד3' }, { id: '4', writerName: 'בילי', text: 'העץ הזה עדיין קיים' }, { id: '5', writerName: 'יוסף', text: 'דוד נפתלי צלם את התמונה' }];
 
   //const[htmlTextArea,setHtmlTextArea]=useState('');
+
+    useEffect(()=>{
+        //console.log('sssssss');
+        //if(Array.isArray(locationArray) && locationArray.length == 0 ){
+      locationService.getLocations().then(data=>{setLocationArray(data)});
+   //  setLocationSelectValue([Array.from(locationArray)[0],Array.from( locationArray)[2]]);
+   // });}
+    },[]);
+    
 
   function clickFigures(value) {
     setFiguresSelectValue(value);
@@ -60,11 +68,12 @@ export default function Item() {
   }
   function clickLocation(value) {
     setLocationSelectValue(value);
-    // alert(JSON.stringify(locationSelectValue));
+  //   alert(JSON.stringify(locationSelectValue));
   }
-
+  const htmlList = locationArray.map((l)=> <h6>{l.name}</h6>);
+  const htmlFingures = JSON.stringify(locationSelectValue);
   const htmlTextArea = writerArry.map((writer) =>
-    <div className="row "><label>{writer.writerName}</label><textarea name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
+    <div className="row "><label>{writer.writerName}</label><textarea value={writer.id} name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
   );
 
   const onSubmit = async (data) => {
@@ -79,7 +88,8 @@ export default function Item() {
 
   return (
     <div className="container">
-
+      <p>{htmlList}</p>
+<p>{htmlFingures}</p>
       <SideNav />
       <div className="container text-center card">
         <div className="p-fluid p-grid p-formgrid">
