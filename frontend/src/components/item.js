@@ -1,21 +1,21 @@
 import React, { useState ,useEffect} from "react";
 import { useForm, Controller } from "react-hook-form";
+import { InputText } from 'primereact/inputtext';
+import { classNames } from 'primereact/utils';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+
+import locationService from "../services/locationService";
+import Location from "./location";
 import ItemProperty from "./itemProperty";
 import ImageUpload from "./imageUpload";
 import SideNav from "./sideNav";
 import CalendarItem from "./calendarItem";
 import itemService from '../services/itemService';
-import { InputText } from 'primereact/inputtext';
-import { classNames } from 'primereact/utils';
-import locationService from "../services/locationService";
-
-
 
 export default function Item(props) {
 
-useEffect(() => {
-  props.updateAccount();
-});
+
 
   const defaultValues = {
     id: '',
@@ -24,6 +24,7 @@ useEffect(() => {
     title: '',
     description: '',
     locations: [],
+    takenDate:'',
   }
   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
@@ -34,9 +35,10 @@ useEffect(() => {
     { id: 'strawberry', name: 'ישי יום הולדת שמח' },
     { id: 'vanilla', name: 'דודה יהודית' }
   ]
+  
+  const [myLocationsArry,setMyLocationsArry]=useState([]);
 
-
-
+  const [showMessage, setShowMessage] = useState(false);
   const [figuresArray, setFiguresArray] = useState(myFiguresArray);
   const [figuresPlaceHolder, setPersonPlaceHolder] = useState('הדמות/יות המשויכות ?');
   const [figuresSelectValue, setFiguresSelectValue] = useState([]);//figuresArray[2]);
@@ -55,9 +57,11 @@ useEffect(() => {
   //const[htmlTextArea,setHtmlTextArea]=useState('');
 
     useEffect(()=>{
+      props.updateAccount();
         //console.log('sssssss');
         //if(Array.isArray(locationArray) && locationArray.length == 0 ){
       locationService.getLocations().then(data=>{setLocationArray(data)});
+      
    //  setLocationSelectValue([Array.from(locationArray)[0],Array.from( locationArray)[2]]);
    // });}
     },[]);
@@ -70,10 +74,11 @@ useEffect(() => {
   }
   function clickLocation(value) {
     setLocationSelectValue(value);
-  //   alert(JSON.stringify(locationSelectValue));
+  // console.log(locationArray);
   }
   const htmlList = locationArray.map((l)=> <h6>{l.name}</h6>);
-  const htmlFingures = JSON.stringify(locationSelectValue);
+  const htmlLocations = JSON.stringify(locationSelectValue);
+  const htmlFingures = JSON.stringify(figuresSelectValue);
   const htmlTextArea = writerArry.map((writer) =>
     <div className="row "><label>{writer.writerName}</label><textarea value={writer.id} name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
   );
@@ -81,25 +86,36 @@ useEffect(() => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      await itemService.addItem(data);
+     // await itemService.addItem(data);
     }
     catch (ex) {
       console.log(ex);
     }
   };
 
+  const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+  
+
   return (
     <div className="container">
-      <p>{htmlList}</p>
-<p>{htmlFingures}</p>
+      <div>{htmlList}</div>
+      <div>{htmlFingures}</div>
+      <div>{htmlLocations}</div>
       <SideNav />
+      {/* <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
+                    <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                        <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
+                        <Location/>
+                        
+                    </div>
+                </Dialog> */}
       <div className="container text-center card">
         <div className="p-fluid p-grid p-formgrid">
 
           <div className="row ">
            
               <div className="col-md-6" >
-
+              
                 <ImageUpload></ImageUpload>
               </div>
               <div className="col-md-6">
@@ -109,6 +125,7 @@ useEffect(() => {
                    <Controller name="title" control={control} render={({ field, fieldState }) => (
                     <InputText id={field.title} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                   )} />
+                  {/* <button onClick={setShowMessage(true)}></button> */}
                   <label htmlFor="title" className={classNames({ 'p-error': errors.name })}>Titel</label>
                 </span>
                 <span className="p-float-label">
@@ -117,13 +134,31 @@ useEffect(() => {
                   )} />
                   <label htmlFor="description" className={classNames({ 'p-error': errors.name })}>Description</label>
                 </span>
+                <span className="p-float-label">
+                  <Controller name="locations" control={control} render={({ field, fieldState }) => (
+                   <ItemProperty id={field.locations} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} optionsArray={figuresArray} place_holder={figuresPlaceHolder} defaultValue={figuresSelectValue} onChildClick={clickFigures}></ItemProperty>
+                   )} />
+                 <label htmlFor="locations" className={classNames({ 'p-error': errors.name })}>Locations</label>
+                
+                  </span>
 
-
-                <ItemProperty optionsArray={figuresArray} place_holder={figuresPlaceHolder} defaultValue={figuresSelectValue} onChildClick={clickFigures}></ItemProperty>
-                <br />
-                <ItemProperty optionsArray={locationArray} place_holder={locationPlaceHolder} defaultValue={locationSelectValue} onChildClick={clickLocation}></ItemProperty>
-                <br />
-                <CalendarItem defaultValue={calenderDefaultValue}></CalendarItem>
+                  <span className="p-float-label">
+                  <Controller name="figures" control={control} render={({ field, fieldState }) => (
+                   <ItemProperty id={field.figures} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} optionsArray={locationArray} place_holder={locationPlaceHolder} defaultValue={locationSelectValue} onChildClick={clickLocation}></ItemProperty>
+                   )} />
+                 <label htmlFor="figures" className={classNames({ 'p-error': errors.name })}>Figures</label>
+                
+                  </span>
+                
+                 
+                  <span className="p-float-label">
+                  <Controller name="takenDate" control={control} render={({ field, fieldState }) => (
+                    <CalendarItem id={field.takenDate} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} defaultValue={calenderDefaultValue}></CalendarItem>
+                   )} />
+                 <label htmlFor="takenDate" className={classNames({ 'p-error': errors.name })}>Taken date</label>
+                
+                  </span>
+                
                 <button>save</button>
                 </form>
               </div>

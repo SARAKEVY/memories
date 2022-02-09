@@ -22,7 +22,7 @@ export default function ItemProperty(props){
       isSearchable
       defaultValue={props.defaultValue}
       onChange={props.onChildClick}
-      ></Select><button>+</button>
+      ></Select>
 
       </div>
     )
