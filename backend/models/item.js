@@ -24,7 +24,7 @@ const itemSchema = new mongoose.Schema({
   locations: {
     type: Array,
   },
-  createdDate: {
+  takenDate: {
     type: Date,
     default: Date.now(),
   },
@@ -39,6 +39,7 @@ function validateItem(item) {
     title: Joi.string().min(2),
     description: Joi.string().min(2),
     locations: Joi.array,
+    takenDate:Joi.date(),
   });
   return schema.validate(item);
 }
