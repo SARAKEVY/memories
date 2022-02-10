@@ -3,25 +3,25 @@ const mongoose = require("mongoose");
 const PasswordComplexity = require("joi-password-complexity");
 
 const accountSchema = new mongoose.Schema({
-  name: {
+  accountName: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 255,
   },
-   type: {
+   accountType: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 30,
   },
-  target: {
+  accountTarget: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 1000,
   },
-  description: {
+  accountDescription: {
     type: String,
     required: true,
     minlength: 2,
@@ -39,7 +39,7 @@ const accountSchema = new mongoose.Schema({
     minlength: 11,
     maxlength: 255,
   }, 
-  managerPassword: {
+  accountPassword: {
    type: String,
     required: true,
     min: 8,
@@ -51,29 +51,25 @@ const accountSchema = new mongoose.Schema({
   participants:{
     type:String,
   },
-  /* users: {
-    type: Array,
-    required: true,
-  }, */
-  
   createdDate: {
     type: Date,
     default: Date.now,
   },
+  user_id: {type: mongoose.Schema.Types.ObjectId, ref : 'User'}
 });
 
 const Account = mongoose.model("Account", accountSchema);
 
 function validateAccount(account) {
   const schema = Joi.object({
-    name: Joi.string().min(2).max(255).required(),
-    type: Joi.string().min(2).max(255).required(),
-    target: Joi.string().min(2).max(1000),
-    description: Joi.string().min(2).max(5000).required(),
+    accountName: Joi.string().min(2).max(255).required(),
+    accountType: Joi.string().min(2).max(255).required(),
+    accountTarget: Joi.string().min(2).max(1000),
+    accountDescription: Joi.string().min(2).max(5000).required(),
     managerName: Joi.string().max(2).max(255).required(),
     managerEmail:Joi.string().min(11).max(255).email().required(),
     participants:Joi.string(),
-    managerPassword: new PasswordComplexity({min:8 ,max:25, lowerCase: 1, upperCase: 1, numeric: 1,}),
+    accountPassword: new PasswordComplexity({min:8 ,max:25, lowerCase: 1, upperCase: 1, numeric: 1,}),
     /* users: Joi.array().required(),
      */
   });

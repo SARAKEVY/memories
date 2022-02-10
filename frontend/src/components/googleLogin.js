@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import loginService from '../services/loginService';
+import UserService from '../services/userService';
 import { useNavigate } from 'react-router-dom';
  
 const clientId = "481632294387-umm3jhqq9qctmmg115sj0rkrc6arf6ki.apps.googleusercontent.com";
@@ -23,7 +23,7 @@ function LoginWithGoogle(props) {
     console.log(data);
     
     try{
-      await loginService.addWithGoogle (data)
+      await UserService.addWithGoogle (data)
     }
     catch(ex) {
         console.log(ex);

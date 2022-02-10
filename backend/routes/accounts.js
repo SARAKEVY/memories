@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 router.use(express.json());
+const _ = require('lodash');
 const { Account, validateAccount } = require('../models/account');
 
 
@@ -35,9 +36,9 @@ router.post('/', async (req, res) => {
     try {
         let new_account = new Account (req.body);
         const salt = await bcrypt.genSalt(10);
-        new_account.managerPassword = await bcrypt.hash(new_account.managerPassword, salt);
+        new_account.accountPassword = await bcrypt.hash(new_account.accountPassword, salt);
         await new_account.save();
-        res.send(new_account)
+        res.send(_.pick(new_account, ['accountName']));
     }
     catch (e) {
         console.log(e);

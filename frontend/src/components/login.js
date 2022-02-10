@@ -1,40 +1,57 @@
-import React, { useState } from 'react';
+import  React, {useState, useEffect} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Calendar } from 'primereact/calendar';
 import { Password } from 'primereact/password';
-import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
+import userService from '../services/userService';
+import { useNavigate } from 'react-router-dom';
+
 import  "../App.css";
 import "../index.css";
 
-const ReactHookFormDemo = () => {
-    
+
+function Login(props){
+
+
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
+    const [user ,setUser] = useState(null);
+    const history = useNavigate();
 
     const defaultValues = {
-        name: '',
         email: '',
-        password: '',
-        date: null,
-        country: null,
-        accept: false
+        password:''
+        
     }
 
-   
+   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
-    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+ 
 
-    const onSubmit = (data) => {
+    const onSubmit =  async(data) => {
         setFormData(data);
         setShowMessage(true);
-
+        console.log("form", data);
+       try{
+        await userService.login (data)
+        props.changeUser();
+        }
+       catch(ex) {
+        console.log(ex);
+        }
         reset();
+       
+        window.location('/item');
+
+
     };
+
+
+
+
 
     const getFormErrorMessage = (name) => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
@@ -55,16 +72,17 @@ const ReactHookFormDemo = () => {
         </React.Fragment>
     );
 
-    return (
+
+    return(
         <div className="container mt-8 ">
             <div className="container form-demo col-lg-6">
                 <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                    <div className="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                    <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
                         <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                         <h5>Registration Successful!</h5>
-                        <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
+                        {/* <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
                             Your account is registered under name <b>{formData.name}</b> ; it'll be valid next 30 days without activation. Please check <b>{formData.email}</b> for activation instructions.
-                        </p>
+                        </p> */}
                     </div>
                 </Dialog>
 
@@ -72,15 +90,7 @@ const ReactHookFormDemo = () => {
                     <div className="card">
                         <h5 className="p-text-center h1">Register</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
-                                </span>
-                                {getFormErrorMessage('name')}
-                            </div>
+                          
                             <div className="p-field">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
@@ -102,28 +112,14 @@ const ReactHookFormDemo = () => {
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <Controller name="date" control={control} render={({ field }) => (
-                                        <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
-                                    )} />
-                                    <label htmlFor="date">Birthday</label>
-                                </span>
-                            </div>
-                            
-                            <div className="p-field-checkbox">
-                                <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
-                                    <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                )} />
-                                <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
-                            </div>
-
+                           
                             <Button type="submit" label="Submit" className="p-mt-2" />
                         </form>
                     </div>
                 </div>
             </div>
         </div>  
-    );
+    )
 }
-export default ReactHookFormDemo ;
+
+export default Login
