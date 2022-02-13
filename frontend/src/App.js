@@ -5,15 +5,19 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";        
 import 'primeflex/primeflex.css';
+import { ToastContainer } from 'react-toastify';
 import Item from "./components/item";
 import Account from "./components/account";
 import Account2 from "./components/account2";
 import Signup from "./components/signup";
 import Login from "./components/login";
+import AccountValidation from "./components/accountValidation";
 import Page404 from "./components/page404";
 import userService from "./services/userService";
+import accountService from "./services/accountService";
 //import Galery from "./components/galery";
 import SideNav from "./components/sideNav";
+import UserAccount from "./components/userAccount";
 import Location from './components/location';
 import ImageT from './components/imageTable';
 import Home from './components/home';
@@ -27,8 +31,8 @@ import './App.css';
 
 function App() {
 
-  const [ user, setUser] = useState();
-  const [ acconut, setAcconut] = useState();
+  const [ user, setUser] = useState('');
+  const [ account, setAcconut] = useState('');
   
   
   useEffect(() =>{
@@ -41,7 +45,7 @@ function App() {
 
 
    function changeUser() {
-   const myUser = userService.getCurrentUser()
+   const myUser = userService.getCurrentUser();
    setUser(myUser);
    console.log(myUser);
    
@@ -49,7 +53,7 @@ function App() {
     } 
   
     function updateAccount(){
-      const cAccount =JSON.parse(localStorage.getItem('account'));
+      const cAccount = accountService.getCurrentAccount();
       setAcconut(cAccount);
      console.log("account:" ,cAccount);
     }
@@ -59,8 +63,8 @@ return (
   
     <React.Fragment>
       <header>
-        <Header changeUser={changeUser} user={user}/>
-
+        <Header changeUser={changeUser} user={user} updateAccount={updateAccount} account={account}/>
+        <ToastContainer/>
       </header>
     
       <main>
@@ -69,12 +73,14 @@ return (
           <Route path = '/home' element={<Home changeUser={changeUser} user={user}/>}/>
           <Route path = "sideNav" element={<SideNav/>}/>
           <Route path = "account" element={<Account/>}/>
+          <Route path = "accountValidation" element={<AccountValidation/>}/>
           <Route path = "signup" element={<Signup/>}/>
           <Route path = "item" element={<Item updateAccount={updateAccount}/> }/>
           <Route path = "location" element={<Location/>}/>
           <Route path = "login" element={<Login changeUser={changeUser}/>}/>
           <Route path = "newLogin" element={<NewLogin changeUser={changeUser}/>}/>
           <Route path = "account2" element={<Account2/>}/>
+          <Route path = "UserAccount" element={<UserAccount user={user}/>}/>
           <Route path = "page404" element={<Page404/>}/>
          <Route path = "navButtons" element={<NavButtons/>}/>
             <Route path ="openAccount" element = {<Account/>}/>

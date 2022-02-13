@@ -1,9 +1,10 @@
 import  React, {useState, useEffect} from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import {toast} from 'react-toastify';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
-import { Dialog } from 'primereact/dialog';
+//import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import userService from '../services/userService';
@@ -36,15 +37,15 @@ function Login(props){
         setShowMessage(true);
         console.log("form", data);
        try{
-        await userService.login (data)
+        await userService.login (data);
+        toast.success('login success!')
         props.changeUser();
+        window.location = '/account2';
         }
        catch(ex) {
         console.log(ex);
         }
-        reset();
-       
-        window.location('/item');
+        
 
 
     };
@@ -76,15 +77,12 @@ function Login(props){
     return(
         <div className="container mt-8 ">
             <div className="container form-demo col-lg-6">
-                <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
+               {/*  <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                     <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
                         <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                         <h5>Registration Successful!</h5>
-                        {/* <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                            Your account is registered under name <b>{formData.name}</b> ; it'll be valid next 30 days without activation. Please check <b>{formData.email}</b> for activation instructions.
-                        </p> */}
                     </div>
-                </Dialog>
+                </Dialog> */}
 
                 <div className="p-d-flex p-jc-center">
                     <div className="card">
@@ -99,7 +97,7 @@ function Login(props){
                                         render={({ field, fieldState }) => (
                                             <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
+                                    <label htmlFor="email" className={classNames({ 'p-error': errors.email })}>Email*</label>
                                 </span>
                                 {getFormErrorMessage('email')}
                             </div>

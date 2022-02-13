@@ -6,15 +6,14 @@ import { Password } from 'primereact/password';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-import userService from '../services/userService';
+import accountService from '../services/accountService';
 import { useNavigate } from 'react-router-dom';
-import {toast} from 'react-toastify';
 
 import  "../App.css";
 import "../index.css";
 
 
-function Signup(props){
+function AccountValidation(props){
 
 
     const [showMessage, setShowMessage] = useState(false);
@@ -23,34 +22,31 @@ function Signup(props){
     const history = useNavigate();
 
     const defaultValues = {
-        name: '',
-        email: '',
-        password:''
+        managerEmail: '',
+        accountPassword:''
         
     }
 
    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
-   /*  useEffect(()=>{
-     setUser(user)
-    },[]) */
+ 
 
     const onSubmit =  async(data) => {
         setFormData(data);
         setShowMessage(true);
         console.log("form", data);
        try{
-        await userService.addUser (data)
+        await accountService.accountLogin (data)
+        props.updateAccount();
+        window.location('/item');
+
         }
        catch(ex) {
         console.log(ex);
         }
-
-        localStorage.setItem("user",  JSON.stringify(data));
-        toast.success(`${user.name}You have successfully registered!`)
-        props.changeUser();
         reset();
-        history('/login');
+       
+        window.location('/item');
 
 
     };
@@ -94,37 +90,30 @@ function Signup(props){
 
                 <div className="p-d-flex p-jc-center">
                     <div className="card">
-                        <h5 className="p-text-center h1">Register</h5>
+                        <h5 className="p-text-center h1">Account Validation</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <Controller name="name" control={control} rules={{ required: 'name is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
-                                </span>
-                                {getFormErrorMessage('name')}
-                            </div>
+                          
                             <div className="p-field">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
-                                    <Controller name="email" control={control}
+                                    <Controller name="managerEmail" control={control}
                                         rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
                                         render={({ field, fieldState }) => (
-                                            <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                            <InputText id={field.managerEmail} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="email" className={classNames({ 'p-error': errors.email })}>Email*</label>
+                                    <label htmlFor="managerEmail" className={classNames({ 'p-error': errors.managerEmail })}>Manager Email*</label>
                                 </span>
-                                {getFormErrorMessage('email')}
+                                {getFormErrorMessage('managerEmail')}
                             </div>
+
                             <div className="p-field">
                                 <span className="p-float-label">
-                                    <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                        <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
+                                    <Controller name="accountPassword" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
+                                        <Password id={field.accountPassword} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
                                     )} />
-                                    <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
+                                    <label htmlFor="accountPassword" className={classNames({ 'p-error': errors.accountPassword })}>Account Password*</label>
                                 </span>
-                                {getFormErrorMessage('password')}
+                                {getFormErrorMessage('accountPassword')}
                             </div>
                            
                             <Button type="submit" label="Submit" className="p-mt-2" />
@@ -136,4 +125,4 @@ function Signup(props){
     )
 }
 
-export default Signup;
+export default AccountValidation;

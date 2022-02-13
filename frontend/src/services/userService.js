@@ -13,6 +13,7 @@ export function getCurrentUser(){
 }
 
 
+
 export function addUser ( data ){
     console.log('postdata', data);
     return axios.post (`${API_URL}/users`, data);
@@ -30,11 +31,18 @@ export async function login (data) {
     
 }
 
+
+export async function getUserAccounts ( userId){
+    console.log("userid", userId);
+    return axios.get(`${API_URL}/users/${userId}`);
+}
+
 const loginService = {
     addUser,
     addWithGoogle,
     login,
-    getCurrentUser
+    getCurrentUser,
+    getUserAccounts
 }
 
 export default loginService;

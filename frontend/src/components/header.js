@@ -1,15 +1,10 @@
 import React, {useEffect} from 'react';
 import NavButtons from './navButtons';
-
-
+import {Link} from 'react-router-dom';
 function Header( props ){
 
     
 
-   useEffect(() => {
-    const header1= props.account;
-       console.log("header",header1)
-   }, [])
 
 
     return(
@@ -34,7 +29,9 @@ function Header( props ){
             </div>
 
             <div className="col-lg-2 projectName d-flex align-content-center flex-wrap justify-content-center">
-                <div></div>
+                { props.account &&
+                <div>{props.account.accountName}</div>
+                }
             </div>
 
             
@@ -42,16 +39,19 @@ function Header( props ){
             <div className="col-lg-3 m-auto d-flex justify-content-between">
                 <div className="navBtn d-flex col-lg-6"><div className=""><NavButtons changeUser={props.changeUser} user={props.user}/></div></div>
                
-
+              
             <div className="avatareBtn col-lg-5">
               <div className="userAvatar d-flex justify-content-end">
-                <div className="h3 align-items-center col-lg-6 errow d-flex justify-content-end"><i className="fas fa-chevron-down" style={{color:"dTurquoise"}}></i></div>
-                <div className="userA m-1 h2"><i className="far fa-user"></i></div>
+                  <Link to='/userAccount' className="linkAccounts h3 align-items-center col-lg-6 errow d-flex justify-content-end">
+                <div><i className="fas fa-chevron-down linkAccounts"></i></div>
+                <div className="userA m-1 h2"><i className="far fa-user linkAccounts "></i></div>
+                </Link>
             </div>
            
             { props.user &&
-            <div className="userName text-right">{props.user.name}</div>}
+            <Link to="/userAccount" className="userName text-right linkAccounts">{props.user.name}</Link>}
             </div> 
+           
             </div>
            </div> 
 

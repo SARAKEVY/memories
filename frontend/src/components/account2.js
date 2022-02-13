@@ -41,6 +41,7 @@ function Account2(props){
         console.log("form", data);
        try{
         await accountService.addAccount (data)
+        history('/accountValidation')
         }
        catch(ex) {
         console.log(ex);
@@ -147,7 +148,7 @@ function Account2(props){
                                         render={({ field, fieldState }) => (
                                             <InputText id={field.managerEmail} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="managerEmail" className={classNames({ 'p-error': !!errors.managerEmail })}>Manager Email*</label>
+                                    <label htmlFor="managerEmail" className={classNames({ 'p-error': errors.managerEmail })}>Manager Email*</label>
                                 </span>
                                 {getFormErrorMessage('managerEmail')}
                             </div>
