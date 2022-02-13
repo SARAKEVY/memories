@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
             name: req.body.name,
             description: req.body.description
         });
-        console.log('new_location1111111111',new_location);
+        //console.log('new_location1111111111',new_location);
         
         await new_location.save();
         res.send(new_location)
