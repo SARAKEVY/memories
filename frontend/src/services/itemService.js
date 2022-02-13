@@ -6,9 +6,14 @@ export function addItem ( data ) {
     return axios.post (`${API_URL}/items`, data);
 }
 
+export function getItems(){
+    const a = axios.get(`${API_URL}/items`).then(res=>res.data)
+    return a;
+}
 
 const itemService = {
-    addItem
+    addItem,
+    getItems
 }
 
 export default itemService;

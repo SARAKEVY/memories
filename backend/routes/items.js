@@ -29,17 +29,29 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    console.log('itemService',req.body);
     const { error } = validateItem(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     // let item = await Item.findOne({ email: req.body.email});
     // if (item) return res.status(400).send('משתמש רשום');
-
-    item = new Item(req.body);
+try{
+    let newItem = new Item({
+        fileUrl: req.body.fileUrl,
+      figures: req.body.figures,
+      title: req.body.title,
+      description: req.body.description,
+      locations: req.body.locations,
+      takenDate:req.body.takenDate,
+    });
+    
     const salt = await bcrypt.genSalt(10);
-    await item.save();
-    res.send(_.pick(item, ['tags', 'title', 'description',]));
-
+    await newItem.save();
+    res.send(newItem);
+}catch (e) {
+    console.log(e);
+    res.status(500).send(e.massege);
+}
 });
 
 

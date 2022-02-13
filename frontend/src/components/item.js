@@ -28,18 +28,11 @@ export default function Item(props) {
   }
   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
-
-  const myFiguresArray = [
-    { id: 'chocolate', name: 'סבא נתן' },
-    { id: '324', name: 'סבתא נחמה' },
-    { id: 'strawberry', name: 'ישי יום הולדת שמח' },
-    { id: 'vanilla', name: 'דודה יהודית' }
-  ]
-  
+  const [fileUrl,setFileUrl]=useState('');
   const [myLocationsArry,setMyLocationsArry]=useState([]);
 
   const [showMessage, setShowMessage] = useState(false);
-  const [figuresArray, setFiguresArray] = useState(myFiguresArray);
+  const [figuresArray, setFiguresArray] = useState([]);
   const [figuresPlaceHolder, setPersonPlaceHolder] = useState('הדמות/יות המשויכות ?');
   const [figuresSelectValue, setFiguresSelectValue] = useState([]);//figuresArray[2]);
 
@@ -48,7 +41,7 @@ export default function Item(props) {
   const [locationSelectValue, setLocationSelectValue] = useState([]);
 
   const [calenderDefaultValue, setCalenderDefaultValue] = useState(null);
-
+  const [takenDate,setTakenDate] = useState(null);
   
 
   const writerArry = [{ id: '1', writerName: 'chaya', text: 'התמונה הצטלמה בגן ליד הבית' }, { id: '2', writerName: 'ahova', text: 'זה היה ביום ההולדת הרביעי של סבתא' },
@@ -62,10 +55,22 @@ export default function Item(props) {
         //if(Array.isArray(locationArray) && locationArray.length == 0 ){
       locationService.getLocations().then(data=>{setLocationArray(data)});
       
+      const myFiguresArray = [
+        { id: 'chocolate', name: 'סבא נתן' },
+        { id: '324', name: 'סבתא נחמה' },
+        { id: 'strawberry', name: 'ישי יום הולדת שמח' },
+        { id: 'vanilla', name: 'דודה יהודית' }
+      ];
+
+      setFiguresArray(myFiguresArray);
+      
    //  setLocationSelectValue([Array.from(locationArray)[0],Array.from( locationArray)[2]]);
    // });}
     },[]);
     
+  function clickImageUpload(value){
+    setFileUrl(value);
+  }
 
   function clickFigures(value) {
     setFiguresSelectValue(value);
@@ -76,17 +81,33 @@ export default function Item(props) {
     setLocationSelectValue(value);
   // console.log(locationArray);
   }
-  const htmlList = locationArray.map((l)=> <h6>{l.name}</h6>);
+
+  function clickCalendar(value){
+    setTakenDate(value);
+  }
+
+  const htmlList = locationArray.map((l,i)=> <h6 key={i}>{l.name}</h6>);
   const htmlLocations = JSON.stringify(locationSelectValue);
   const htmlFingures = JSON.stringify(figuresSelectValue);
-  const htmlTextArea = writerArry.map((writer) =>
-    <div className="row "><label>{writer.writerName}</label><textarea value={writer.id} name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
+  const htmlTextArea = writerArry.map((writer,i) =>
+    <div className="row " key={i}><label>{writer.writerName}</label><textarea value={writer.id} name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
   );
 
   const onSubmit = async (data) => {
-    console.log(data);
+   
+    const i = {
+    
+      fileUrl: fileUrl,
+      figures: figuresSelectValue,
+      title: data.title,
+      description: data.description,
+      locations: locationSelectValue,
+      takenDate:takenDate,
+    };
+    //React.forwardRef()
+    console.log(i);
     try {
-     // await itemService.addItem(data);
+      await itemService.addItem(data);
     }
     catch (ex) {
       console.log(ex);
@@ -116,7 +137,7 @@ export default function Item(props) {
            
               <div className="col-md-6" >
               
-                <ImageUpload></ImageUpload>
+                <ImageUpload onChildClick={clickImageUpload}></ImageUpload>
               </div>
               <div className="col-md-6">
 
@@ -135,27 +156,18 @@ export default function Item(props) {
                   <label htmlFor="description" className={classNames({ 'p-error': errors.name })}>Description</label>
                 </span>
                 <span className="p-float-label">
-                  <Controller name="locations" control={control} render={({ field, fieldState }) => (
-                   <ItemProperty id={field.locations} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} optionsArray={figuresArray} place_holder={figuresPlaceHolder} defaultValue={figuresSelectValue} onChildClick={clickFigures}></ItemProperty>
-                   )} />
-                 <label htmlFor="locations" className={classNames({ 'p-error': errors.name })}>Locations</label>
+                   <ItemProperty  optionsArray={figuresArray} place_holder={figuresPlaceHolder} defaultValue={figuresSelectValue} onChildClick={clickFigures}></ItemProperty>
+                   
                 
                   </span>
 
                   <span className="p-float-label">
-                  <Controller name="figures" control={control} render={({ field, fieldState }) => (
-                   <ItemProperty id={field.figures} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} optionsArray={locationArray} place_holder={locationPlaceHolder} defaultValue={locationSelectValue} onChildClick={clickLocation}></ItemProperty>
-                   )} />
-                 <label htmlFor="figures" className={classNames({ 'p-error': errors.name })}>Figures</label>
-                
+                   <ItemProperty  optionsArray={locationArray} place_holder={locationPlaceHolder} defaultValue={locationSelectValue} onChildClick={clickLocation}></ItemProperty>
+                 
                   </span>
                 
                  
-                  <span className="p-float-label">
-                  <Controller name="takenDate" control={control} render={({ field, fieldState }) => (
-                    <CalendarItem id={field.takenDate} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} defaultValue={calenderDefaultValue}></CalendarItem>
-                   )} />
-                 <label htmlFor="takenDate" className={classNames({ 'p-error': errors.name })}>Taken date</label>
+                  <span className="p-float-label"> <CalendarItem  defaultValue={calenderDefaultValue} onChildClick={clickCalendar}></CalendarItem>
                 
                   </span>
                 
