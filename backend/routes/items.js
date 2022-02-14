@@ -4,13 +4,13 @@ const _ = require('lodash');
 router.use(express.json());
 const { Item, validateItem } = require('../models/item');
 
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 router.get('/', async (req, res) => {
-    const items = await Item.find({});
+    const item = await Item.find({});
 
     try {
-        res.send(items);
+        res.send(item);
     } catch (error) {
         res.status(500).send(error);
     }

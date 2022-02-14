@@ -42,7 +42,7 @@ function validateItem(item) {
     figures: Joi.array().optional().allow(''),
     title: Joi.string().min(2).optional().allow(''),
     description: Joi.string().min(2).optional().allow(''),
-    locations: Joi.array.optional().allow(''),
+    locations: Joi.array().optional().allow(''),
     takenDate:Joi.date().optional().allow(''),
   });
   return schema.validate(item);

@@ -3,6 +3,7 @@ import {API_URL} from './httpService';
 
 
 export function addItem ( data ) {
+    console.log('itemService',data);
     return axios.post (`${API_URL}/items`, data);
 }
 
@@ -13,7 +14,8 @@ export function getItems(){
 
 const itemService = {
     addItem,
-    getItems
+    getItems,
+
 }
 
 export default itemService;
