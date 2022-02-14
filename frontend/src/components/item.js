@@ -107,7 +107,7 @@ export default function Item(props) {
     //React.forwardRef()
     console.log(i);
     try {
-      await itemService.addItem(data);
+      await itemService.addItem(i);
     }
     catch (ex) {
       console.log(ex);

@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log('itemService',req.body);
+    console.log('itemService-backend ',req.body);
     const { error } = validateItem(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     // if (item) return res.status(400).send('משתמש רשום');
 try{
     let newItem = new Item({
-        fileUrl: req.body.fileUrl,
+      fileUrl: req.body.fileUrl,
       figures: req.body.figures,
       title: req.body.title,
       description: req.body.description,
@@ -45,7 +45,6 @@ try{
       takenDate:req.body.takenDate,
     });
     
-    const salt = await bcrypt.genSalt(10);
     await newItem.save();
     res.send(newItem);
 }catch (e) {
