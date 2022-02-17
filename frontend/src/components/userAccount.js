@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 
 function UserAccount(props){
 
-    const [accountsList, setAccountList] = useState(['new', 'li']);
+    const [accountsList, setAccountList] = useState([]);
 
     
     useEffect(() => {
        
-        console.log(props.user);
+       
         listAccount() 
      
-    });
+    }, []);
 
 
 

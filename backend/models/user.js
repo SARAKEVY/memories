@@ -29,10 +29,14 @@ const userSchema = new mongoose.Schema({
   googleId:{
     type: String,
   },
+  userAccounts:{
+    type:Array
+  },
   createDate: {
     type: Date,
     default: Date.now,
   },
+  
 });
 
 userSchema.methods.generateAuthToken = function(){
@@ -54,7 +58,8 @@ function validateUser(user) {
        lowerCase: 1,
        upperCase: 1,
        numeric: 1,
-     })
+     }),
+     userAccounts:Joi.array,
   });
 
    return schema.validate(user);

@@ -7,41 +7,56 @@ import { Password } from 'primereact/password';
 //import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-import userService from '../services/userService';
-import {Link, useNavigate } from 'react-router-dom';
-import GoogleLogin from './googleLogin';
+import accountService from '../services/accountService';
+import { useNavigate, useParams } from "react-router-dom";
 
 import  "../App.css";
 import "../index.css";
 
 
-function Login(props){
+function AddParticipants(props){
 
+    const { id } = useParams();
+    
+    useEffect(() => {
+      
+      
+        console.log("id", id);
+        
+    }, [])
 
+    const [ participantsList, setParticipantsList]= useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const [user ,setUser] = useState(null);
     const history = useNavigate();
 
     const defaultValues = {
-        email: '',
-        password:''
-        
+        email: '',    
     }
+
+    
 
    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
- 
+    function addParticipants(value){
+        let newArr = [];
+        newArr = participantsList;
+        newArr.push(value);
+        setParticipantsList(newArr);
+        console.log(newArr);
+        reset();
 
-    const onSubmit =  async(data) => {
-        setFormData(data);
-        setShowMessage(true);
-        console.log("form", data);
+    }
+
+    const onSubmitData =  async() => {
+    console.log("form", participantsList);
        try{
-        await userService.login (data);
+        await accountService.addAccount(participantsList);
         toast.success('login success!')
         props.updateUser();
         window.location = '/account2';
+        history('/accountValidation')
         }
        catch(ex) {
         console.log(ex);
@@ -77,22 +92,13 @@ function Login(props){
 
     return(
         <div className="container mt-8 ">
+            <div className="container form-demo col-lg-6">
             
-            <div className="container form-demo col-lg-5" >
-               {/*  <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                    <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
-                        <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
-                        <h5>Registration Successful!</h5>
-                    </div>
-                </Dialog> */}
 
                 <div className="p-d-flex p-jc-center">
-                <div className="text-center mb-3" style={{border:"1px solid #E0E0E0", borderRadius:"3px"}}>
-                <GoogleLogin updateUser={props.updateUser} user={props.user}/>
-                </div>
                     <div className="card">
-                        <h5 className="p-text-center h1">Login</h5>
-                        <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+                        <h5 className="p-text-center h1">Register</h5>
+                        <form  className="p-fluid">
                           
                             <div className="p-field">
                                 <span className="p-float-label p-input-icon-right">
@@ -106,18 +112,11 @@ function Login(props){
                                 </span>
                                 {getFormErrorMessage('email')}
                             </div>
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                        <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
-                                    )} />
-                                    <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
-                                </span>
-                                {getFormErrorMessage('password')}
+                            
+                           <div className="d-flex justify-content-center">
+                            <Button label="Add participants" onClick={() => addParticipants}className="p-mt-2 me-5" style={{backgroundColor:"green" }} />
+                            <Button onClick={() => onSubmitData} label="Submit" className="p-mt-2" />
                             </div>
-                           
-                            <Button type="submit" label="Submit" className="p-mt-2" />
-                            <p className="text-center h5 mt-3" style={{color:"red"}} >Not yet registered?  <Link to="/signup" style={{color:"red"}}>Enter here</Link></p>
                         </form>
                     </div>
                 </div>
@@ -126,4 +125,4 @@ function Login(props){
     )
 }
 
-export default Login
+export default AddParticipants;

@@ -23,12 +23,18 @@ export async function accountLogin (data) {
     
 }
 
-
+export async function joinAccount(id){
+    const newAccount = await axios.post(`${API_URL}/accountAuth/auth`, id);
+    console.log(newAccount);
+   localStorage.setItem("accountToken",newAccount.data.token);
+     
+}
 
 const service = {
     addAccount,
     accountLogin,
-    getCurrentAccount
+    getCurrentAccount,
+    joinAccount
  
 }
 

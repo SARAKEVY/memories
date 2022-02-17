@@ -8,14 +8,13 @@ import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import userService from '../services/userService';
-import {Link, useNavigate } from 'react-router-dom';
-import GoogleLogin from './googleLogin';
+import { useNavigate } from 'react-router-dom';
 
 import  "../App.css";
 import "../index.css";
 
 
-function Login(props){
+function AccountLogin(props){
 
 
     const [showMessage, setShowMessage] = useState(false);
@@ -77,8 +76,7 @@ function Login(props){
 
     return(
         <div className="container mt-8 ">
-            
-            <div className="container form-demo col-lg-5" >
+            <div className="container form-demo col-lg-6">
                {/*  <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                     <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
                         <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
@@ -87,11 +85,8 @@ function Login(props){
                 </Dialog> */}
 
                 <div className="p-d-flex p-jc-center">
-                <div className="text-center mb-3" style={{border:"1px solid #E0E0E0", borderRadius:"3px"}}>
-                <GoogleLogin updateUser={props.updateUser} user={props.user}/>
-                </div>
                     <div className="card">
-                        <h5 className="p-text-center h1">Login</h5>
+                        <h5 className="p-text-center h1">Account Login</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                           
                             <div className="p-field">
@@ -117,7 +112,6 @@ function Login(props){
                             </div>
                            
                             <Button type="submit" label="Submit" className="p-mt-2" />
-                            <p className="text-center h5 mt-3" style={{color:"red"}} >Not yet registered?  <Link to="/signup" style={{color:"red"}}>Enter here</Link></p>
                         </form>
                     </div>
                 </div>
@@ -126,4 +120,4 @@ function Login(props){
     )
 }
 
-export default Login
+export default AccountLogin;

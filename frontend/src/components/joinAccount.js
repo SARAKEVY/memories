@@ -7,25 +7,24 @@ import { Password } from 'primereact/password';
 //import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
+import accountService from '../services/accountService';
 import userService from '../services/userService';
-import {Link, useNavigate } from 'react-router-dom';
-import GoogleLogin from './googleLogin';
+import {useNavigate} from 'react-router-dom';
 
 import  "../App.css";
 import "../index.css";
 
 
-function Login(props){
+function JoinAccount(props){
 
 
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const [user ,setUser] = useState(null);
-    const history = useNavigate();
+    const history = useNavigate()
 
     const defaultValues = {
-        email: '',
-        password:''
+        accountId:''
         
     }
 
@@ -38,10 +37,17 @@ function Login(props){
         setShowMessage(true);
         console.log("form", data);
        try{
-        await userService.login (data);
+        await accountService.joinAccount (data);
         toast.success('login success!')
-        props.updateUser();
-        window.location = '/account2';
+        props.updateAccount();
+        reset();
+        const newData = {
+        userId: props.user._id, 
+        accountId: props.account._id} 
+        console.log(newData);
+        await userService.addJoinAccount(newData);
+        
+        history('/item');
         }
        catch(ex) {
         console.log(ex);
@@ -87,37 +93,23 @@ function Login(props){
                 </Dialog> */}
 
                 <div className="p-d-flex p-jc-center">
-                <div className="text-center mb-3" style={{border:"1px solid #E0E0E0", borderRadius:"3px"}}>
-                <GoogleLogin updateUser={props.updateUser} user={props.user}/>
-                </div>
+               
                     <div className="card">
-                        <h5 className="p-text-center h1">Login</h5>
+                        <h5 className="p-text-center h1">Join Acconut</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                          
-                            <div className="p-field">
-                                <span className="p-float-label p-input-icon-right">
-                                    <i className="pi pi-envelope" />
-                                    <Controller name="email" control={control}
-                                        rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
-                                        render={({ field, fieldState }) => (
-                                            <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="email" className={classNames({ 'p-error': errors.email })}>Email*</label>
-                                </span>
-                                {getFormErrorMessage('email')}
-                            </div>
-                            <div className="p-field">
+
+                        <div className="p-field">
                                 <span className="p-float-label">
-                                    <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                        <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
+                                    <Controller name="accountId" control={control} rules={{ required: 'Code is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.accountId} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
+                                    <label htmlFor="accountId" className={classNames({ 'p-error': errors.accountId })}>Account Code*</label>
                                 </span>
-                                {getFormErrorMessage('password')}
+                                {getFormErrorMessage('accountId')}
                             </div>
                            
                             <Button type="submit" label="Submit" className="p-mt-2" />
-                            <p className="text-center h5 mt-3" style={{color:"red"}} >Not yet registered?  <Link to="/signup" style={{color:"red"}}>Enter here</Link></p>
+                           
                         </form>
                     </div>
                 </div>
@@ -126,4 +118,4 @@ function Login(props){
     )
 }
 
-export default Login
+export default JoinAccount

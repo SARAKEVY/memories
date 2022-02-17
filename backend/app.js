@@ -10,6 +10,7 @@ const usersRouter = require('./routes/users');
 const itemsRouter = require('./routes/items');
 const locationsRouter = require('./routes/locations');
 const authRouter = require('./routes/auth');
+const accountAuthRouter = require('./routes/accountAuth')
 
 app.use(express.json());
 
@@ -23,6 +24,7 @@ app.use(express.static('public'));
 app.use('/api/accounts', accountsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/accountAuth', accountAuthRouter)
 app.use('/api/items', itemsRouter)
 app.use('/api/locations', locationsRouter)
 

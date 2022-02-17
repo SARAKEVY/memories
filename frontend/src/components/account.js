@@ -1,111 +1,190 @@
-import React, { useState} from "react";
-import { useForm} from "react-hook-form";
-import { useNavigate } from 'react-router-dom';
+import  React, {useState, useEffect} from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Password } from 'primereact/password';
+import { Dialog } from 'primereact/dialog';
+import { Divider } from 'primereact/divider';
+import { classNames } from 'primereact/utils';
 import accountService from '../services/accountService';
+import { useNavigate } from 'react-router-dom';
 
-function Account(props) {
-  let type_ar = ["Family", "Freindly", "Company", "Recipes", "Other"];
-  
-  const history = useNavigate();
-const [ accountData, setAccountData] = useState();
+import  "../App.css";
+import "../index.css";
 
-  
-  const {  register, handleSubmit, formState: { errors } } = useForm();
 
-  const styleTags = {
-    span:{
-      color:"red"
+function Account(props){
+
+
+    const [showMessage, setShowMessage] = useState(false);
+    const [formData, setFormData] = useState({});
+    const [user ,setUser] = useState(null);
+    const history = useNavigate();
+
+  const defaultValues = {
+        accountName: '',
+        accountType:'',
+        accountTarget:'',
+        accountDescription:'',
+        managerName:'',
+        managerEmail: '',
+        accountPassword:'',
+     /*    participants:[] */
+        
+    } 
+
+   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+
+    const onSubmit =  async(data) => {
+        setFormData(data);
+       /*  setShowMessage(true); */
+        console.log("form", data);
+       try{
+        const newAccount = await accountService.addAccount (data);
+        console.log("newAccount", newAccount);
+       /*  history({
+           pathname:'/addParticipants/',
+            search:`${newAccount.data._id}`});
+        } */
+        history(`/addParticipants/${newAccount.data._id}`)
     }
-  }
-
-  const onSubmit =  async (data) => {
-     
-     try{
-        await accountService.addAccount(data);
-    }
-    catch(ex){
+    catch(ex) {
         console.log(ex);
-    }
-    setAccountData(data);
-    localStorage.setItem("account", JSON.stringify(data));
-    alert("Success Open Account");
-    history('/item');
-    console.log(data);
-  };
+        }
 
-
-
-  return (
-    <div className="container divAc col-lg-3">
-      <h1 className="text-center accountH1">Open Account</h1>
-
-      <form className="container text-center" onSubmit={handleSubmit(onSubmit)}>
-       {/*  <label class>Account Name</label> */}
-       <input className="form-control" placeholder="Account Name" 
-        {...register("name", {required: true, minlength: 2, maxlength: 255,})}/>
-        {errors.name && <span style={styleTags.span}>This field is required*</span>}
-        <br></br>
-
-        {/* <label>Account Type</label> */}
-        <select
-          className="form-select" placeholder="Account Type"
-          {...register("type", { required: true, minlength: 2, maxlength: 30,})}>
-            {errors.type && <span style={styleTags.span}>This field is required*</span>}
-          <option>Chosse Account Type</option>
-          {type_ar.map((type, index) => (
-            <option key={index} value={type}>{type}</option>))}
-        </select>
-        {errors.type && <span style={styleTags.span}>This field is required*</span>}
-        <br></br>
-
-        {/* <label className="">Account Target</label> */}
-        <input className="form-control" placeholder="Account Target"
-        {...register("target", { required: true, minlength: 2, maxlength: 1000 })}/>
-        {errors.target && <span style={styleTags.span}>This field is required*</span>}
-        <br></br>
-
-        {/* <label>Account Description</label> */}
-        <input className="form-control" placeholder="Account Description"
-        {...register("description", { required: true, minlength: 2, maxlength: 5000 })}/>
-        {errors.description && <span style={styleTags.span}>This field is required*</span>}
-        <br></br>
-
-        {/* <label>Manager Name</label> */}
-        <input className="form-control" placeholder="Manager Name"
-        {...register("managerName", { required: true, minlength: 2, maxlength: 255 })}/>
-        {errors.managerName && <span style={styleTags.span}>This field is required*</span>}
-        <br></br>
-
-      {/*   <label>Manager Email</label> */}
-        <input type="email" className="form-control" placeholder="Manager Email"
-        {...register("managerEmail", { required: true, minlength: 11, maxlength: 255})} />
-        {errors.managerEmail && <span style={styleTags.span}>Enater invalid email*</span>}
-        <br></br>
-        {/* <label>Manager Password</label> */}
-        <input className="form-control" placeholder="Manager Password"
-        {...register("managerPassword", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ })} />
-        {errors.managerPassword && <span style={styleTags.span}>Must contain lowercase and uppercase letters and numbers *</span>}
-        <br></br>
-
-
-        <input className="form-control" placeholder="participants"
-        {...register("participants", {} )}/>
        
+
+
+    };
+
+
+
+
+
+    const getFormErrorMessage = (name) => {
+        return errors[name] && <small className="p-error">{errors[name].message}</small>
+    };
+
+    const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const passwordHeader = <h6>Pick a password</h6>;
+    const passwordFooter = (
+        <React.Fragment>
+            <Divider />
+            <p className="p-mt-2">Suggestions</p>
+            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+            </ul>
+        </React.Fragment>
+    );
+
+
+    return(
+        <div className="container mt-8 ">
+            <div className="container form-demo col-lg-6">
+                <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
+                    <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                        <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
+                        <h5>Registration Successful!</h5>
+                    </div>
+                </Dialog>
+
+                <div className="p-d-flex p-jc-center">
+                    <div className="card">
+                        <h5 className="p-text-center h1">Open Account</h5>
+                        <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="accountName" control={control} rules={{ required: 'Account Name is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.accountName} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="accountName" className={classNames({ 'p-error': errors.accountName })}>Account Name*</label>
+                                </span>
+                                {getFormErrorMessage('accountName')}
+                            </div>
+
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="accountType" control={control} rules={{ required: 'Type is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.accountType} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="accountType" className={classNames({ 'p-error': errors.accountType })}>Account Type*</label>
+                                </span>
+                                {getFormErrorMessage('accountType')}
+                            </div>
+
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="accountTarget" control={control} rules={{ required: 'Type is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.accountTarget} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="accountTarget" className={classNames({ 'p-error': errors.accountTarget })}>Account Target*</label>
+                                </span>
+                                {getFormErrorMessage('accountTarget')}
+                            </div>
+
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="accountDescription" control={control} rules={{ required: 'Type is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.accountDescription} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="accountDescription" className={classNames({ 'p-error': errors.accountDescription })}>Account Description*</label>
+                                </span>
+                                {getFormErrorMessage('accountDescription')}
+                            </div>
+
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="managerName" control={control} rules={{ required: 'Type is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.managerName} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="managerName" className={classNames({ 'p-error': errors.managerName })}>Manager Name*</label>
+                                </span>
+                                {getFormErrorMessage('managerName')}
+                            </div>
+
+                            <div className="p-field">
+                                <span className="p-float-label p-input-icon-right">
+                                    <i className="pi pi-envelope" />
+                                    <Controller name="managerEmail" control={control}
+                                        rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
+                                        render={({ field, fieldState }) => (
+                                            <InputText id={field.managerEmail} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="managerEmail" className={classNames({ 'p-error': errors.managerEmail })}>Manager Email*</label>
+                                </span>
+                                {getFormErrorMessage('managerEmail')}
+                            </div>
+
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="accountPassword" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
+                                        <Password id={field.accountPassword} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
+                                    )} />
+                                    <label htmlFor="accountPassword" className={classNames({ 'p-error': errors.accountPassword})}>Account Password*</label>
+                                </span>
+                                {getFormErrorMessage('accountPassword')}
+                            </div>
 {/* 
-       {fields.map((field, index) => <input key={field.id} className="form-control" placeholder="participants"
-        {...register("partocipants", {} )}/>)} */}
-        <br></br>
-
-      
-      
-    
-
-        {/* <label>Participants in the account</label>
-        <input className="form-control" {...register("users", {})} /> */}
-        <button className="btn btn-primary mb-5 col-lg-12">Submit</button>
-      </form>
-    </div>
-  );
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="participants" control={control} rules={{ required: 'Type is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.participants} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="participants" className={classNames({ 'p-error': errors.participants })}>Participants*</label>
+                                </span>
+                                {getFormErrorMessage('participants')}
+                            </div> */}
+                           
+                            <Button type="submit" label="Submit" className="p-mt-2" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    )
 }
 
 export default Account;

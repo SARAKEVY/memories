@@ -49,6 +49,13 @@
   font-family: 'Indie Flower', cursive;
   font-weight: bold;
   color: #21b1b1;
+  /*   .search1{
+    display:contents;
+   }
+
+   .search2{
+    display:none;
+   } */
 }
 
 .dHeader .navBtn {
@@ -56,6 +63,15 @@
       -ms-flex-align: center;
           align-items: center;
   margin-left: 10px;
+  display: contents;
+}
+
+.dHeader .linkAccounts {
+  color: #21b1b1 !important;
+  text-decoration: none;
+}
+
+.dHeader .avatareBtn {
   display: contents;
 }
 
@@ -78,14 +94,6 @@
   border-radius: 5px;
 }
 
-.dHeader .search1 {
-  display: contents;
-}
-
-.dHeader .search2 {
-  display: none;
-}
-
 @media screen and (min-width: 1200px) {
   .dHeader .headerH1 {
     font-size: 40px;
@@ -103,6 +111,9 @@
   }
   .dHeader .projectName {
     font-size: 20px;
+  }
+  .dHeader .btnHidden {
+    display: none;
   }
 }
 
@@ -123,11 +134,17 @@
     font-size: 25px;
     margin: auto;
   }
+  .dHeader .btnHidden {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1000px) {
-  .dHeader .navBtn {
-    display: none;
+  .dHeader {
+    /*    .navBtn{
+        display: none;
+   
+     } */
   }
   .dHeader .search1 {
     display: none;
@@ -142,83 +159,99 @@
     font-size: 15px;
     margin-top: -5px;
   }
+  .dHeader .btnHidden {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .dHeader .avatareBtn {
+    display: none;
+  }
+  .dHeader .navbar-toggler {
+    margin-right: 0px !important;
+  }
+  .dHeader .btnHidden {
+    display: none;
+  }
+  .dHeader .btnHidden {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 767px) {
-  .dHeader .headerH1 {
+  .headerH1 {
     font-size: 20px;
   }
-  .dHeader .hMemories {
+  .hMemories {
     font-size: 15px;
     margin-top: -5px;
   }
-  .dHeader .userName {
+  .userName {
     font-size: 10px;
     text-overflow: inherit;
     text-align: right;
     margin: auto;
     margin-right: 10px;
   }
-  .dHeader .projectName {
+  .projectName {
     font-size: 20px;
     margin: auto;
   }
-  .dHeader .navBtn {
+  .btnHidden {
+    display: contents;
+  }
+  /* .navBtn{
+        display: none;
+   
+     } */
+  .search1 {
     display: none;
   }
-  .dHeader .search1 {
-    display: none;
-  }
-  .dHeader .search2 {
+  .search2 {
     display: contents;
   }
 }
 
 @media screen and (max-width: 575px) {
-  .dHeader .headerH1 {
+  .headerH1 {
     font-size: 20px;
   }
-  .dHeader .hMemories {
+  .hMemories {
     font-size: 12px;
     margin-top: -10px;
   }
-  .dHeader .userName {
+  .userName {
     font-size: 10px;
     text-overflow: inherit;
     text-align: right;
     margin: auto;
     margin-right: 10px;
   }
-  .dHeader .projectName {
+  .projectName {
     font-size: 15px;
     margin: auto;
   }
-  .dHeader .navBtn {
-    display: none;
-  }
-  .dHeader .search1 {
-    display: none;
-  }
-  .dHeader .search2 {
-    display: contents;
-  }
+  /* 
+    .navBtn{
+        display: none;
+    */
+}
+
+.search1 {
+  display: none;
+}
+
+.search2 {
+  display: contents;
 }
 
 .bShAcconuts {
   background-color: #41d3d3;
-  border-radius: 15px;
-  color: white;
+  border-radius: 20px;
+  color: black;
   font-weight: bold;
-  width: 55px;
-}
-
-.bShAcconuts2 {
-  background-color: #41d3d3;
-  border-radius: 15px;
-  color: white;
-  font-weight: bold;
-  width: 105px;
-  margin-left: 2px;
+  width: 70px;
 }
 
 .sideNav {

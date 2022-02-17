@@ -1,6 +1,9 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 const PasswordComplexity = require("joi-password-complexity");
+const jwt = require('jsonwebtoken');
+const config = require ('config');
+const { user } = require('../models/user');
 
 const accountSchema = new mongoose.Schema({
   accountName: {
@@ -49,14 +52,20 @@ const accountSchema = new mongoose.Schema({
     numeric: 1,
   },
   participants:{
-    type:String,
+    type:Array,
   },
   createdDate: {
     type: Date,
     default: Date.now,
   },
-  user_id: {type: mongoose.Schema.Types.ObjectId, ref : 'User'}
+  /* user_id: {type: mongoose.Schema.Types.ObjectId, ref : 'User'} */
 });
+
+
+accountSchema.methods.generateAuthAccountToken = function(){
+  const token = jwt.sign({_id: this.id, accountName: this.accountName, managerEmail:this.managerEmail}, config.get ('jwtAccountKey'));
+  return token;
+} 
 
 const Account = mongoose.model("Account", accountSchema);
 
@@ -68,7 +77,7 @@ function validateAccount(account) {
     accountDescription: Joi.string().min(2).max(5000).required(),
     managerName: Joi.string().max(2).max(255).required(),
     managerEmail:Joi.string().min(11).max(255).email().required(),
-    participants:Joi.string(),
+    participants:Joi.array(),
     accountPassword: new PasswordComplexity({min:8 ,max:25, lowerCase: 1, upperCase: 1, numeric: 1,}),
     /* users: Joi.array().required(),
      */

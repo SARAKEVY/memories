@@ -9,6 +9,7 @@ import { classNames } from 'primereact/utils';
 import userService from '../services/userService';
 import { useNavigate } from 'react-router-dom';
 import {toast} from 'react-toastify';
+import GoogleLogin from './googleLogin';
 
 import  "../App.css";
 import "../index.css";
@@ -37,20 +38,17 @@ function Signup(props){
 
     const onSubmit =  async(data) => {
         setFormData(data);
-        setShowMessage(true);
+        /* setShowMessage(true); */
         console.log("form", data);
        try{
         await userService.addUser (data)
+        toast.success(`${data.name}, You have successfully registered, now login!`);
+        history('/login');
         }
        catch(ex) {
         console.log(ex);
         }
-
-        localStorage.setItem("user",  JSON.stringify(data));
-        toast.success(`${user.name}You have successfully registered!`)
-        props.changeUser();
-        reset();
-        history('/login');
+       
 
 
     };
@@ -81,18 +79,21 @@ function Signup(props){
 
     return(
         <div className="container mt-8 ">
-            <div className="container form-demo col-lg-6">
-                <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
+            <div className="container form-demo col-lg-5">
+                {/* <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                     <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
                         <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                         <h5>Registration Successful!</h5>
-                        {/* <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
+                        <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
                             Your account is registered under name <b>{formData.name}</b> ; it'll be valid next 30 days without activation. Please check <b>{formData.email}</b> for activation instructions.
-                        </p> */}
+                        </p> 
                     </div>
                 </Dialog>
-
+ */}
                 <div className="p-d-flex p-jc-center">
+                <div className="text-center mb-3" style={{border:"1px solid #E0E0E0", borderRadius:"3px", margin:"0px"}}>
+                <GoogleLogin updateUser={props.updateUser} user={props.user}/>
+                </div>
                     <div className="card">
                         <h5 className="p-text-center h1">Register</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">

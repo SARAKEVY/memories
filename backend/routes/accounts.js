@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
 });
 
 
+
 router.get('/:id', async (req, res) => {
     const account = await Account.findById(req.params.id).exec();
 
@@ -38,7 +39,8 @@ router.post('/', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         new_account.accountPassword = await bcrypt.hash(new_account.accountPassword, salt);
         await new_account.save();
-        res.send(_.pick(new_account, ['accountName']));
+        res.send(_.pick(new_account, ['accountName', '_id']));
+        
     }
     catch (e) {
         console.log(e);
@@ -58,7 +60,9 @@ router.put('/:id', async (req, res) => {
         res.status(500).send(error);
     }
 
-})
+});
+
+
 
 router.delete('/:id', async (req, res) => {
     const account = await Account.findByIdAndDelete(req.params.id)

@@ -15,7 +15,7 @@ export default function Item(props) {
 
 useEffect(() => {
   props.updateAccount();
-});
+}, []);
 
   const defaultValues = {
     id: '',
@@ -53,14 +53,14 @@ useEffect(() => {
   { id: '3', writerName: 'sari', text: 'ד3' }, { id: '4', writerName: 'בילי', text: 'העץ הזה עדיין קיים' }, { id: '5', writerName: 'יוסף', text: 'דוד נפתלי צלם את התמונה' }];
 
   //const[htmlTextArea,setHtmlTextArea]=useState('');
-
+ 
     useEffect(()=>{
         //console.log('sssssss');
         //if(Array.isArray(locationArray) && locationArray.length == 0 ){
       locationService.getLocations().then(data=>{setLocationArray(data)});
    //  setLocationSelectValue([Array.from(locationArray)[0],Array.from( locationArray)[2]]);
    // });}
-    },[]);
+    },[]); 
     
 
   function clickFigures(value) {
