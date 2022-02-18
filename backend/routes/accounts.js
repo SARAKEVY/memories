@@ -20,9 +20,10 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const account = await Account.findById(req.params.id).exec();
-
+    console.log(account.accountName);
     try {
-        res.json(account)
+        res.send(account.accountName);
+        
     }
     catch (error) {
         res.status(500).send(error);

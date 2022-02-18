@@ -38,12 +38,15 @@ function JoinAccount(props){
         console.log("form", data);
        try{
         await accountService.joinAccount (data);
+        reset();
         toast.success('login success!')
         props.updateAccount();
-        reset();
+        
         const newData = {
         userId: props.user._id, 
-        accountId: props.account._id} 
+        accountId: props.account._id,
+        accountName:data.accountName
+        } 
         console.log(newData);
         await userService.addJoinAccount(newData);
         
@@ -97,6 +100,16 @@ function JoinAccount(props){
                     <div className="card">
                         <h5 className="p-text-center h1">Join Acconut</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+
+                        <div className="p-field">
+                                <span className="p-float-label">
+                                    <Controller name="accountName" control={control} rules={{ required: 'Account Name is required.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.accountName} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="accountName" className={classNames({ 'p-error': errors.accountName })}>Account Name*</label>
+                                </span>
+                                {getFormErrorMessage('accountName')}
+                            </div>
 
                         <div className="p-field">
                                 <span className="p-float-label">

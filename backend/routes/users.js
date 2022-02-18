@@ -17,9 +17,11 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
+    console.log(req.params.id);
     const user = await User.findById(req.params.id).exec();
     try {
-       res.json(user.userAccounts);
+       res.send(user.userAccounts);
+       console.log(user.userAccounts);
     }
     catch (error) {
         res.status(500).send(error);
@@ -48,11 +50,10 @@ router.post('/join', async (req, res) => {
     const userId= req.body.userId;
 
     let addAccount = await User.findOne({ _id: userId});
-    if (addAccount.AccountId === accountId ) 
-    return res.status(400).send( "You are already logged in to this account" );
-
-
-    await User.findOneAndUpdate({_id: userId}, {$push: {userAccounts: accountId}});
+    if (addAccount.AccountId === accountId ) {
+     res.status(400).send( "You are already logged in to this account" );
+    }
+    await User.findOneAndUpdate({_id: userId}, {$push: {userAccounts: req.body}});
 })
 
 

@@ -30,10 +30,10 @@ router.post('/auth', async (req, res) => {
   console.log(req.body.accountId);
   try{
    
-   let account =  await Account.findOne({_id: req.body.accountId});
-    res.json({token: account.generateAuthAccountToken()}); 
-    
+    let addUser = await Account.findOne({_id: req.body.accountId});
    
+    res.json({token: addUser.generateAuthAccountToken()}); 
+  
 }
  catch(ex) {
   console.log(ex);

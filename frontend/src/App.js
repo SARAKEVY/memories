@@ -31,6 +31,7 @@ import AccountLogin from "./components/accountLogin";
 import NavBar3 from './components/navbar3';
 import JoinAccount from "./components/joinAccount";
 import 'react-toastify/dist/ReactToastify.css';
+import Dropdown from "./components/dropdown";
 import './sass/main.css';
 import './App.css';
 
@@ -97,6 +98,7 @@ return (
           <Route path = "timel" element={<TimeLine/>}/>  
           <Route path = "t" element={<ImageT/>}/>  
           <Route path = "navButtons" element={<NavButtons/>}/>
+          <Route path = "dropdown" element={<Dropdown/>}/>
           <Route path ="googleLogin" element={<GoogleLogin updateUser={updateUser} user={user}/>}/>
          
          </Routes> 

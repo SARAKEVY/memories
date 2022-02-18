@@ -25,7 +25,7 @@ function NavBar3(props){
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><Link to ="" class="dropdown-item" href="#">Action</Link></li>
             <li><Link to="" class="dropdown-item" href="#">Another action</Link></li>
-            <li><hr></hr> class="dropdown-divider"></li>
+            <li><hr></hr> class="dropdown-divider"</li>
             <li><Link to ="" class="dropdown-item" href="#">Something else here</Link></li>
           </ul>
         </li>

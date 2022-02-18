@@ -6,17 +6,18 @@ import userService from "../services/userService";
 function NavBar(props){
 
   useEffect(() => {
-    getMyAccount()
+    
   }, [])
 
   const [ myAccount, setMyAccount] = useState([])
+  const [ user, setUser] = useState([])
 
+const getMyAccount = async (userId) =>{
 
-const getMyAccount = async () =>{
-const userId = props.user.id;
+console.log(userId);
 const myAccountList = await userService.getUserAccounts( userId);
-setMyAccount(myAccountList.data.data)
-console.log(myAccountList);
+setMyAccount(myAccountList.data)
+console.log(myAccountList.data);
 }
  
 
@@ -37,9 +38,6 @@ console.log(myAccountList);
             Accounts
           </Link >
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><Link to = "My Account"  className="dropdown-item" ><FontAwesomeIcon icon="fa-thin fa-circle-plus" /> My Account </Link >
-              <ul></ul>
-            </li>
             <li><Link to = "account"  className="dropdown-item" ><FontAwesomeIcon icon="fa-thin fa-circle-plus" /> Create </Link ></li>
             <li><Link to = "/joinAccount"  className="dropdown-item" ><i class="fa-thin fa-arrow-right-to-bracket"></i>Join</Link ></li>
             <li><Link to = ""  className="dropdown-item" ><i class="fal fa-edit"></i>Edit</Link ></li>
