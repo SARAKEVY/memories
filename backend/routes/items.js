@@ -4,13 +4,13 @@ const _ = require('lodash');
 router.use(express.json());
 const { Item, validateItem } = require('../models/item');
 
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 router.get('/', async (req, res) => {
-    const items = await Item.find({});
+    const item = await Item.find({});
 
     try {
-        res.send(items);
+        res.send(item);
     } catch (error) {
         res.status(500).send(error);
     }
@@ -29,17 +29,28 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    console.log('itemService-backend ',req.body);
     const { error } = validateItem(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     // let item = await Item.findOne({ email: req.body.email});
     // if (item) return res.status(400).send('משתמש רשום');
-
-    item = new Item(req.body);
-    const salt = await bcrypt.genSalt(10);
-    await item.save();
-    res.send(_.pick(item, ['tags', 'title', 'description',]));
-
+try{
+    let newItem = new Item({
+      fileUrl: req.body.fileUrl,
+      figures: req.body.figures,
+      title: req.body.title,
+      description: req.body.description,
+      locations: req.body.locations,
+      takenDate:req.body.takenDate,
+    });
+    
+    await newItem.save();
+    res.send(newItem);
+}catch (e) {
+    console.log(e);
+    res.status(500).send(e.massege);
+}
 });
 
 
