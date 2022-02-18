@@ -15,22 +15,20 @@ import jwtDecode from 'jwt-decode';
 } 
 
 /* create account */
-
 export function addAccount ( data ) {
     return axios.post (`${API_URL}/accounts`, data);
 }
 
-/* get accountToken from login */
 
+/* get accountToken from login */
 export async function accountLogin (data) {
     const newData = await axios.post (`${API_URL}/accountAuth`, data);
     console.log(newData);
     localStorage.setItem("accountToken",newData.data.token);
+    }
+
     
-}
-
 /* get account list name */
-
 export async function getAccountsName(id){
     return axios.get(`${API_URL}/account/${id}`)
 }

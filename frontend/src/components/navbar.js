@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import userService from "../services/userService";
+
 
 function NavBar(props){
 
@@ -9,17 +9,9 @@ function NavBar(props){
     
   }, [])
 
-  const [ myAccount, setMyAccount] = useState([])
+  
   const [ user, setUser] = useState([])
 
-const getMyAccount = async (userId) =>{
-
-console.log(userId);
-const myAccountList = await userService.getUserAccounts( userId);
-setMyAccount(myAccountList.data)
-console.log(myAccountList.data);
-}
- 
 
 
 

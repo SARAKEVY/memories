@@ -38,6 +38,7 @@ export async function getUserAccounts ( userId){
     return axios.get(`${API_URL}/users/${userId}`);
 }
 
+/* add account to array accountUser */
 export async function addJoinAccount(newData){
     return axios.post(`${API_URL}/users/join`, newData);
 }
