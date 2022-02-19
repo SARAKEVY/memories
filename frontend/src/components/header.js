@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import NavButtons from './navButtons';
-import {Link} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import NavBar from './navbar';
 import userService from "../services/userService";
 import accountService from "../services/accountService";
+import itemService from '../services/itemService';
 
 function Header( props ){
 
@@ -16,6 +17,8 @@ useEffect(() => {
     
     const [ currentUserId, setCurrentUserId] = useState();
 
+    const [searchParams] = useSearchParams();
+    const [items, setItems] = useState([]);
     function getId(){
         const user = localStorage.getItem("token");
         const currentUser = userService.getCurrentUser(user);
@@ -34,6 +37,15 @@ useEffect(() => {
        /*  nameAccountList(); */
         }
         
+
+        async function accountItems (accountId){
+         
+            console.log(accountId);
+            const data = await itemService.getAccountItems(accountId);
+            setItems(data);
+            console.log(data);
+          }
+    
  /*    const nameAccount = (currentUserId) =>{
          accountService.getAccountsName(currentUserId);
       
@@ -64,10 +76,10 @@ return(
         { props.user &&
           <Link to = "#"  className="nav-link dropdown-toggle text-center h3 " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
          <i className="far fa-user linkAccounts avatareBtn"></i><br></br><span className="h5">{props.user.name}</span></Link >}
-        { !props.user &&  <Link to = "#" onClick={() => useEffect} className="nav-link text-center mt-3 h3 " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        { ! props.user &&  <Link to = "#" onClick={() => useEffect} className="nav-link text-center mt-3 h3 " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
          <i className="far fa-user linkAccounts avatareBtn"></i><br></br><span className="h5"></span></Link >}
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">{myAccount.map((item ,i) => (
-                 <li key={i}><Link to = "item" className="dropdown-item" href="#">{item.accountName}</Link ></li>
+                 <li key={i}><Link to = "#" /* {`./item?account=${item.accountId}`} */ onClick={ ()=> accountItems(item.accountId)} className="dropdown-item" href="#">{item.accountName}</Link ></li>
           ))}
          
             <li><Link to = ""  className="dropdown-item" href="#">date</Link ></li>

@@ -17,11 +17,11 @@ router.get('/', async (req, res) => {
 });
 
 
-router.get('/:id', async (req, res) => {
-    const item = await Item.findById(req.params.id).exec();
+router.get('/:accountId', async (req, res) => {
+    const items = await Item.find({accountId:req.params.accountId}).exec();
 
     try {
-        res.json(item)
+        res.json(items)
     }
     catch (error) {
         res.status(500).send(error);

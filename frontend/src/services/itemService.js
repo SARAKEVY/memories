@@ -12,10 +12,17 @@ export function getItems(){
     return a;
 }
 
+
+export function getAccountItems(accountId){
+    const data = axios.get(`${API_URL}/items/${accountId}`)
+    return data;
+}
+
+
 const itemService = {
     addItem,
     getItems,
-
+    getAccountItems
 }
 
 export default itemService;

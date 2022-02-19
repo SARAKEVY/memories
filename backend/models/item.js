@@ -32,6 +32,9 @@ const itemSchema = new mongoose.Schema({
     default: Date.now(),
     required: false,
   },
+  accountId:{
+    type: String,
+  }
 });
 
 const Item = mongoose.model("Item", itemSchema);
