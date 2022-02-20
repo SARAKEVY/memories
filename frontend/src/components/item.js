@@ -110,6 +110,7 @@ export default function Item(props) {
       description: data.description,
       locations: locationSelectValue,
       takenDate:takenDate,
+      accountId:props.account,
     };
     //React.forwardRef()
     console.log(i);
@@ -148,13 +149,13 @@ export default function Item(props) {
               </div>
               <div className="col-md-6">
 
-              <form onSubmit={handleSubmit(onSubmit)} >
+              <form onSubmit={handleSubmit(onSubmit())} >
                 <span className="p-float-label">
                    <Controller name="title" control={control} render={({ field, fieldState }) => (
                     <InputText id={field.title} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                   )} />
                   {/* <button onClick={setShowMessage(true)}></button> */}
-                  <label htmlFor="title" className={classNames({ 'p-error': errors.name })}>Titel</label>
+                  <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Titel</label>
                 </span>
                 <span className="p-float-label">
                   <Controller name="description" control={control} render={({ field, fieldState }) => (

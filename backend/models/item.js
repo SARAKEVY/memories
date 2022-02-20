@@ -9,10 +9,17 @@ const itemSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  figures: {
-    type: Array,
-    required: false,
-  },
+  figures:  [{
+    name:{
+      type:String,
+      required: true,
+      minlength: 2,
+    },
+    description: {
+      type: String,
+      required: false,
+    },
+  }],
   title: {
     type: String,
     required: false,
@@ -23,10 +30,19 @@ const itemSchema = new mongoose.Schema({
     minlength: 2,
     required: false,
   },
-  locations: {
-    type: Array,
-    required: false,
-  },
+  locations: 
+    [{
+      name:{
+        type:String,
+        required: true,
+        minlength: 2,
+      },
+      description: {
+        type: String,
+        required: false,
+      },
+    }],
+  
   takenDate: {
     type: Date,
     default: Date.now(),
