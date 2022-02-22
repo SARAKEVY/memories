@@ -51,15 +51,15 @@ export default function Item(props) {
 
     useEffect(()=>{
       props.updateAccount();
-        //console.log('sssssss');
+        console.log('sssssss',props.account);
         //if(Array.isArray(locationArray) && locationArray.length == 0 ){
       locationService.getLocations().then(data=>{setLocationArray(data)});
       
       const myFiguresArray = [
-        { id: 'chocolate', name: 'סבא נתן' },
-        { id: '324', name: 'סבתא נחמה' },
-        { id: 'strawberry', name: 'ישי יום הולדת שמח' },
-        { id: 'vanilla', name: 'דודה יהודית' }
+        { id: 'chocolate', name: 'סבא נתן' ,description: 'fdg'},
+        { id: '324', name: 'סבתא נחמה' ,description: 'fdg' },
+        { id: 'strawberry', name: 'ישי יום הולדת שמח' ,description: 'fdg' },
+        { id: 'vanilla', name: 'דודה יהודית'  ,description: 'fdg'}
       ];
 
       setFiguresArray(myFiguresArray);
@@ -96,13 +96,13 @@ export default function Item(props) {
   const onSubmit = async (data) => {
    
     const i = {
-    
       fileUrl: fileUrl,
       figures: figuresSelectValue,
       title: data.title,
       description: data.description,
       locations: locationSelectValue,
       takenDate:takenDate,
+      accountId:"gfhjjh",//props.account,
     };
     //React.forwardRef()
     console.log(i);

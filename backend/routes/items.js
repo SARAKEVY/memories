@@ -30,11 +30,13 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     console.log('itemService-backend ',req.body);
-    const { error } = validateItem(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  //  const { error } = validateItem(req.body);
+  //  console.log('by1',error);
+//    if (error) return res.status(400).send(error.details[0].message);
 
-    // let item = await Item.findOne({ email: req.body.email});
-    // if (item) return res.status(400).send('משתמש רשום');
+//     let item = await Item.findOne({ email: req.body.email});
+//     if (item) return res.status(400).send('משתמש רשום');
+    
 try{
     let newItem = new Item({
       fileUrl: req.body.fileUrl,
@@ -43,8 +45,9 @@ try{
       description: req.body.description,
       locations: req.body.locations,
       takenDate:req.body.takenDate,
+      accountId:req.body.accountId,
     });
-    
+    console.log('by2');
     await newItem.save();
     res.send(newItem);
 }catch (e) {

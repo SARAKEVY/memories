@@ -74,7 +74,7 @@ export default function CalendarItem(props) {
              
                
                         <label htmlFor="date_calender">Date</label>
-                        <Calendar id="date_calender" value={myDate} onChange={(e) => onCalanderClick(e)}  dateFormat="dd/mm/yy" mask="99/99/9999" showIcon monthNavigator yearNavigator yearRange="1800:2050"
+                        <Calendar id="date_calender" value={myDate} onChange={(e) => onCalanderClick(e.target.value)}  dateFormat="dd/mm/yy" mask="99/99/9999" showIcon monthNavigator yearNavigator yearRange="1800:2050"
                             monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />
                    
   

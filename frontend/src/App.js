@@ -27,7 +27,7 @@ import ImageT from './components/imageTable';
 function App() {
 
   const [ user, setUser] = useState();
-  const [ acconut, setAcconut] = useState();
+  const [ account, setAcconut] = useState();
   
   
   useEffect(() =>{
@@ -69,7 +69,7 @@ return (
           <Route path = "sideNav" element={<SideNav/>}/>
           <Route path = "account" element={<Account/>}/>
           <Route path = "signup" element={<Signup/>} />
-          <Route path = "item" element={<Item updateAccount={updateAccount}/> }/>
+          <Route path = "item" element={<Item updateAccount={updateAccount} account={account}/> }/>
           <Route path = "location" element={<Location/>}/>
           <Route path = "login" element={<ReactHookFormDemo/>}/>
           <Route path = "newLogin" element={<NewLogin changeUser={changeUser}/>}/>
