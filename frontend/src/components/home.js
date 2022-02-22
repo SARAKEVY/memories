@@ -7,7 +7,7 @@ function Home(props){
     const onDeleteUser = ()=> {
         console.log(props.user);
         localStorage.setItem('user', null);
-        props.changeUser();
+        props.updateUser();
  
     }
 
@@ -19,7 +19,7 @@ function Home(props){
         <div className="container div-home">
         
             <div className="container d-flex justify-content-center col-lg-6">
-            <LoginWithGoogle className="btn-google-logout" changeUser={props.changeUser} user={props.user} />
+            <LoginWithGoogle className="btn-google-logout" updateUser={props.updateUser} user={props.user} />
            { !props.user ?
             <Link to="/newLogin" className="btn-primary col-lg-6 btnSignin text-center">Sign in </Link>
            :

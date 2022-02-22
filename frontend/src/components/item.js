@@ -4,7 +4,6 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
-
 import locationService from "../services/locationService";
 import Location from "./location";
 import ItemProperty from "./itemProperty";
@@ -15,8 +14,7 @@ import itemService from '../services/itemService';
 
 export default function Item(props) {
 
-
-
+  
   const defaultValues = {
     id: '',
     fileUrl: '',
@@ -28,6 +26,7 @@ export default function Item(props) {
   }
   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
+ 
   const [fileUrl,setFileUrl]=useState('');
   const [myLocationsArry,setMyLocationsArry]=useState([]);
 
@@ -42,16 +41,17 @@ export default function Item(props) {
 
   const [calenderDefaultValue, setCalenderDefaultValue] = useState(null);
   const [takenDate,setTakenDate] = useState(null);
+ 
   
 
   const writerArry = [{ id: '1', writerName: 'chaya', text: 'התמונה הצטלמה בגן ליד הבית' }, { id: '2', writerName: 'ahova', text: 'זה היה ביום ההולדת הרביעי של סבתא' },
   { id: '3', writerName: 'sari', text: 'ד3' }, { id: '4', writerName: 'בילי', text: 'העץ הזה עדיין קיים' }, { id: '5', writerName: 'יוסף', text: 'דוד נפתלי צלם את התמונה' }];
 
   //const[htmlTextArea,setHtmlTextArea]=useState('');
-
+ 
     useEffect(()=>{
-      props.updateAccount();
-        console.log('sssssss',props.account);
+      //props.updateAccount();
+       // console.log('sssssss',props.account);
         //if(Array.isArray(locationArray) && locationArray.length == 0 ){
       locationService.getLocations().then(data=>{setLocationArray(data)});
       
@@ -62,11 +62,17 @@ export default function Item(props) {
         { id: 'vanilla', name: 'דודה יהודית'  ,description: 'fdg'}
       ];
 
+    
+
       setFiguresArray(myFiguresArray);
       
    //  setLocationSelectValue([Array.from(locationArray)[0],Array.from( locationArray)[2]]);
    // });}
-    },[]);
+    },[]); 
+
+
+
+
     
   function clickImageUpload(value){
     setFileUrl(value);
@@ -102,7 +108,7 @@ export default function Item(props) {
       description: data.description,
       locations: locationSelectValue,
       takenDate:takenDate,
-      accountId:"gfhjjh",//props.account,
+      accountId:props.account,
     };
     //React.forwardRef()
     console.log(i);
@@ -141,13 +147,13 @@ export default function Item(props) {
               </div>
               <div className="col-md-6">
 
-              <form onSubmit={handleSubmit(onSubmit)} >
+              <form onSubmit={handleSubmit(onSubmit())} >
                 <span className="p-float-label">
                    <Controller name="title" control={control} render={({ field, fieldState }) => (
                     <InputText id={field.title} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                   )} />
                   {/* <button onClick={setShowMessage(true)}></button> */}
-                  <label htmlFor="title" className={classNames({ 'p-error': errors.name })}>Titel</label>
+                  <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Titel</label>
                 </span>
                 <span className="p-float-label">
                   <Controller name="description" control={control} render={({ field, fieldState }) => (

@@ -11,9 +11,16 @@
     display:contents;
    }
 
+  .linkAccounts{
+     
+    color:$dTurquoise !important;
+    text-decoration: none;
   
+  }
 
-  
+  .avatareBtn{
+    display:contents;
+  }
   
     .headerH1 {
         margin-left: 10px;
@@ -34,13 +41,16 @@
     
    }
 
-   .search1{
+ /*   .search1{
     display:contents;
    }
 
    .search2{
     display:none;
-   }
+   } */
+  .btnHidden{
+      display:none;
+  }
 
 @media screen and (min-width:1200px) {
 
@@ -62,6 +72,9 @@
     .projectName {
         font-size: 20px;
         
+}
+.btnHidden{
+    display: none;
 }
 
 }
@@ -90,16 +103,18 @@
 
     }
 
-   
+   .btnHidden{
+       display: none;
+   }
 
 }
 
 @media screen and (max-width:1000px) {
     
-    .navBtn{
+ /*    .navBtn{
         display: none;
    
-     }
+     } */
 
      .search1{
          display: none;
@@ -117,7 +132,31 @@
          margin-top: -5px;
      }
     
+    .btnHidden{
+        display: none;
+    }
+ 
 }
+
+ @media screen and (max-width:990px) {
+    .avatareBtn{
+    display:none;
+  }
+  .navbar-toggler{
+      margin-right: 0px !important;
+  }
+
+.btnHidden{
+    display: none;
+}
+   .btnHidden{
+    display: contents;
+}
+
+}
+    }
+
+
 
 @media screen and (max-width:767px) {
 
@@ -143,17 +182,20 @@
 
     }
 
-    .navBtn{
+    .btnHidden{
+        display:contents;
+    }
+    /* .navBtn{
         display: none;
    
-     }
-     .search1{
+     } */
+     /* .search1{
          display: none;
      } 
 
      .search2{
         display:contents;
-    }
+    } */
  
 }
 
@@ -182,11 +224,11 @@
         margin: auto;
 
     }
-
+/* 
     .navBtn{
         display: none;
-   
-     }
+    */
+   /*   }
      .search1{
          display: none;
      } 
@@ -194,7 +236,7 @@
      .search2{
         display:contents;
     }
-}
+ */
 
-}
+
 

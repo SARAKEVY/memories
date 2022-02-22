@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 router.use(express.json());
+const _ = require('lodash');
 const { Account, validateAccount } = require('../models/account');
 
 
@@ -16,11 +17,13 @@ router.get('/', async (req, res) => {
 });
 
 
+
 router.get('/:id', async (req, res) => {
     const account = await Account.findById(req.params.id).exec();
-
+    console.log(account.accountName);
     try {
-        res.json(account)
+        res.send(account.accountName);
+        
     }
     catch (error) {
         res.status(500).send(error);
@@ -35,9 +38,10 @@ router.post('/', async (req, res) => {
     try {
         let new_account = new Account (req.body);
         const salt = await bcrypt.genSalt(10);
-        new_account.managerPassword = await bcrypt.hash(new_account.managerPassword, salt);
+        new_account.accountPassword = await bcrypt.hash(new_account.accountPassword, salt);
         await new_account.save();
-        res.send(new_account)
+        res.send(_.pick(new_account, ['accountName', '_id']));
+        
     }
     catch (e) {
         console.log(e);
@@ -57,7 +61,9 @@ router.put('/:id', async (req, res) => {
         res.status(500).send(error);
     }
 
-})
+});
+
+
 
 router.delete('/:id', async (req, res) => {
     const account = await Account.findByIdAndDelete(req.params.id)
