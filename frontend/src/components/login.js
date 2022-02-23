@@ -8,6 +8,7 @@ import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import userService from '../services/userService';
+import ErrorMassege from './common/errorMassege';
 import {Link, useNavigate } from 'react-router-dom';
 import GoogleLogin from './googleLogin';
 
@@ -17,7 +18,7 @@ import "../index.css";
 
 function Login(props){
 
-
+    const [currentError, setCurrentError] = useState('');
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const [user ,setUser] = useState(null);
@@ -44,12 +45,12 @@ function Login(props){
         window.location = '/account2';
         }
        catch(ex) {
-        console.log(ex);
-        }
-        
-
-
-    };
+            console.log(ex.response);
+            if(ex.response.status === 400){
+                setCurrentError('Email or password incorrect' );
+            }
+    }
+}
 
 
 
@@ -92,8 +93,9 @@ function Login(props){
                 </div>
                     <div className="card">
                         <h5 className="p-text-center h1">Login</h5>
+                       
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                          
+                         
                             <div className="p-field">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
@@ -115,7 +117,9 @@ function Login(props){
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
-                           
+                            
+                             { currentError && <ErrorMassege massegeText={currentError}/>} 
+                            
                             <Button type="submit" label="Submit" className="p-mt-2" />
                             <p className="text-center h5 mt-3" style={{color:"red"}} >Not yet registered?  <Link to="/signup" style={{color:"red"}}>Enter here</Link></p>
                         </form>

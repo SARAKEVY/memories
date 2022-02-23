@@ -3,7 +3,7 @@ import {API_URL} from './httpService';
 import jwtDecode from 'jwt-decode';
 
 
-/* get details of user */
+/* get details of current account */
  export function getCurrentAccount(){
     try{
         const jwt = localStorage.getItem("accountToken");
@@ -42,12 +42,25 @@ export async function joinAccount(id){
      
 }
 
+/* get account details to edit */
+export async function getAccountData(id){
+    console.log("j", id);
+   return axios.get(`${API_URL}/accounts/edit/${id}`);
+}
+
+/* delete account */
+export async function delAccount(id){
+    return axios.delete(`${API_URL}/accounts/${id}`)
+}
+
 const service = {
     addAccount,
     accountLogin,
     getCurrentAccount,
     joinAccount,
-    getAccountsName
+    getAccountsName,
+    getAccountData,
+    delAccount
  
 }
 

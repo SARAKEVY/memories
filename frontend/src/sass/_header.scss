@@ -3,13 +3,18 @@
     font-family: 'Indie Flower', cursive;
     font-weight: bold;
     color: $dTurquoise;
+}
 
-   .navBtn{
-       
-    align-items: center;
-    margin-left: 10px;
-    display:contents;
-   }
+.nav-link{
+    color:$dTurquoise !important;
+}
+
+   .dH {
+
+    font-family: 'Indie Flower', cursive;
+    font-weight: bold;
+    color: $dTurquoise !important;
+ }
 
   .linkAccounts{
      
@@ -18,94 +23,33 @@
   
   }
 
-  .avatareBtn{
-    display:contents;
-  }
+ 
   
-    .headerH1 {
-        margin-left: 10px;
-    }
 
     .userAvatar{
        justify-content: end;
     }
 
-   .serchStyle{
-       border-radius: 5px;
-   }
+   
 
-   .serchStyle1{
-       background-color:$dTurquoise;
-       border-radius: 5px;
-      
-    
-   }
-
- /*   .search1{
-    display:contents;
-   }
-
-   .search2{
-    display:none;
-   } */
-  .btnHidden{
-      display:none;
-  }
+   
 
 @media screen and (min-width:1200px) {
 
-    .headerH1 {
-        font-size: 40px;
-    }
 
-    .hMemories {
-        font-size: 17px;
-        margin: -10px;
-    }
-
-    .userName {
-        font-size: 15px;
-        display: block;
-        align-items:end;
-    }
-
-    .projectName {
-        font-size: 20px;
-        
-}
-.btnHidden{
-    display: none;
-}
-
+/* 
+.btnNavHeader{
+    display:contents;
+} */
 }
 
 
 @media screen and (max-width:1200px) {
 
-    .headerH1 {
-        font-size: 40px;
-    }
+  
 
-    .hMemories {
-        font-size: 17px;
-        margin-top: -20px;
-    }
+ 
 
-    .userName {
-        font-size: 15px;
-        /* text-align: right; */
-        margin: auto;
-    }
-
-    .projectName {
-        font-size: 25px;
-        margin: auto;
-
-    }
-
-   .btnHidden{
-       display: none;
-   }
 
 }
 
@@ -116,127 +60,45 @@
    
      } */
 
-     .search1{
-         display: none;
-     }  
-
-     .search2{
-         display:contents;
-     }
-
-     .headerH1{
-         font-size:20px;
-     }
-     .hMemories{
-         font-size:15px;
-         margin-top: -5px;
-     }
+   
     
-    .btnHidden{
-        display: none;
-    }
- 
 }
 
  @media screen and (max-width:990px) {
     .avatareBtn{
     display:none;
   }
-  .navbar-toggler{
-      margin-right: 0px !important;
+
+  .nav-link{
+      display: none;
+  }
+ 
+  .navSmall{
+      width:100% !important; 
   }
 
-.btnHidden{
-    display: none;
 }
-   .btnHidden{
-    display: contents;
-}
-
-}
-    }
+    
 
 
 
 @media screen and (max-width:767px) {
 
-    .headerH1{
-        font-size:20px;
-    }
-    .hMemories{
-        font-size:15px;
-        margin-top: -5px;
-    }
-    .userName {
-        font-size: 10px;
-        text-overflow: inherit;
-        text-align: right;
-        margin: auto;
-        margin-right: 10px;
-
-    }
-
-    .projectName {
-        font-size: 20px;
-        margin: auto;
-
-    }
-
-    .btnHidden{
-        display:contents;
-    }
-    /* .navBtn{
-        display: none;
    
-     } */
-     /* .search1{
-         display: none;
-     } 
-
-     .search2{
-        display:contents;
-    } */
- 
+   
+  
 }
 
 @media screen and (max-width:575px) {
 
-    .headerH1 {
-        font-size: 20px;
-    }
 
-    .hMemories {
-        font-size: 12px;
-        margin-top: -10px;
-    }
-
-    .userName {
-        font-size: 10px;
-        text-overflow: inherit;
-        text-align: right;
-        margin: auto;
-        margin-right: 10px;
-
-    }
-
-    .projectName {
-        font-size: 15px;
-        margin: auto;
-
-    }
 /* 
-    .navBtn{
+    .btnNavHeader{
         display: none;
-    */
-   /*   }
-     .search1{
-         display: none;
-     } 
+    } */
 
-     .search2{
-        display:contents;
-    }
- */
-
+}
+ 
+  
 
 
