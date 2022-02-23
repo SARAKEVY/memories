@@ -87,7 +87,7 @@ return (
           <Route path = "navbar3" element={<NavBar3/>}/>
           <Route path = "accountValidation" element={<AccountValidation/>}/>
           <Route path = "signup" element={<Signup/>}/>
-          <Route path = "item" element={<Item updateAccount={updateAccount} /> }/>
+          <Route path = "item" element={<Item updateAccount={updateAccount} account={account}/> }/>
           <Route path = "location" element={<Location/>}/>
           <Route path = "login" element={<Login updateUser={updateUser} user={user}/>}/>
           <Route path = "newLogin" element={<NewLogin updateUser={updateUser}/>}/>
