@@ -11,6 +11,7 @@ import ImageUpload from "./imageUpload";
 import SideNav from "./sideNav";
 import CalendarItem from "./calendarItem";
 import itemService from '../services/itemService';
+import TextAreaDetails from "./textAreaDetails";
 
 export default function Item(props) {
 
@@ -43,9 +44,6 @@ export default function Item(props) {
   const [takenDate,setTakenDate] = useState(null);
  
   
-
-  const writerArry = [{ id: '1', writerName: 'chaya', text: 'התמונה הצטלמה בגן ליד הבית' }, { id: '2', writerName: 'ahova', text: 'זה היה ביום ההולדת הרביעי של סבתא' },
-  { id: '3', writerName: 'sari', text: 'ד3' }, { id: '4', writerName: 'בילי', text: 'העץ הזה עדיין קיים' }, { id: '5', writerName: 'יוסף', text: 'דוד נפתלי צלם את התמונה' }];
 
   //const[htmlTextArea,setHtmlTextArea]=useState('');
  
@@ -92,12 +90,9 @@ export default function Item(props) {
     setTakenDate(value);
   }
 
-  const htmlList = locationArray.map((l,i)=> <h6 key={i}>{l.name}</h6>);
-  const htmlLocations = JSON.stringify(locationSelectValue);
+  //const htmlList = locationArray.map((l,i)=> <h6 key={i}>{l.name}</h6>);
+  //const htmlLocations = JSON.stringify(locationSelectValue);
   const htmlFingures = JSON.stringify(figuresSelectValue);
-  const htmlTextArea = writerArry.map((writer,i) =>
-    <div className="row " key={i}><label>{writer.writerName}</label><textarea value={writer.id} name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
-  );
 
   const onSubmit = async (data) => {
    
@@ -125,9 +120,9 @@ export default function Item(props) {
 
   return (
     <div className="container">
-      <div>{htmlList}</div>
+      {/* <div>{htmlList}</div> */}
       <div>{htmlFingures}</div>
-      <div>{htmlLocations}</div>
+      {/* <div>{htmlLocations}</div> */}
       <SideNav />
       {/* <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                     <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
@@ -182,7 +177,7 @@ export default function Item(props) {
               </div>
             
           </div>
-          {htmlTextArea}
+         <TextAreaDetails></TextAreaDetails>
         </div>
       </div>
     </div>

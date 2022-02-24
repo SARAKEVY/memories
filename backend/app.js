@@ -10,7 +10,8 @@ const usersRouter = require('./routes/users');
 const itemsRouter = require('./routes/items');
 const locationsRouter = require('./routes/locations');
 const authRouter = require('./routes/auth');
-const accountAuthRouter = require('./routes/accountAuth')
+const accountAuthRouter = require('./routes/accountAuth');
+const detailsRouter = require('./routes/details');
 
 app.use(express.json());
 
@@ -27,6 +28,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/accountAuth', accountAuthRouter)
 app.use('/api/items', itemsRouter)
 app.use('/api/locations', locationsRouter)
+app.use('/api/details',  detailsRouter)
 
 
 mongoose.connect('mongodb://localhost/memories', {

@@ -16,7 +16,7 @@ import Page404 from "./components/page404";
 import userService from "./services/userService";
 import accountService from "./services/accountService";
 //import Galery from "./components/galery";
-import NavBar from "./components/navbar";
+//import NavBar from "./components/navbar";
 import GoogleLogin from "./components/googleLogin";
 import SideNav from "./components/sideNav";
 import UserAccount from "./components/userAccount";
@@ -90,7 +90,7 @@ return (
           <Route path = "newLogin" element={<NewLogin updateUser={updateUser}/>}/>
           <Route path = "UserAccount" element={<UserAccount user={user}/>}/>
           <Route path = "page404" element={<Page404/>}/>
-          <Route path = "navBar" element={<NavBar updateUser={updateUser} user={user} updateAccount={updateAccount} account={account} />}/>
+          {/* <Route path = "navBar" element={<NavBar updateUser={updateUser} user={user} updateAccount={updateAccount} account={account} />}/> */}
           <Route path = "accountLogin" element={<AccountLogin/>}/>
           <Route path = "joinAccount" element={<JoinAccount updateAccount={updateAccount} user={user} account={account}/>}/>
           <Route path = "addParticipants/:id" element={<AddParticipants/>}/>
