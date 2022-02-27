@@ -7,17 +7,17 @@ import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import userService from '../services/userService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import GoogleLogin from './googleLogin';
-
+import ErrorMassege from './common/errorMassege';
 import  "../App.css";
 import "../index.css";
 
 
 function Signup(props){
 
-
+    const [error, setError] = useState('');
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const [user ,setUser] = useState(null);
@@ -46,12 +46,20 @@ function Signup(props){
         history('/login');
         }
        catch(ex) {
-        console.log(ex);
+        console.log(ex.data);
+        console.log(ex.response.status);
+        if(ex.response.status === 400){
+            setError("user exists, now login");
+           
+        }
+        else if(ex.response.status === 500){
+            setError('There is a problem, please try again later')
         }
        
+       }
+    }
 
-
-    };
+    
 
 
 
@@ -127,8 +135,11 @@ function Signup(props){
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
-                           
+                            { error && <ErrorMassege massegeText={error}/>}
+
+                                        
                             <Button type="submit" label="Submit" className="p-mt-2" />
+                           <p className="text-center h5 mt-3" style={{color:"red"}} >Already registered? <Link to="/login" style={{color:"red"}}>Log in here</Link></p>  
                         </form>
                     </div>
                 </div>

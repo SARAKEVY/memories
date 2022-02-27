@@ -12,7 +12,7 @@ function NavButtons(props){
  
 
     return(
-        <div className="d-flex align-items-end m-auto">
+        <div className="d-flex align-items-end mt-5">
             
             
             <div className="navBtn">

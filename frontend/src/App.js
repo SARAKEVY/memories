@@ -30,6 +30,8 @@ import TimeLine from './components/timeLine';
 import AccountLogin from "./components/accountLogin";
 import NavBar3 from './components/navbar3';
 import JoinAccount from "./components/joinAccount";
+import DeleteAccount from "./components/deleteAccount";
+import EditAccount from "./components/editAccount";
 import 'react-toastify/dist/ReactToastify.css';
 import Dropdown from "./components/dropdown";
 import './sass/main.css';
@@ -81,6 +83,7 @@ return (
           <Route path = '/home' element={<Home updateUser={updateUser} user={user}/>}/>
           <Route path = "sideNav" element={<SideNav/>}/>
           <Route path = "account" element={<Account/>}/>
+          <Route path = "editAccount" element={<EditAccount account = {account}/>}/>
           <Route path = "navbar3" element={<NavBar3/>}/>
           <Route path = "accountValidation" element={<AccountValidation/>}/>
           <Route path = "signup" element={<Signup/>}/>
@@ -99,6 +102,7 @@ return (
           <Route path = "t" element={<ImageT/>}/>  
           <Route path = "navButtons" element={<NavButtons/>}/>
           <Route path = "dropdown" element={<Dropdown/>}/>
+          <Route path ="deleteAccount" element={<DeleteAccount account={account} user={user}/>}/>
           <Route path ="googleLogin" element={<GoogleLogin updateUser={updateUser} user={user}/>}/>
          
          </Routes> 

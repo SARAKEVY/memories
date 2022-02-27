@@ -30,6 +30,19 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+
+router.get('/edit/:id', async (req, res) => {
+    const account = await Account.findById(req.params.id).exec();
+    console.log(account);
+    try {
+        res.send(account);
+        
+    }
+    catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 router.post('/', async (req, res) => {
     console.log('hi')
     const { error } = validateAccount(req.body);
@@ -66,10 +79,10 @@ router.put('/:id', async (req, res) => {
 
 
 router.delete('/:id', async (req, res) => {
-    const account = await Account.findByIdAndDelete(req.params.id)
+    const account = await Account.findOneAndDelete({_id:req.params.id})
 
     try {
-        res.send('accountDelete')
+        res.send('Account Delete');
     }
     catch (error) {
         res.status(500).send(error);
