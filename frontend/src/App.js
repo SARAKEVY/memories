@@ -16,7 +16,7 @@ import Page404 from "./components/page404";
 import userService from "./services/userService";
 import accountService from "./services/accountService";
 //import Galery from "./components/galery";
-//import NavBar from "./components/navbar";
+import NavBar from "./components/navbar";
 import GoogleLogin from "./components/googleLogin";
 import SideNav from "./components/sideNav";
 import UserAccount from "./components/userAccount";
@@ -56,7 +56,7 @@ function App() {
    function updateUser() {
    const myUser = userService.getCurrentUser();
    setUser(myUser);
-   console.log(myUser);
+   console.log("***myUser",myUser);
    
   
     } 
@@ -83,17 +83,17 @@ return (
           <Route path = '/home' element={<Home updateUser={updateUser} user={user}/>}/>
           <Route path = "sideNav" element={<SideNav/>}/>
           <Route path = "account" element={<Account/>}/>
-          <Route path = "editAccount" element={<EditAccount account = {account}/>}/>
+          <Route path = "editAccount" element={<EditAccount accountId = {account}/>}/>
           <Route path = "navbar3" element={<NavBar3/>}/>
           <Route path = "accountValidation" element={<AccountValidation/>}/>
           <Route path = "signup" element={<Signup/>}/>
-          <Route path = "item" element={<Item updateAccount={updateAccount} account={account}/> }/>
+          <Route path = "item" element={<Item updateAccount={updateAccount} account={account} user={user}/> }/>
           <Route path = "location" element={<Location/>}/>
           <Route path = "login" element={<Login updateUser={updateUser} user={user}/>}/>
           <Route path = "newLogin" element={<NewLogin updateUser={updateUser}/>}/>
           <Route path = "UserAccount" element={<UserAccount user={user}/>}/>
           <Route path = "page404" element={<Page404/>}/>
-          {/* <Route path = "navBar" element={<NavBar updateUser={updateUser} user={user} updateAccount={updateAccount} account={account} />}/> */}
+          <Route path = "navBar" element={<NavBar updateUser={updateUser} user={user} updateAccount={updateAccount} account={account} />}/>
           <Route path = "accountLogin" element={<AccountLogin/>}/>
           <Route path = "joinAccount" element={<JoinAccount updateAccount={updateAccount} user={user} account={account}/>}/>
           <Route path = "addParticipants/:id" element={<AddParticipants/>}/>

@@ -36,8 +36,10 @@ router.post('/', async (req, res) => {
     console.log('error',error);
     try {
         let new_detail = new Detail({
-            detailText: req.body.detailText,
-            detailOwner: req.body.detailOwner
+            itemId:req.body.itemId,
+            textDetail: req.body.textDetail,
+            ownerDetailId: req.body.ownerDetailId,
+            ownerDetailName: req.body.ownerDetailName,
         });
         
         await new_detail.save();

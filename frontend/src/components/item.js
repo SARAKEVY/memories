@@ -12,6 +12,7 @@ import SideNav from "./sideNav";
 import CalendarItem from "./calendarItem";
 import itemService from '../services/itemService';
 import TextAreaDetails from "./textAreaDetails";
+import { use } from "../../../backend/routes/accounts";
 
 export default function Item(props) {
 
@@ -42,9 +43,8 @@ export default function Item(props) {
 
   const [calenderDefaultValue, setCalenderDefaultValue] = useState(null);
   const [takenDate,setTakenDate] = useState(null);
+  const [htmlTextAreaDetails,setHtmlTextAreaDetails]=useState('');
  
-  
-
   //const[htmlTextArea,setHtmlTextArea]=useState('');
  
     useEffect(()=>{
@@ -103,7 +103,7 @@ export default function Item(props) {
       description: data.description,
       locations: locationSelectValue,
       takenDate:takenDate,
-      accountId:props.account,
+      accountId:props.accountId,
     };
     //React.forwardRef()
     console.log(i);
@@ -116,8 +116,11 @@ export default function Item(props) {
   };
 
   const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+  if(defaultValues.id != '') {
+  setHtmlTextAreaDetails("<TextAreaDetails item={defaultValues.id} user={props.user}></TextAreaDetails>")
+  }
   
-
+  
   return (
     <div className="container">
       {/* <div>{htmlList}</div> */}
@@ -177,7 +180,8 @@ export default function Item(props) {
               </div>
             
           </div>
-         <TextAreaDetails></TextAreaDetails>
+          {htmlTextAreaDetails}
+         {/* <TextAreaDetails item={defaultValues.id} user={props.user}></TextAreaDetails> */}
         </div>
       </div>
     </div>

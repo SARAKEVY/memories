@@ -15,8 +15,9 @@ export default function TextAreaDetails(props) {
       },[]); 
   
       const defaultValues = {
-        detailText: '',
-        detailOwner:''
+        textDetail: '',
+        detailOwnerId: '',
+        detailOwnerName:''
     }
     
 
@@ -25,6 +26,13 @@ export default function TextAreaDetails(props) {
 
       const onSubmit =  async(data) => {
         setFormData(data);
+
+        const DetailDate ={
+            itemId :props.itemId,
+            textDetail: data.textDetail,
+            detailOwnerId: props.user._id,
+            detailOwnerName:props.user.name
+        }
         
          console.log("form", data);
         try{
@@ -63,10 +71,10 @@ return(
             <div className="p-field">
                                 <span className="p-float-label">
                                 <div className="row " >
-                                <label htmlFor="detailText" >Do You have more details to share abuot this picter?</label>
+                                <label htmlFor="textDetail" >Do You have more details to share abuot this picter?</label>
               
-                                    <Controller name="detailText" control={control}  render={({ field, fieldState }) => (
-                                   <textarea id={field.detailText} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })}  cols="10" rows="2"/>
+                                    <Controller name="textDetail" control={control}  render={({ field, fieldState }) => (
+                                   <textarea id={field.textDetail} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })}  cols="10" rows="2"/>
                                    
                                     )} />
                                     <label htmlFor="description" className={classNames({ 'p-error': errors.description })}>description</label>
