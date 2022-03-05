@@ -1,11 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import NavButtons from './navButtons';
-// import { InputText } from 'primereact/inputtext';
-
+import {Link, useSearchParams} from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import NavBar from './navbar';
+import userService from "../services/userService";
+import accountService from "../services/accountService";
+import itemService from '../services/itemService';
 
 function Header( props ){
 
-    // const [globalFilter, setGlobalFilter] = useState(null);
+useEffect(() => {
+    getMyAccount();
+},[])
+
+    const [ myAccount, setMyAccount] = useState([]);
     
     const [ currentUserId, setCurrentUserId] = useState();
 
@@ -90,9 +98,3 @@ return(
 }
 
 export default Header;
-
-
-
-
- 
-           

@@ -45,7 +45,7 @@ export default function TimeLine() {
     return date1;
   }
   
-  const yourDate = new Date();   const NewDate = moment(yourDate, 'DD-MM-YYYY')   ; 
+  // const yourDate = new Date();   const NewDate = moment(yourDate, 'DD-MM-YYYY')   ; 
   return (
 
     <div
@@ -80,7 +80,7 @@ export default function TimeLine() {
               className="vertical-timeline-element-subtitle"
               // dangerouslySetInnerHTML={{ __html: item.description + " - in  "  }}
               // dangerouslySetInnerHTML={{ __html: item.description + " - in " + item.takenDate.format("DD/MM/YYYY") }}
-              {`${item.takenDate.getDate()}-${item.takenDate.getMonth() + 1}-${item.takenDate.getFullYear()}`;}
+              // {`${item.takenDate.getDate()}-${item.takenDate.getMonth() + 1}-${item.takenDate.getFullYear()}`;}
               //  {correctDate(item.takenDate)}
             />
             <img src={item.fileUrl} style={IMAGE_STYLES} ></img>
