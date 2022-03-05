@@ -82,7 +82,6 @@ return (
 
           <Route path = "navButtons" element={<NavButtons/>}/>
           <Route path ="openAccount" element = {<Account/>}/>
-          <Route path = "timel" element={<TimeLine/>}/>  
             {/* <Route path = "galery" element={<Galery/>}/>  */}
        
          </Routes> 

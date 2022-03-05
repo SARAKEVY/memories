@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import NavButtons from './navButtons';
+// import { InputText } from 'primereact/inputtext';
 
 
 function Header( props ){
 
+    // const [globalFilter, setGlobalFilter] = useState(null);
     
 
    useEffect(() => {
@@ -26,9 +28,11 @@ function Header( props ){
             <div className="col-lg-4 d-flex align-items-center">
             <form>
                     <div className="search1">
+                {/* <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." /> */}
+
                         <input className="serchStyle" type="search" id="mySearch" name="q"
-                        placeholder="Search the site..." size="30"/>
-                        <button className="serchStyle1 text-center">Search</button>
+                        placeholder="Search the site..." size="30"/> 
+                        <button className="serchStyle1 text-center">Search</button> 
                     </div>
             </form>
             </div>
