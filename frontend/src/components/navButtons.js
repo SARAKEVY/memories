@@ -1,28 +1,33 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+
 function NavButtons(props){
 
-  
+    const onDeleteUser = async  () => {
+        localStorage.removeItem("token");
+        props.updateUser();
+    }
     
  
 
     return(
-        <div className="d-flex align-items-end">
+        <div className="d-flex align-items-end mt-5">
             
             
             <div className="navBtn">
+       
             { (!props.user) &&
-            <Link to="/home"className="btn bShAcconuts">Login</Link> 
+            <Link to="/login"className="btn bShAcconuts">Login</Link> 
             }
 
             { props.user &&
-            <Link to="/home"  className="btn bShAcconuts btnLogout ">Logout</Link>  
+            <button  onClick={()=>onDeleteUser()} className="btn bShAcconuts ">Logout</button>  
             }
            
-           <Link to="/account"  className="btn bShAcconuts2 btnLogout ">+Add Account</Link>
-
             </div>
+              
+
             <div>
 
             </div>

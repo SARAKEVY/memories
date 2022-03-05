@@ -13,27 +13,55 @@ import  "../App.css";
 import "../index.css";
 
 
-function Account(props){
+function Editaccount(props){
+
+     useEffect (()=>{
+        const id = props.account._id;
+        console.log(id);
+        async function accountData (id){
+        const data = await accountService.getAccountData(id);
+        console.log(data.data);
+        setCurrentAccount(data.data);
+       
+        
+        };
+        accountData(id);
+    }, []);
 
 
+
+    const [currentAaccount, setCurrentAccount] = useState({});
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const [user ,setUser] = useState(null);
     const history = useNavigate();
 
-  const defaultValues = {
-        accountName: '',
+    /*  const defaultValues = {
+        accountName:formData.accountName,
         accountType:'',
         accountTarget:'',
         accountDescription:'',
         managerName:'',
-        managerEmail: '',
+        managerEmail:'',
         accountPassword:'',
-     /*    participants:[] */
         
-    } 
+        
+    }  */
 
-   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+   const defaultValues = {
+        accountName:currentAaccount.accountName,
+        accountType:currentAaccount.accountType,
+        accountTarget:currentAaccount.accountTarget,
+        accountDescription:currentAaccount.accountDescription,
+        managerName:currentAaccount.managerName,
+        managerEmail: currentAaccount.managerEmail,
+        accountPassword:'',
+        
+        
+    }  
+
+
+   const { control, formState: { errors }, handleSubmit} = useForm({ defaultValues });
 
     const onSubmit =  async(data) => {
         setFormData(data);
@@ -42,19 +70,11 @@ function Account(props){
        try{
         const newAccount = await accountService.addAccount (data);
         console.log("newAccount", newAccount);
-       /*  history({
-           pathname:'/addParticipants/',
-            search:`${newAccount.data._id}`});
-        } */
         history(`/addParticipants/${newAccount.data._id}`)
     }
     catch(ex) {
         console.log(ex);
         }
-
-       
-
-
     };
 
 
@@ -93,14 +113,14 @@ function Account(props){
 
                 <div className="p-d-flex p-jc-center">
                     <div className="card">
-                        <h5 className="p-text-center h1">Open Account</h5>
+                        <h5 className="p-text-center h1">Edit Account</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                             <div className="p-field">
                                 <span className="p-float-label">
                                     <Controller name="accountName" control={control} rules={{ required: 'Account Name is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.accountName} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    <InputText id={field.accountName} {...field} autoFocus value={currentAaccount.accountName} editeble={true} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="accountName" className={classNames({ 'p-error': errors.accountName })}>Account Name*</label>
+                                    <label htmlFor="accountName"  className={classNames({ 'p-error': errors.accountName })}>Account Name*</label>
                                 </span>
                                 {getFormErrorMessage('accountName')}
                             </div>
@@ -108,7 +128,7 @@ function Account(props){
                             <div className="p-field">
                                 <span className="p-float-label">
                                     <Controller name="accountType" control={control} rules={{ required: 'Type is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.accountType} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.accountType} {...field} autoFocus value={currentAaccount.accountType} legend={field.accountType} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="accountType" className={classNames({ 'p-error': errors.accountType })}>Account Type*</label>
                                 </span>
@@ -167,16 +187,6 @@ function Account(props){
                                 </span>
                                 {getFormErrorMessage('accountPassword')}
                             </div>
-{/* 
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <Controller name="participants" control={control} rules={{ required: 'Type is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.participants} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="participants" className={classNames({ 'p-error': errors.participants })}>Participants*</label>
-                                </span>
-                                {getFormErrorMessage('participants')}
-                            </div> */}
                            
                             <Button type="submit" label="Submit" className="p-mt-2" />
                         </form>
@@ -187,4 +197,4 @@ function Account(props){
     )
 }
 
-export default Account;
+export default Editaccount;

@@ -7,70 +7,92 @@ function Header( props ){
 
     // const [globalFilter, setGlobalFilter] = useState(null);
     
+    const [ currentUserId, setCurrentUserId] = useState();
 
-   useEffect(() => {
-    const header1= props.account;
-       console.log("header",header1)
-   }, [])
+    const [searchParams] = useSearchParams();
+    const [items, setItems] = useState([]);
+    function getId(){
+        const user = localStorage.getItem("token");
+        const currentUser = userService.getCurrentUser(user);
+        const userId = currentUser._id;
+        setCurrentUserId(userId);
+        return userId;
+}
 
+    const getMyAccount = async () =>{
+        const userId = getId();
+        console.log("hi",userId);
+        const newAccountList = await userService.getUserAccounts( userId);
+        setMyAccount(newAccountList.data)
+        console.log("my", newAccountList.data);
+        console.log("my", newAccountList.data.accountName);
+       /*  nameAccountList(); */
+        }
+        
 
-    return(
+        async function accountItems (accountId){
+         
+            console.log(accountId);
+            const data = await itemService.getAccountItems(accountId);
+            setItems(data);
+            console.log(data);
+          }
+    
+ /* const nameAccount = (currentUserId) =>{
+         accountService.getAccountsName(currentUserId);
+      
+    }
+    const nameAccountList = ()=>{
+        const newList = myAccountList.forEach( element => nameAccount(element) );
+            console.log(newList); 
+        }
+     */
+
+return(
         <React.Fragment>
         <div className="container-fluid d-flex dHeader">
-           
-            <div className="col-lg-3">
-                <div className="headerH1">Memories</div>
-                <div className="hMemories m-1">Memories, Events and Experiences</div>
+            <div className="col-lg-8 d-flex align-items-center navSmall">
+                <NavBar account={props.account} user={props.user}/>
+            </div>
+
+
+
+            <div className=" col-lg-4 d-flex justify-content-end btnNavHeader avatareBtn">
+                <div className="col-lg-4"></div>
+                <div className="avatareBtn col-lg-3">
+                    <NavButtons updateUser={props.updateUser} user={props.user}/>
+                </div>
                
-            </div>
-
-
-            <div className="col-lg-4 d-flex align-items-center">
-            <form>
-                    <div className="search1">
-                {/* <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." /> */}
-
-                        <input className="serchStyle" type="search" id="mySearch" name="q"
-                        placeholder="Search the site..." size="30"/> 
-                        <button className="serchStyle1 text-center">Search</button> 
-                    </div>
-            </form>
-            </div>
-
-            <div className="col-lg-2 projectName d-flex align-content-center flex-wrap justify-content-center">
-                <div></div>
-            </div>
-
-            
-
-            <div className="col-lg-3 m-auto d-flex justify-content-between">
-                <div className="navBtn d-flex col-lg-6"><div className=""><NavButtons changeUser={props.changeUser} user={props.user}/></div></div>
-               
-
-            <div className="avatareBtn col-lg-5">
-              <div className="userAvatar d-flex justify-content-end">
-                <div className="h3 align-items-center col-lg-6 errow d-flex justify-content-end"><i className="fas fa-chevron-down" style={{color:"dTurquoise"}}></i></div>
-                <div className="userA m-1 h2"><i className="far fa-user"></i></div>
-            </div>
+              
+              
+                <div className="col-lg-5 btnNavHeader mt-2 avatareBtn" >
+                    <li className="nav-item dropdown userName text-right linkAccounts d-flex justify-content-end">
+                    { props.user &&
+                    <Link to = "#"  className="nav-link dropdown-toggle text-center h3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i className="far fa-user linkAccounts avatareBtn dh"></i><br></br><span className="h5 dH avatareBtn">{props.user.name}</span></Link >}
+                    { ! props.user &&  <Link to = "#" onClick={() => useEffect} className="nav-link text-center mt-3 h3 " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i className="far fa-user linkAccounts avatareBtn"></i><br></br><span className="h5"></span></Link >}
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">{myAccount.map((item ,i) => (
+                            <li key={i}><Link to = "#" /* {`./item?account=${item.accountId}`} */ onClick={ ()=> accountItems(item.accountId)} className="dropdown-item" href="#">{item.accountName}</Link ></li>
+                            ))}
+                
+                            <li><Link to = ""  className="dropdown-item" href="#">date</Link ></li>
+                        </ul>
+                    </li> 
+                </div> 
            
-            { props.user &&
-            <div className="userName text-right">{props.user.name}</div>}
             </div> 
-            </div>
-           </div> 
+        </div>  
 
-           <div className="smallScreen d-flex  dHeader">
-           <form className="col-lg-8">
-                    <div className="search2">
-                        <input className="serchStyle" type="search" id="mySearch" name="q"
-                        placeholder="Search the site..." size="30"/>
-                        <button className="serchStyle1 text-center">Search</button>
-                    </div>
-            </form>
-           
-           </div>
-        </React.Fragment>
+        
+ </React.Fragment>
     )
 }
 
-export default Header
+export default Header;
+
+
+
+
+ 
+           

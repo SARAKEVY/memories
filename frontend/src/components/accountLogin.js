@@ -1,19 +1,20 @@
 import  React, {useState, useEffect} from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import {toast} from 'react-toastify';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
-import { Dialog } from 'primereact/dialog';
+//import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-import loginService from '../services/loginService';
+import userService from '../services/userService';
 import { useNavigate } from 'react-router-dom';
 
 import  "../App.css";
 import "../index.css";
 
 
-function NewLogin(props){
+function AccountLogin(props){
 
 
     const [showMessage, setShowMessage] = useState(false);
@@ -22,7 +23,6 @@ function NewLogin(props){
     const history = useNavigate();
 
     const defaultValues = {
-        name: '',
         email: '',
         password:''
         
@@ -30,25 +30,22 @@ function NewLogin(props){
 
    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
-   /*  useEffect(()=>{
-     setUser(user)
-    },[]) */
+ 
 
     const onSubmit =  async(data) => {
         setFormData(data);
         setShowMessage(true);
         console.log("form", data);
        try{
-        await loginService.addUser (data)
+        await userService.login (data);
+        toast.success('login success!')
+        props.updateUser();
+        window.location = '/account2';
         }
        catch(ex) {
         console.log(ex);
         }
-
-        localStorage.setItem("user",  JSON.stringify(data));
-        props.changeUser();
-        reset();
-        history('/item');
+        
 
 
     };
@@ -80,29 +77,18 @@ function NewLogin(props){
     return(
         <div className="container mt-8 ">
             <div className="container form-demo col-lg-6">
-                <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
+               {/*  <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                     <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
                         <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                         <h5>Registration Successful!</h5>
-                        {/* <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                            Your account is registered under name <b>{formData.name}</b> ; it'll be valid next 30 days without activation. Please check <b>{formData.email}</b> for activation instructions.
-                        </p> */}
                     </div>
-                </Dialog>
+                </Dialog> */}
 
                 <div className="p-d-flex p-jc-center">
                     <div className="card">
-                        <h5 className="p-text-center h1">Register</h5>
+                        <h5 className="p-text-center h1">Account Login</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <Controller name="name" control={control} rules={{ required: 'name is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
-                                </span>
-                                {getFormErrorMessage('name')}
-                            </div>
+                          
                             <div className="p-field">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
@@ -111,7 +97,7 @@ function NewLogin(props){
                                         render={({ field, fieldState }) => (
                                             <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
-                                    <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
+                                    <label htmlFor="email" className={classNames({ 'p-error': errors.email })}>Email*</label>
                                 </span>
                                 {getFormErrorMessage('email')}
                             </div>
@@ -134,4 +120,4 @@ function NewLogin(props){
     )
 }
 
-export default NewLogin
+export default AccountLogin;

@@ -1,37 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import loginService from '../services/loginService';
+import UserService from '../services/userService';
 import { useNavigate } from 'react-router-dom';
- 
+import {toast} from 'react-toastify'; 
+
 const clientId = "481632294387-umm3jhqq9qctmmg115sj0rkrc6arf6ki.apps.googleusercontent.com";
  
 function LoginWithGoogle(props) {
  
   const [loading, setLoading] = useState('Loading...');
-  
+  const [user, setUser] = useState('');
   const history = useNavigate();
+
+useEffect(() => {
+  const newUser = props.user;
+  setUser(newUser);
+}, [])
+
 
   const handleLoginSuccess = async (response) => {
     console.log("Login Success ", response);
     
     const data = {
       name: response.profileObj.name,
-      googleId: response.profileObj.googleId,
+      password: "nechamiF1234",
       email: response.profileObj.email,
 
     }
     console.log(data);
     
     try{
-      await loginService.addWithGoogle (data)
+      await UserService.addUser (data);
+      const authData = {
+        password: "nechamiF1234",
+        email: response.profileObj.email,
+      }
+      await UserService.login(authData);
+     
+      props.updateUser();
+      toast.success('login success!')
+        window.location = '/item';
     }
     catch(ex) {
         console.log(ex);
     }
-   localStorage.setItem("user",  JSON.stringify(data));
+   /* localStorage.setItem("user",  JSON.stringify(data));
    
-    props.changeUser();
-    setLoading();
+    props.updateUser();
+    setLoading(); */
     
    /*  history('/item'); */
   }
@@ -41,12 +57,20 @@ function LoginWithGoogle(props) {
     setLoading();
   }
  
-  const handleLogoutSuccess = (response) => {
-    console.log("Logout Success ", response);
-    localStorage.setItem("user", null);
-    props.changeUser()
+  
+
+  const handleLogoutSuccess = async (user) => {
+    console.log(user);
+    const id = props.user.id;
+    localStorage.removeItem("token");
+    setUser('');
+    props.updateUser();
+    console.log("id", id);
+    await UserService.deleteUser(id);
+    console.log("user delete");
+}
     
-  }
+  
  
   const handleLogoutFailure = error => {
     console.log("Logout Failure ", error);
@@ -67,15 +91,15 @@ function LoginWithGoogle(props) {
       
       {props.user ? <div>
        
-        <GoogleLogout
+        <GoogleLogout className="btn-google" 
           clientId={clientId}
           onLogoutSuccess={handleLogoutSuccess}
           onFailure={handleLogoutFailure}
-          className="btn-google-logout"
+          user={props.user}
         />
        
       </div> :
-        <GoogleLogin className="btn-google-login" 
+        <GoogleLogin className="btn-google" 
           clientId={clientId}
           buttonText={loading}
           onSuccess={handleLoginSuccess}

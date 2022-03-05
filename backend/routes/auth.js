@@ -8,14 +8,14 @@ router.post ('/', async (req, res ) => {
   console.log(req.body);
   try{
     const { error} = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message); 
+    if (error) return res.status(400).send( error.details[0].message); 
 
     let user = await User.findOne({ email: req.body.email});
     if ( ! user ) return res.status(400).send('email or password not incorrect');
-
+console.log('y');
     const validaPassword = await bcrypt.compare(req.body.password, user.password);
     if (! validaPassword ) return res.status(400).send('email or password not incorrect');
-
+console.log('r');
     res.json({token: user.generateAuthToken()}); 
     
   }
@@ -40,3 +40,5 @@ function validate(req) {
 
 
   module.exports = router; 
+
+

@@ -1,3 +1,4 @@
 {
-    "jwtKey": "memories"
+    "jwtKey": "memories",
+    "jwtAccountKey": "accountMemories"
 }
