@@ -7,7 +7,7 @@ import {API_URL} from './httpService';
 export function addImage ( data ) {
 
     const imageData = new FormData() ;
-    imageData.append('file',JSON.stringify(data));
+    imageData.append('file',data.selectedFile);
     console.log('imageService--->data',data);
     console.log('addImage***********imageData',imageData);
     const config = {
@@ -20,7 +20,7 @@ export function addImage ( data ) {
 
   //  Flatted.stringify(data);
  //   Flatted.parse(JSON.stringify(data));
-    return axios.post(`${API_URL}/image/upload`,imageData,config).then(res => console.log('statusText',res.statusText));
+    return axios.post(`${API_URL}/image/upload`,imageData).then(res => console.log('statusText',res.statusText));
 }
 
 const imageService = {
