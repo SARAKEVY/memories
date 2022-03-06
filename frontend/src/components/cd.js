@@ -1,53 +1,29 @@
 
-import React, { Component } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 
-   
 
-class App extends Component {
+export default function Cd(props) {
+    props=Date.now();
+    useEffect(() => {
+        const  today = props.getFullYear() + '-' + (props.getMonth() + 1) + '-' + props.getDate();
+    }, )
 
-  constructor() {
+    // const [myDate, setMyDate] = useState([]);
 
-   
 
-    var today = new Date(),
-
-    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
-   
-
-    this.state = {
-
-      currentDate: date
-
-    }
-
-  }
-
-   
-
-  render() {
+      const  today = props.getFullYear() + '-' + (props.getMonth() + 1) + '-' + props.getDate();
 
     return (
 
-      <div>
-
-        <p>
-
-          { this.state.currentDate }
-
-        </p>
-
-      </div>
+        <div>
+            <h1>
+                {today}
+            </h1>
+        </div>
 
     );
 
-  }
+
 
 }
-
-   
-
-render(<Cd />, document.getElementById('root'));
-
