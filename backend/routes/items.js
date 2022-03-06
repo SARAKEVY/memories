@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+//const multer = require('multer');
+//const uuid = require('uuid').v4;
 const _ = require('lodash');
 router.use(express.json());
 const { Item, validateItem } = require('../models/item');
@@ -7,6 +9,7 @@ const { Item, validateItem } = require('../models/item');
 //const bcrypt = require('bcrypt');
 
 router.get('/', async (req, res) => {
+    
     const item = await Item.find({});
 
     try {
@@ -28,18 +31,27 @@ router.get('/:accountId', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
-    console.log('itemService-backend ',req.body);
-  //  const { error } = validateItem(req.body);
-  //  console.log('by1',error);
-//    if (error) return res.status(400).send(error.details[0].message);
+// const storage = multer.diskStorage({
+//     destination:(req,file,cb)=>{
+//     cb(null,'uploads');
+// },
 
-//     let item = await Item.findOne({ email: req.body.email});
-//     if (item) return res.status(400).send('משתמש רשום');
-    
+//     fileName:(req,file,cb)=>{
+//         const {orginalName} = file;
+//         cb(null,orginalName);
+//     }
+
+// })
+
+// const uploadImage = multer({storage:storage});
+
+router.post('/', async (req, res) => {
+    console.log('itemService-backend ',req.body);  
 try{
     let newItem = new Item({
-      fileUrl: req.body.fileUrl,
+      fileUrl: '',
+      //file:myFile.selectedFile,
+     // fileName:req.body.myFile,
       figures: req.body.figures,
       title: req.body.title,
       description: req.body.description,
@@ -48,8 +60,8 @@ try{
       accountId:req.body.accountId,
     });
     console.log('by2');
-    await newItem.save();
-    res.send(newItem);
+  //  await newItem.save();
+  //  res.send(newItem);
 }catch (e) {
     console.log(e);
     res.status(500).send(e.massege);

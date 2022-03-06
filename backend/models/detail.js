@@ -8,18 +8,18 @@ const mongoose = require("mongoose");
 const detailSchema = new mongoose.Schema({
     
     itemId:{
-        type: Number,
+        type: String,
         required: true,  
     },
     textDetail: {
     type: String,
     required: true,
   },
-  detailOwnerId: {
-    type: Number,
+  ownerId: {
+    type: String,
     required: true,
   },
-  detailOwnerName: {
+  ownerName: {
     type: String,
     required: true,
   },
@@ -29,10 +29,10 @@ const Detail = mongoose.model("Detail", detailSchema);
 
 function validateDetail(detail) {
   const schema = Joi.object({
-    itemId: Joi.number().required(),
+    itemId: Joi.string().required(),
     textDetail: Joi.string().required(),
-    detailOwnerId: Joi.number().required(),
-    detailOwnerName: Joi.string().required(),
+    ownerId: Joi.string().required(),
+    ownerName: Joi.string().required(),
     });
   return schema.validate(detail);
 }

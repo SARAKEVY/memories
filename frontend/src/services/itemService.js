@@ -9,7 +9,7 @@ export function addItem ( data ) {
     console.log('itemService',data);
   //  Flatted.stringify(data);
  //   Flatted.parse(JSON.stringify(data));
-    return axios.post(`${API_URL}/items`,data);
+    return axios.post(`${API_URL}/items`,data).then(res=>res.data);
 }
 
 export function getItems(){
