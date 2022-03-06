@@ -98,13 +98,8 @@ return (
           <Route path = "joinAccount" element={<JoinAccount updateAccount={updateAccount} user={user} account={account}/>}/>
           <Route path = "addParticipants/:id" element={<AddParticipants/>}/>
           <Route path ="openAccount" element = {<Account/>}/>
-          <Route path = "timel" element={<TimeLine/>}/>  
-          <Route path = "t" element={<ImageT/>}/>  
-          <Route path = "navButtons" element={<NavButtons/>}/>
-          <Route path = "dropdown" element={<Dropdown/>}/>
-          <Route path ="deleteAccount" element={<DeleteAccount account={account} user={user}/>}/>
-          <Route path ="googleLogin" element={<GoogleLogin updateUser={updateUser} user={user}/>}/>
-         
+            {/* <Route path = "galery" element={<Galery/>}/>  */}
+       
          </Routes> 
       
       </main>
