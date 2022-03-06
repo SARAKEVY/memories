@@ -52,7 +52,6 @@ export default function ImageT() {
 
 
     // ];
-
     const items1 = [
         {
           "takenDate": "2022-03-06T10:08:43.191Z",
@@ -63,7 +62,7 @@ export default function ImageT() {
           "figures": [],
           "title": "השורשים שלי",
           "description": "אילן  מפואר",
-          "createdDate": "2022-01-13T19:16:36.130Z",
+          "createdDate": "2022-01-13",
           "__v": 0,
           "fileUrl": "https://cdn.pixabay.com/photo/2018/04/03/20/29/forest-3287976__340.jpg",
           "locations": []
@@ -73,9 +72,9 @@ export default function ImageT() {
           "_id": "61e07ac10bfa835972d66b47",
           "tags": [],
           "figures": [],
-          "title": "חתונת סבא וסבתא מרוקו",
+          "title": "חתונת הכסף",
           "description": "קיץ תרצא",
-          "createdDate": "2022-01-13T19:16:36.130Z",
+          "createdDate": "1931-01-15",
           "__v": 0,
           "fileUrl": "https://cdn.pixabay.com/photo/2021/11/08/23/29/nature-6780354__340.jpg",
           "locations": []
@@ -88,8 +87,8 @@ export default function ImageT() {
           ],
           "figures": [],
           "title": "בר מצוה לשלמה",
-          "description": "חורף מושלג היה",
-          "createdDate": "2022-01-13T19:27:32.745Z",
+          "description": "חורף מושלג ",
+          "createdDate": "2017-01-13",
           "__v": 0,
           "fileUrl": "https://cdn.pixabay.com/photo/2020/02/08/14/36/trees-4830285__340.jpg",
           "locations": []
@@ -104,9 +103,9 @@ export default function ImageT() {
           "figures": [],
           "title": "מסע שורשים בטבע",
           "description": " נסענו כל האחים לטיול ",
-          "createdDate": "2022-01-13T19:42:22.553Z",
+          "createdDate": "2018-01-13",
           "__v": 0,
-          "fileUrl": "https://cdn.pixabay.com/photo/2017/10/18/16/08/wolves-2864647__340.jpg",
+          "fileUrl": "https://yefe.co.il/wp-content/uploads/2020/04/%D7%90%D7%97%D7%93-%D7%9E%D7%A2%D7%99%D7%A8-216x326.gif",
           "locations": []
         },
       
@@ -319,7 +318,7 @@ export default function ImageT() {
     // }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.judaicalgeria.com/medias/images/rabbi-allouche-1.jpg?fx=r_1200_800'} alt={rowData.image} className="product-image" style={{ width: 250, height: 200 }} />
+        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src = 'http://nplumber.co.il/wp-content/uploads/2015/06/%D7%94%D7%A1%D7%A8%D7%AA-%D7%A9%D7%95%D7%A8%D7%A9%D7%99%D7%9D-%D7%9E%D7%91%D7%99%D7%95%D7%91.jpg'} alt={rowData.image} className="product-image" style={{ width: 250, height: 200 }} />
     }
 
 
@@ -395,16 +394,17 @@ export default function ImageT() {
                   
                     <Column field="description" header="Description" sortable style={{ minWidth: '2rem' }}></Column>
                     <Column field="title" header="Title" sortable style={{ minWidth: '10rem' }}></Column>
-                    <Column field="fileUrl" header="Image" body={imageBodyTemplate} src={products.fileUrl} ></Column>
-                
+                    <Column field="fileUrl" header="Image" body={imageBodyTemplate} ></Column>
+                    <img src={products.fileUrl}></img>
+                    {/*  */}
                     {/* <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
                     {/* <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
-                    {/* <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column> */}
+                    <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                 </DataTable>
 
             </div>
 
-            <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+            <Dialog visible={productDialog} style={{ width: '450px' }} header=" Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
                 {product.image && <img src={`images/product/${product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
                 <div className="field">
                     <label htmlFor="name">Name</label>
