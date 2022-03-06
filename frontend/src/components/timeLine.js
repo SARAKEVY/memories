@@ -119,7 +119,7 @@ export default function TimeLine() {
 
       >
 
-        {items.map(item => (
+        {items.sort((a, b) => a.takenDate > b.takenDate ? 1:-1).map(item => (
           <VerticalTimelineElement
             key={item.takenDate}
 
