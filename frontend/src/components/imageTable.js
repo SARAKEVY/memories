@@ -319,7 +319,7 @@ export default function ImageT() {
     // }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.judaicalgeria.com/medias/images/rabbi-allouche-1.jpg?fx=r_1200_800'} alt={rowData.image} className="product-image" style={{ width: 250, height: 200 }} />
+        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src = 'http://nplumber.co.il/wp-content/uploads/2015/06/%D7%94%D7%A1%D7%A8%D7%AA-%D7%A9%D7%95%D7%A8%D7%A9%D7%99%D7%9D-%D7%9E%D7%91%D7%99%D7%95%D7%91.jpg'} alt={rowData.image} className="product-image" style={{ width: 250, height: 200 }} />
     }
 
 

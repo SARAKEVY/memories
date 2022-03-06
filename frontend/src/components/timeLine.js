@@ -27,7 +27,7 @@ export default function TimeLine() {
       "figures": [],
       "title": "השורשים שלי",
       "description": "אילן  מפואר",
-      "createdDate": "2022-01-13T19:16:36.130Z",
+      "createdDate": "2022-01-13",
       "__v": 0,
       "fileUrl": "https://cdn.pixabay.com/photo/2018/04/03/20/29/forest-3287976__340.jpg",
       "locations": []
@@ -39,7 +39,7 @@ export default function TimeLine() {
       "figures": [],
       "title": "חתונת סבא וסבתא מרוקו",
       "description": "קיץ תרצא",
-      "createdDate": "2022-01-13T19:16:36.130Z",
+      "createdDate": "1931-01-15",
       "__v": 0,
       "fileUrl": "https://cdn.pixabay.com/photo/2021/11/08/23/29/nature-6780354__340.jpg",
       "locations": []
@@ -52,8 +52,8 @@ export default function TimeLine() {
       ],
       "figures": [],
       "title": "בר מצוה לשלמה",
-      "description": "חורף מושלג היה",
-      "createdDate": "2022-01-13T19:27:32.745Z",
+      "description": "חורף מושלג ",
+      "createdDate": "2017-01-13",
       "__v": 0,
       "fileUrl": "https://cdn.pixabay.com/photo/2020/02/08/14/36/trees-4830285__340.jpg",
       "locations": []
@@ -68,9 +68,9 @@ export default function TimeLine() {
       "figures": [],
       "title": "מסע שורשים בטבע",
       "description": " נסענו כל האחים לטיול ",
-      "createdDate": "2022-01-13T19:42:22.553Z",
+      "createdDate": "2018-01-13",
       "__v": 0,
-      "fileUrl": "https://cdn.pixabay.com/photo/2017/10/18/16/08/wolves-2864647__340.jpg",
+      "fileUrl": "https://yefe.co.il/wp-content/uploads/2020/04/%D7%90%D7%97%D7%93-%D7%9E%D7%A2%D7%99%D7%A8-216x326.gif",
       "locations": []
     },
   
@@ -124,7 +124,7 @@ export default function TimeLine() {
             key={item.id}
 
             className="vertical-timeline-element--work"
-            date={item.date}
+            date={item.createdDate}
             iconStyle={{ background: "#41d3d3", color: "#fff", textDecoration: "6546" }}
 
           >
@@ -135,15 +135,13 @@ export default function TimeLine() {
             />
             <h6
               className="vertical-timeline-element-subtitle"
-              dangerouslySetInnerHTML={{ __html: item.description + " - in  " }}
-            // dangerouslySetInnerHTML={{ __html: item.description + " - in " + item.takenDate.format("DD/MM/YYYY") }}
-            // {`${item.takenDate.getDate()}-${item.takenDate.getMonth() + 1}-${item.takenDate.getFullYear()}`;}
+            dangerouslySetInnerHTML={{ __html: item.description  }}
             //  {correctDate(item.takenDate)}
             />
             <img src={item.fileUrl} style={IMAGE_STYLES} ></img>
             <br></br>
             <Button
-              style={{ background: "#21b1b1", color: "#000000", margin: "10" }}
+              style={{ background: "#21b1b1", color: "#000000", marginTop: "10" }}
             > More</Button>
           </VerticalTimelineElement>
         ))}
