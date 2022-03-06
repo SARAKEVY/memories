@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:itemId', async (req, res) => {
-    const details = await Detail.find({ itemId: req.paramss.itemId })
+    const details = await Detail.find({ itemId: req.body.itemId })
 
     try {
         res.json(details)
