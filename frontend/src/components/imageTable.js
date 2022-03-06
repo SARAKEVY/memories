@@ -1,18 +1,18 @@
+import React, { useState, useEffect, useRef } from 'react';
+
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../services/ProductService';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
-import { Rating } from 'primereact/rating';
+// import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { RadioButton } from 'primereact/radiobutton';
@@ -21,8 +21,8 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 
 
-    
-export default function ImageT  ()  {
+
+export default function ImageT() {
 
     let emptyProduct = {
         id: null,
@@ -31,11 +31,11 @@ export default function ImageT  ()  {
         description: '',
         category: null,
         quantity: 0,
-        rating: 0,
-        inventoryStatus: 'INSTOCK'
+        // rating: 0,
+        // inventoryStatus: 'INSTOCK'
     };
 
-    const [products, setProducts] = useState(null);
+    const [products, setProducts] = useState([]);
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
@@ -45,47 +45,92 @@ export default function ImageT  ()  {
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-    const productService = new ProductService();
-    const sd = [
-        {"id": "1000","code": "f230fh0g3","name": "Bamboo Watch","description": "Product Description","image": "bamboo-watch.jpg","price": 65,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
-        {"id": "1001","code": "nvklal433","name": "Black Watch","description": "Product Description","image": "black-watch.jpg","price": 72,"category": "Accessories","quantity": 61,"inventoryStatus": "INSTOCK","rating": 4},
-        {"id": "1002","code": "zz21cz3c1","name": "Blue Band","description": "Product Description","image": "blue-band.jpg","price": 79,"category": "Fitness","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 3},
-        {"id": "1003","code": "244wgerg2","name": "Blue T-Shirt","description": "Product Description","image": "blue-t-shirt.jpg","price": 29,"category": "Clothing","quantity": 25,"inventoryStatus": "INSTOCK","rating": 5},
-        {"id": "1004","code": "h456wer53","name": "Bracelet","description": "Product Description","image": "bracelet.jpg","price": 15,"category": "Accessories","quantity": 73,"inventoryStatus": "INSTOCK","rating": 4},
-        {"id": "1005","code": "av2231fwg","name": "Brown Purse","description": "Product Description","image": "brown-purse.jpg","price": 120,"category": "Accessories","quantity": 0,"inventoryStatus": "OUTOFSTOCK","rating": 4},
-        {"id": "1006","code": "bib36pfvm","name": "Chakra Bracelet","description": "Product Description","image": "chakra-bracelet.jpg","price": 32,"category": "Accessories","quantity": 5,"inventoryStatus": "LOWSTOCK","rating": 3},
-        {"id": "1007","code": "mbvjkgip5","name": "Galaxy Earrings","description": "Product Description","image": "galaxy-earrings.jpg","price": 34,"category": "Accessories","quantity": 23,"inventoryStatus": "INSTOCK","rating": 5},
-        {"id": "1008","code": "vbb124btr","name": "Game Controller","description": "Product Description","image": "game-controller.jpg","price": 99,"category": "Electronics","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 4},
-        {"id": "1009","code": "cm230f032","name": "Gaming Set","description": "Product Description","image": "gaming-set.jpg","price": 299,"category": "Electronics","quantity": 63,"inventoryStatus": "INSTOCK","rating": 3},
-        {"id": "1010","code": "plb34234v","name": "Gold Phone Case","description": "Product Description","image": "gold-phone-case.jpg","price": 24,"category": "Accessories","quantity": 0,"inventoryStatus": "OUTOFSTOCK","rating": 4},
-        {"id": "1011","code": "4920nnc2d","name": "Green Earbuds","description": "Product Description","image": "green-earbuds.jpg","price": 89,"category": "Electronics","quantity": 23,"inventoryStatus": "INSTOCK","rating": 4},
-        {"id": "1012","code": "250vm23cc","name": "Green T-Shirt","description": "Product Description","image": "green-t-shirt.jpg","price": 49,"category": "Clothing","quantity": 74,"inventoryStatus": "INSTOCK","rating": 5},
-        {"id": "1013","code": "fldsmn31b","name": "Grey T-Shirt","description": "Product Description","image": "grey-t-shirt.jpg","price": 48,"category": "Clothing","quantity": 0,"inventoryStatus": "OUTOFSTOCK","rating": 3},
-         {"id": "1028","code": "tx125ck42","name": "Yoga Mat","description": "Product Description","image": "yoga-mat.jpg","price": 20,"category": "Fitness","quantity": 15,"inventoryStatus": "INSTOCK","rating": 5},
-        {"id": "1029","code": "gwuby345v","name": "Yoga Set","description": "Product Description","image": "yoga-set.jpg","price": 20,"category": "Fitness","quantity": 25,"inventoryStatus": "INSTOCK","rating": 8}
-    ];
+    // const sd = [
+    //     { "id": "1000", "name": "Bamboo Watch", "description": "Product Description", "image": "bamboo-watch.jpg", "price": 65, "category": "Accessories", "quantity": 24 },
+    //     { "id": "1001", "name": "Black Watch", "description": "Product Description", "image": "black-watch.jpg", "price": 72, "category": "Accessories", "quantity": 61, "rating": 5 },
+    //     { "id": "1002", "name": "Blue Band", "description": "Product Description", "image": "blue-band.jpg", "price": 79, "category": "Fitness", "quantity": 2, "rating": 5 }
+
+
+    // ];
+    const items1 = [
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e07abb0bfa835972d66b45",
+          "tags": [
+            "fvdf"
+          ],
+          "figures": [],
+          "title": "השורשים שלי",
+          "description": "אילן  מפואר",
+          "createdDate": "2022-01-13",
+          "__v": 0,
+          "fileUrl": "https://cdn.pixabay.com/photo/2018/04/03/20/29/forest-3287976__340.jpg",
+          "locations": []
+        },
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e07ac10bfa835972d66b47",
+          "tags": [],
+          "figures": [],
+          "title": "חתונת הכסף",
+          "description": "קיץ תרצא",
+          "createdDate": "1931-01-15",
+          "__v": 0,
+          "fileUrl": "https://cdn.pixabay.com/photo/2021/11/08/23/29/nature-6780354__340.jpg",
+          "locations": []
+        },
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e07d6f3f645c9a948be130",
+          "tags": [
+            "fvdf"
+          ],
+          "figures": [],
+          "title": "בר מצוה לשלמה",
+          "description": "חורף מושלג ",
+          "createdDate": "2017-01-13",
+          "__v": 0,
+          "fileUrl": "https://cdn.pixabay.com/photo/2020/02/08/14/36/trees-4830285__340.jpg",
+          "locations": []
+        },
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e082f9d9db6a98b9410b7a",
+          "tags": [
+            "fvdf",
+            "dsvd"
+          ],
+          "figures": [],
+          "title": "מסע שורשים בטבע",
+          "description": " נסענו כל האחים לטיול ",
+          "createdDate": "2018-01-13",
+          "__v": 0,
+          "fileUrl": "https://yefe.co.il/wp-content/uploads/2020/04/%D7%90%D7%97%D7%93-%D7%9E%D7%A2%D7%99%D7%A8-216x326.gif",
+          "locations": []
+        },
+      
+      ]
+    useEffect(() => {
+        setProducts(items1);
+    })
+
+
 
     // useEffect(() => {
-    //     productService.getProducts(sd)
-    //     .then(data1 => setProducts(data1.data)).catch(function (error) {
-    //                 // handle error
-    //                 console.log(error);
-    //               });
-    // }, []);  
+    //     return () => {
+    //         axios.get(`http://localhost:3500/api/items`)
+    //             .then(function (response) {
+    //                 setProducts(response.data)
 
-    useEffect(() => {
-        axios.get(`http://localhost:3500/api/items`)
-          .then(function (response) {
-            setProduct(response.data)
-    
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-          })
-    
-      }, [])
-    
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error);
+    //             })
+
+    //     }
+    // })
+
+
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
@@ -114,7 +159,7 @@ export default function ImageT  ()  {
 
         if (product.name.trim()) {
             let _products = [...products];
-            let _product = {...product};
+            let _product = { ...product };
             if (product.id) {
                 const index = findIndexById(product.id);
 
@@ -135,7 +180,7 @@ export default function ImageT  ()  {
     }
 
     const editProduct = (product) => {
-        setProduct({...product});
+        setProduct({ ...product });
         setProductDialog(true);
     }
 
@@ -184,22 +229,22 @@ export default function ImageT  ()  {
             const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
-            const importedData = data.map(d => {
-                d = d.split(',');
-                const processedData = cols.reduce((obj, c, i) => {
-                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
-                    obj[c] = d[i].replace(/['"]+/g, '');
-                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
-                    return obj;
-                }, {});
+            // const importedData = data.map(d => {
+            //     d = d.split(',');
+            //     const processedData = cols.reduce((obj, c, i) => {
+            //         c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
+            //         obj[c] = d[i].replace(/['"]+/g, '');
+            //         (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
+            //         return obj;
+            //     }, {});
 
-                processedData['id'] = createId();
-                return processedData;
-            });
+            //     processedData['id'] = createId();
+            //     return processedData;
+            // });
 
-            const _products = [...products, ...importedData];
+            // const _products = [...products, ...importedData];
 
-            setProducts(_products);
+            // setProducts(_products);
         };
 
         reader.readAsText(file, 'UTF-8');
@@ -213,7 +258,18 @@ export default function ImageT  ()  {
         setDeleteProductsDialog(true);
     }
 
+
     const deleteSelectedProducts = () => {
+
+        // axios.delete(`http://localhost:3500/api/items`)
+        // .then(function (response) {
+        //     setProducts(response.data)
+
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // })
+
         let _products = products.filter(val => !selectedProducts.includes(val));
         setProducts(_products);
         setDeleteProductsDialog(false);
@@ -222,14 +278,14 @@ export default function ImageT  ()  {
     }
 
     const onCategoryChange = (e) => {
-        let _product = {...product};
+        let _product = { ...product };
         _product['category'] = e.value;
         setProduct(_product);
     }
 
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
-        let _product = {...product};
+        let _product = { ...product };
         _product[`${name}`] = val;
 
         setProduct(_product);
@@ -237,7 +293,7 @@ export default function ImageT  ()  {
 
     const onInputNumberChange = (e, name) => {
         const val = e.value || 0;
-        let _product = {...product};
+        let _product = { ...product };
         _product[`${name}`] = val;
 
         setProduct(_product);
@@ -252,28 +308,28 @@ export default function ImageT  ()  {
         )
     }
 
-    const rightToolbarTemplate = () => {
-        return (
-            <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} />
-                <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
-            </React.Fragment>
-        )
-    }
+    // const rightToolbarTemplate = () => {
+    //     return (
+    //         <React.Fragment>
+    //             <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} />
+    //             <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
+    //         </React.Fragment>
+    //     )
+    // }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src = 'http://nplumber.co.il/wp-content/uploads/2015/06/%D7%94%D7%A1%D7%A8%D7%AA-%D7%A9%D7%95%D7%A8%D7%A9%D7%99%D7%9D-%D7%9E%D7%91%D7%99%D7%95%D7%91.jpg'} alt={rowData.image} className="product-image" style={{ width: 250, height: 200 }} />
     }
 
-  
 
-    const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readOnly cancel={false} />;
-    }
 
-    const statusBodyTemplate = (rowData) => {
-        return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
-    }
+    // const ratingBodyTemplate = (rowData) => {
+    //     return <Rating value={rowData.rating} readOnly cancel={false} />;
+    // }
+
+    // const statusBodyTemplate = (rowData) => {
+    //     return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
+    // }
 
     const actionBodyTemplate = (rowData) => {
         return (
@@ -286,19 +342,19 @@ export default function ImageT  ()  {
 
     const header = (
         <div className="table-header">
-            <h5 className="mx-0 my-1">Manage Products</h5>
+            <h5 className="mx-0 my-1">Display with table</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
             </span>
         </div>
     );
-     const productDialogFooter = (
+    const productDialogFooter = (
         <React.Fragment>
-             <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
+            <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
             <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={saveProduct} />
-       </React.Fragment>
-     );
+        </React.Fragment>
+    );
     const deleteProductDialogFooter = (
         <React.Fragment>
             <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteProductDialog} />
@@ -311,32 +367,45 @@ export default function ImageT  ()  {
             <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteSelectedProducts} />
         </React.Fragment>
     );
-    
+
     return (
-        <div className="datatable-crud-demo">
+        <div >
+            {/* <div className="datatable-crud-demo"> */}
+
             <Toast ref={toast} />
 
+
+
+
             <div className="card">
-                {/* <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar> */}
+
+
+                <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
+                 {/* right={rightToolbarTemplate} */}
 
                 <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
                     globalFilter={globalFilter} header={header} responsiveLayout="scroll">
-                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
-                    <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
-                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
-                    <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    {/* <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column> */}
+                    {/* <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column> */}
+                    <Column field="createdDate" header="Date" sortable style={{ minWidth: '10rem' }}></Column>
+                  
+                    <Column field="description" header="Description" sortable style={{ minWidth: '2rem' }}></Column>
+                    <Column field="title" header="Title" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column field="fileUrl" header="Image" body={imageBodyTemplate} ></Column>
+                    <img src={products.fileUrl}></img>
+                    {/*  */}
+                    {/* <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
+                    {/* <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                 </DataTable>
+
             </div>
 
-            <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={`images/product/${product.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
+            <Dialog visible={productDialog} style={{ width: '450px' }} header=" Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                {product.image && <img src={`images/product/${product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
                 <div className="field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -369,25 +438,25 @@ export default function ImageT  ()  {
                     </div>
                 </div>
 
-                
+
             </Dialog>
 
             <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {product && <span>Are you sure you want to delete <b>{product.name}</b>?</span>}
                 </div>
             </Dialog>
 
             <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {product && <span>Are you sure you want to delete the selected products?</span>}
                 </div>
             </Dialog>
         </div>
     );
 }
-          
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(<ImageT />, rootElement);

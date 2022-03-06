@@ -11,9 +11,14 @@ import ImageUpload from "./imageUpload";
 import SideNav from "./sideNav";
 import CalendarItem from "./calendarItem";
 import itemService from '../services/itemService';
+import TextAreaDetails from "./textAreaDetails";
+import imageService from "../services/imageService";
 
 export default function Item(props) {
 
+  
+    
+   
   
   const defaultValues = {
     id: '',
@@ -24,10 +29,12 @@ export default function Item(props) {
     locations: [],
     takenDate:'',
   }
+
+  const [selectedFile,setSelectedFile] = useState(null);
   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
  
-  const [fileUrl,setFileUrl]=useState('');
+  const [myFile,setMyFile]=useState(null);
   const [myLocationsArry,setMyLocationsArry]=useState([]);
 
   const [showMessage, setShowMessage] = useState(false);
@@ -41,33 +48,27 @@ export default function Item(props) {
 
   const [calenderDefaultValue, setCalenderDefaultValue] = useState(null);
   const [takenDate,setTakenDate] = useState(null);
+  const [isItem,setIsItem]=useState(false);
+  const [objectItem,setObjectItem]= useState(null);
  
   
-
-  const writerArry = [{ id: '1', writerName: 'chaya', text: 'התמונה הצטלמה בגן ליד הבית' }, { id: '2', writerName: 'ahova', text: 'זה היה ביום ההולדת הרביעי של סבתא' },
-  { id: '3', writerName: 'sari', text: 'ד3' }, { id: '4', writerName: 'בילי', text: 'העץ הזה עדיין קיים' }, { id: '5', writerName: 'יוסף', text: 'דוד נפתלי צלם את התמונה' }];
-
-  //const[htmlTextArea,setHtmlTextArea]=useState('');
- 
     useEffect(()=>{
-      //props.updateAccount();
-       // console.log('sssssss',props.account);
-        //if(Array.isArray(locationArray) && locationArray.length == 0 ){
       locationService.getLocations().then(data=>{setLocationArray(data)});
       
       const myFiguresArray = [
-        { id: 'chocolate', name: 'סבא נתן' ,description: 'fdg'},
-        { id: '324', name: 'סבתא נחמה' ,description: 'fdg' },
-        { id: 'strawberry', name: 'ישי יום הולדת שמח' ,description: 'fdg' },
-        { id: 'vanilla', name: 'דודה יהודית'  ,description: 'fdg'}
+        { id: '111', name: 'אבא ישראל' ,description: 'אבא של יהושע'},
+        { id: '112', name: 'יהושע' ,description: '' },
+        { id: '113', name: 'ישראל' ,description: 'בן של יהושעי' },
+        { id: '114', name: 'עטרה'  ,description: 'בת של יהושע'},
+        { id: '115', name: 'נכדה -עטרה'  ,description: 'נכדה של יהושע'}
       ];
 
-    
+      console.log("itemId: 1,============= בשליחה לפרטים itemId!!!!!!!!!!!!!!");
+        
 
       setFiguresArray(myFiguresArray);
       
-   //  setLocationSelectValue([Array.from(locationArray)[0],Array.from( locationArray)[2]]);
-   // });}
+   
     },[]); 
 
 
@@ -75,7 +76,12 @@ export default function Item(props) {
 
     
   function clickImageUpload(value){
-    setFileUrl(value);
+    setSelectedFile({
+      selectedFile:value,
+      loaded: 0,
+    })
+    console.log('selectedFile&&&&&&',value);
+    setMyFile(value);
   }
 
   function clickFigures(value) {
@@ -92,28 +98,43 @@ export default function Item(props) {
     setTakenDate(value);
   }
 
-  const htmlList = locationArray.map((l,i)=> <h6 key={i}>{l.name}</h6>);
-  const htmlLocations = JSON.stringify(locationSelectValue);
+  //const htmlList = locationArray.map((l,i)=> <h6 key={i}>{l.name}</h6>);
+  //const htmlLocations = JSON.stringify(locationSelectValue);
   const htmlFingures = JSON.stringify(figuresSelectValue);
-  const htmlTextArea = writerArry.map((writer,i) =>
-    <div className="row " key={i}><label>{writer.writerName}</label><textarea value={writer.id} name={writer.id && writer.name} cols="10" rows="2">{writer.text}</textarea></div>
-  );
 
   const onSubmit = async (data) => {
-   
-    const i = {
-      fileUrl: fileUrl,
+    console.log('data',data);
+    console.log('accountId:56545 -----------props.accountId!!!!!',data);
+    try {
+    //if (data != undefined){
+
+      const i = {
+      fileUrl: selectedFile.selectedFile.name,
+      //file:myFile.selectedFile,
       figures: figuresSelectValue,
       title: data.title,
       description: data.description,
       locations: locationSelectValue,
       takenDate:takenDate,
-      accountId:props.account,
+      accountId:56545//props.accountId,
     };
+   // console.log('selectedFile',selectedFile);
+    await imageService.addImage(selectedFile);
+    await itemService.addItem(i).then(data=>{setObjectItem(data)});//.errors(console.log('service erorr'));
+    
+    //}
+    
+     
     //React.forwardRef()
-    console.log(i);
-    try {
-      await itemService.addItem(i);
+    console.log('objectItem',objectItem);
+    console.log('objectItem._id',objectItem._id);
+    if(objectItem != undefined && objectItem._id != null)
+    {
+      setIsItem(true);
+    }
+    
+    
+      
     }
     catch (ex) {
       console.log(ex);
@@ -122,12 +143,12 @@ export default function Item(props) {
 
   const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
   
-
+  
   return (
     <div className="container">
-      <div>{htmlList}</div>
-      <div>{htmlFingures}</div>
-      <div>{htmlLocations}</div>
+      {/* <div>{htmlList}</div> */}
+      {/* <div>{htmlFingures}</div> */}
+      {/* <div>{htmlLocations}</div> */}
       <SideNav />
       {/* <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                     <div className="text-center mt-8 p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
@@ -147,7 +168,8 @@ export default function Item(props) {
               </div>
               <div className="col-md-6">
 
-              <form onSubmit={handleSubmit(onSubmit())} >
+              <form onSubmit={handleSubmit(onSubmit)} >
+              <br></br>
                 <span className="p-float-label">
                    <Controller name="title" control={control} render={({ field, fieldState }) => (
                     <InputText id={field.title} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
@@ -155,34 +177,40 @@ export default function Item(props) {
                   {/* <button onClick={setShowMessage(true)}></button> */}
                   <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Titel</label>
                 </span>
+                <br></br>
                 <span className="p-float-label">
                   <Controller name="description" control={control} render={({ field, fieldState }) => (
                     <InputText id={field.description} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
                   )} />
                   <label htmlFor="description" className={classNames({ 'p-error': errors.name })}>Description</label>
                 </span>
+                <br></br>
                 <span className="p-float-label">
                    <ItemProperty  optionsArray={figuresArray} place_holder={figuresPlaceHolder} defaultValue={figuresSelectValue} onChildClick={clickFigures}></ItemProperty>
                    
                 
                   </span>
-
+                  <br></br>
                   <span className="p-float-label">
                    <ItemProperty  optionsArray={locationArray} place_holder={locationPlaceHolder} defaultValue={locationSelectValue} onChildClick={clickLocation}></ItemProperty>
                  
                   </span>
-                
+                  <br></br>
                  
                   <span className="p-float-label"> <CalendarItem  defaultValue={calenderDefaultValue} onChildClick={clickCalendar}></CalendarItem>
                 
                   </span>
                 
-                <button>save</button>
+                <br></br>
+                <Button type="save" label="save" className="p-mt-2" /> 
                 </form>
               </div>
             
           </div>
-          {htmlTextArea}
+          {/* {myHtmlTextAreaDetails}
+          <TextAreaDetails item={4562} user={852}></TextAreaDetails>
+          { this.state.showResults ? <Results /> : null } */}
+         {isItem ? <TextAreaDetails itemId={objectItem._id/*defaultValues.id*/} user={props.user}></TextAreaDetails>:null }
         </div>
       </div>
     </div>

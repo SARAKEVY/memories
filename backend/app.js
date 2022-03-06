@@ -5,12 +5,16 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const port = 3500
 
+const multer = require('multer')
+
 const accountsRouter = require('./routes/accounts');
 const usersRouter = require('./routes/users');
 const itemsRouter = require('./routes/items');
 const locationsRouter = require('./routes/locations');
 const authRouter = require('./routes/auth');
-const accountAuthRouter = require('./routes/accountAuth')
+const accountAuthRouter = require('./routes/accountAuth');
+const detailsRouter = require('./routes/details');
+const imageRouter = require('./routes/image');
 
 app.use(express.json());
 
@@ -27,7 +31,8 @@ app.use('/api/auth', authRouter)
 app.use('/api/accountAuth', accountAuthRouter)
 app.use('/api/items', itemsRouter)
 app.use('/api/locations', locationsRouter)
-
+app.use('/api/details',  detailsRouter)
+app.use('/api/image',  imageRouter)
 
 mongoose.connect('mongodb://localhost/memories', {
   useNewUrlParser: true,

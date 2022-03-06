@@ -24,7 +24,7 @@ function Location(){
         //console.log('sssssss');
       locationService.getLocations().then(data=>{setLocationArray(data);});
   //console.log('a',locationArray);
-    });
+    },[]);
 //   useEffect(()=>{
 //     utilsService.getItemsById("https://jsonplaceholder.typicode.com/users",props.userId).then(data=>{setUserName(data.name);});
 // },[props.userId]);
