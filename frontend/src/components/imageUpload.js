@@ -9,10 +9,11 @@ class Upload extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
   handleChange(event) {
+    console.log('event.target.files[0]',event.target.files[0])
     this.setState({
       file: URL.createObjectURL(event.target.files[0])
     })
-    this.props.onChildClick(URL.createObjectURL(event.target.files[0]));
+    this.props.onChildClick(event.target.files[0]);
     
 // {/* <img src={this.state.file} height="300" />
 

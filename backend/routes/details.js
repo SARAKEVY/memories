@@ -15,6 +15,17 @@ router.get('/', async (req, res) => {
 });
 
 
+router.get('/:itemId', async (req, res) => {
+    const details = await Detail.find({ itemId: req.paramss.itemId })
+
+    try {
+        res.json(details)
+    }
+    catch (error) {
+        res.status(500).send(error);
+    }
+})
+
 router.get('/:id', async (req, res) => {
     const detail = await Detail.findById(req.params.id).exec();
 
@@ -28,7 +39,6 @@ router.get('/:id', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-
     console.log('hi detail' ,req.body)
     const { error } =validateDetail(req.body);
     console.log('error',error);
@@ -38,8 +48,8 @@ router.post('/', async (req, res) => {
         let new_detail = new Detail({
             itemId:req.body.itemId,
             textDetail: req.body.textDetail,
-            ownerDetailId: req.body.ownerDetailId,
-            ownerDetailName: req.body.ownerDetailName,
+            ownerId: req.body.ownerId,
+            ownerName: req.body.ownerName,
         });
         
         await new_detail.save();
