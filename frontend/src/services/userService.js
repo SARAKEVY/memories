@@ -40,6 +40,7 @@ export async function getUserAccounts ( userId){
 
 /* add account to array accountUser */
 export async function addJoinAccount(newData){
+    console.log(newData);
     return axios.post(`${API_URL}/users/join`, newData);
 }
 const loginService = {

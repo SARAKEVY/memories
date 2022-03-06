@@ -35,20 +35,20 @@ function JoinAccount(props){
     const onSubmit =  async(data) => {
         setFormData(data);
         setShowMessage(true);
-        console.log("form", data);
+        console.log("form", data.accountId);
        try{
-        await accountService.joinAccount (data);
+        await accountService.joinAccount(data.accountId);
         reset();
         toast.success('login success!')
         props.updateAccount();
-        
-        const newData = {
-        userId: props.user._id, 
-        accountId: props.account._id,
-        accountName:data.accountName
-        } 
+        const newData = await accountService.getAccount(data.accountId);
         console.log(newData);
-        await userService.addJoinAccount(newData);
+        const sendData = {
+        userId: props.user._id, 
+        data:newData
+        }
+        console.log(sendData);
+        await userService.addJoinAccount(sendData);
         
         history('/item');
         }
@@ -101,15 +101,6 @@ function JoinAccount(props){
                         <h5 className="p-text-center h1">Join Acconut</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
 
-                        <div className="p-field">
-                                <span className="p-float-label">
-                                    <Controller name="accountName" control={control} rules={{ required: 'Account Name is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.accountName} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="accountName" className={classNames({ 'p-error': errors.accountName })}>Account Name*</label>
-                                </span>
-                                {getFormErrorMessage('accountName')}
-                            </div>
 
                         <div className="p-field">
                                 <span className="p-float-label">

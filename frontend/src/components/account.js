@@ -42,19 +42,18 @@ function Account(props){
        try{
         const newAccount = await accountService.addAccount (data);
         console.log("newAccount", newAccount);
+        localStorage.setItem("accountToken", newAccount.data.accountToken);
+         //props.updateAcconut();
        /*  history({
            pathname:'/addParticipants/',
             search:`${newAccount.data._id}`});
         } */
-        history(`/addParticipants/${newAccount.data._id}`)
+        history(`/addParticipants/${newAccount}`);
+       // window.location= `/addParticipants/${newAccount}`;
     }
     catch(ex) {
         console.log(ex);
         }
-
-       
-
-
     };
 
 

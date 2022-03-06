@@ -22,9 +22,8 @@ function Editaccount(props){
         const data = await accountService.getAccountData(id);
         console.log(data.data);
         setCurrentAccount(data.data);
-       
         
-        };
+     };
         accountData(id);
     }, []);
 
@@ -70,14 +69,14 @@ function Editaccount(props){
        try{
         const newAccount = await accountService.addAccount (data);
         console.log("newAccount", newAccount);
-        history(`/addParticipants/${newAccount.data._id}`)
+        history(`/addParticipants/${newAccount.data._id}`);
     }
     catch(ex) {
         console.log(ex);
         }
     };
 
-
+    
 
 
 

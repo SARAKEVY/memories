@@ -26,11 +26,11 @@ router.post ('/', async (req, res ) => {
   
 })
 
-router.post('/auth', async (req, res) => {
-  console.log(req.body.accountId);
+router.post('/auth/:id', async (req, res) => {
+  console.log('t', req.params.id);
   try{
    
-    let addUser = await Account.findOne({_id: req.body.accountId});
+    let addUser = await Account.findOne({_id: req.params.id});
    
     res.json({token: addUser.generateAuthAccountToken()}); 
   
