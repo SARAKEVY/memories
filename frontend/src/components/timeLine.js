@@ -37,7 +37,7 @@ export default function TimeLine() {
       "_id": "61e07ac10bfa835972d66b47",
       "tags": [],
       "figures": [],
-      "title": "חתונת סבא וסבתא מרוקו",
+      "title": "חתונת הכסף",
       "description": "קיץ תרצא",
       "createdDate": "1931-01-15",
       "__v": 0,
