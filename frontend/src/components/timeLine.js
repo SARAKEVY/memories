@@ -77,23 +77,23 @@ export default function TimeLine() {
   ]
   const IMAGE_STYLES = { Maxwidth: 250, height: 200 };
 
-  // useEffect(() => {
-  //   return () => {
-  //     // async () => {
-  //     axios.get(`http://localhost:3500/api/items`)
-  //       .then(function (response) {
-  //         setItems(response.data)
-
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //       })
-  //   }
-
-  // });
   useEffect(() => {
-    setItems(items1);
-  })
+    return () => {
+      // async () => {
+      axios.get(`http://localhost:3500/api/items`)
+        .then(function (response) {
+          setItems(response.data)
+
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    }
+
+  });
+  // useEffect(() => {
+  //   setItems(items1);
+  // })
 
 
   const correctDate = (today) => {
@@ -121,10 +121,10 @@ export default function TimeLine() {
 
         {items.map(item => (
           <VerticalTimelineElement
-            key={item.id}
+            key={item.takenDate}
 
             className="vertical-timeline-element--work"
-            date={item.createdDate}
+            date={item.takenDate}
             iconStyle={{ background: "#41d3d3", color: "#fff", textDecoration: "6546" }}
 
           >

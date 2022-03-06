@@ -110,25 +110,25 @@ export default function ImageT() {
         },
       
       ]
-    useEffect(() => {
-        setProducts(items1);
-    })
-
-
-
     // useEffect(() => {
-    //     return () => {
-    //         axios.get(`http://localhost:3500/api/items`)
-    //             .then(function (response) {
-    //                 setProducts(response.data)
-
-    //             })
-    //             .catch(function (error) {
-    //                 console.log(error);
-    //             })
-
-    //     }
+    //     setProducts(items1);
     // })
+
+
+
+    useEffect(() => {
+        return () => {
+            axios.get(`http://localhost:3500/api/items`)
+                .then(function (response) {
+                    setProducts(response.data)
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+        }
+    })
 
 
     const formatCurrency = (value) => {
@@ -390,7 +390,7 @@ export default function ImageT() {
                     globalFilter={globalFilter} header={header} responsiveLayout="scroll">
                     {/* <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column> */}
                     {/* <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column> */}
-                    <Column field="createdDate" header="Date" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column field="takenDate" header="Date" sortable style={{ minWidth: '10rem' }}></Column>
                   
                     <Column field="description" header="Description" sortable style={{ minWidth: '2rem' }}></Column>
                     <Column field="title" header="Title" sortable style={{ minWidth: '10rem' }}></Column>
