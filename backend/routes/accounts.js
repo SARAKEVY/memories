@@ -19,10 +19,11 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
+    console.log('6');
     const account = await Account.findById(req.params.id).exec();
-    console.log(account.accountName);
+    console.log(account);
     try {
-        res.send(account.accountName);
+        res.send(account);
         
     }
     catch (error) {
@@ -53,8 +54,11 @@ router.post('/', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         new_account.accountPassword = await bcrypt.hash(new_account.accountPassword, salt);
         await new_account.save();
-        res.send(_.pick(new_account, ['accountName', '_id']));
-        
+        const data = (_.pick(new_account, ['accountDescription','accountName','accountTarget', 'accountType','managerEmail','managerName', '_id']));
+        res.json(({accountToken: new_account.generateAuthAccountToken(), data: data}));
+         
+        //res.send(_.pick(new_account, ['accountDescription','accountName','accountTarget', 'accountType','managerEmail','managerName', '_id']));
+       
     }
     catch (e) {
         console.log(e);
@@ -79,13 +83,13 @@ router.put('/:id', async (req, res) => {
 
 
 router.delete('/:id', async (req, res) => {
-    const account = await Account.findOneAndDelete({_id:req.params.id})
-
+    const account = await Account.findOneAndRemove({_id:req.params.id})
+    if( ! account ) return res.status(404).send('Account does not exist');
     try {
         res.send('Account Delete');
     }
-    catch (error) {
-        res.status(500).send(error);
+    catch (ex) {
+        res.status(500).send(ex);
     }
 })
 

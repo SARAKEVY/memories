@@ -16,14 +16,13 @@ import "../index.css";
 
 function AddParticipants(props){
 
-    const { id } = useParams();
+   // const { id } = useParams();
     
-    useEffect(() => {
-      
-      
-        console.log("id", id);
-        
-    }, [])
+useEffect(() => {
+    props.updateAccount()
+}, [])
+
+
 
     const [ participantsList, setParticipantsList]= useState([]);
     const [showMessage, setShowMessage] = useState(false);
@@ -31,25 +30,27 @@ function AddParticipants(props){
     const [user ,setUser] = useState(null);
     const history = useNavigate();
 
-    const defaultValues = {
+     const defaultValues = {
         email: '',    
-    }
+    } 
 
     
 
-   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+   const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues});
 
-    function addParticipants(value){
-        let newArr = [];
-        newArr = participantsList;
+    const addParticipants = (e)=> {
+        console.log(e);
+        
+        /* const newArr = participantsList;
         newArr.push(value);
         setParticipantsList(newArr);
         console.log(newArr);
-        reset();
+        reset(); */
 
     }
 
-    const onSubmitData =  async() => {
+    const onSubmit =  async(e) => {
+
     console.log("form", participantsList);
        try{
         await accountService.addAccount(participantsList);
@@ -97,7 +98,7 @@ function AddParticipants(props){
 
                 <div className="p-d-flex p-jc-center">
                     <div className="card">
-                        <h5 className="p-text-center h1">Register</h5>
+                        <h5 className="p-text-center h1">Add Participants</h5>
                         <form  className="p-fluid">
                           
                             <div className="p-field">
@@ -113,9 +114,9 @@ function AddParticipants(props){
                                 {getFormErrorMessage('email')}
                             </div>
                             
-                           <div className="d-flex justify-content-center">
-                            <Button label="Add participants" onClick={() => addParticipants}className="p-mt-2 me-5" style={{backgroundColor:"green" }} />
-                            <Button onClick={() => onSubmitData} label="Submit" className="p-mt-2" />
+                           <div className="container d-flex justify-content-center col-xl-6">
+                            <button onClick={() => addParticipants()} className="btn btn-success p-3 m-5 col-xl-6 p-mt-2 me-5">Add participants</button>
+                            <button onClick={() => onSubmit}  className="btn btn-primary p-mt-2 m-5 col-xl-6">submit</button>
                             </div>
                         </form>
                     </div>

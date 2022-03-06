@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import accountService from '../services/accountService';
+import ErrorMassage from './common/errorMassege';
 
 const DeleteAccount = (props) => {
     
@@ -22,7 +23,7 @@ useEffect(() => {
     const [ account, setAccount] = useState({})
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
-
+    const [error, setError] = useState();
 
     
     const accept = () => {
@@ -43,14 +44,19 @@ useEffect(() => {
         });
     }; */
 
-    const confirm2 = ()=> {
+    const confirm2 = async()=> {
        const id = account._id;
         try{
-            accountService.delAccount(id);
+            await accountService.delAccount(id);
+            localStorage.removeItem("accountToken");
+            props.updateAccount()
             toast.current.show({ severity: 'info', summary: 'Account Delete', life: 3000 });
+            history('/joinAccount');
         }
         catch(ex){
-            console.log(ex.massege);
+            if(ex.response.status === 404){
+                setError('Account does not exist');
+            };
         }
         
     }
@@ -77,11 +83,12 @@ useEffect(() => {
 
     <div className="card row mt-8">
     <h4 className="m-5 ">You're sure you want to delete the account?</h4>
-    <div className="d-flex justify-content-evenly mb-6">
+    <div className="d-flex justify-content-evenly mb-4">
     <Button onClick={confirm1} icon="pi pi-times" label="No!" className="mr-2 col-xl-4"></Button>
     <Button onClick={confirm2} icon="pi pi-check" label="Delete" className="p-button-danger p-button-outlined col-xl-4"></Button>
-    </div>
     
+    </div>
+    {error &&<ErrorMassage massegeText={error}/>}
     </div>
          </div>
         </div>

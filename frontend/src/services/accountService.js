@@ -36,7 +36,8 @@ export async function getAccountsName(id){
 
 /* join to account */
 export async function joinAccount(id){
-    const newAccount = await axios.post(`${API_URL}/accountAuth/auth`, id);
+    console.log(id);
+    const newAccount = await axios.post(`${API_URL}/accountAuth/auth/${id}`);
     console.log(newAccount);
    localStorage.setItem("accountToken",newAccount.data.token);
      
@@ -46,6 +47,12 @@ export async function joinAccount(id){
 export async function getAccountData(id){
     console.log("j", id);
    return axios.get(`${API_URL}/accounts/edit/${id}`);
+}
+
+
+export async function getAccount(id){
+    console.log("j", id);
+   return axios.get(`${API_URL}/accounts/${id}`);
 }
 
 /* delete account */
@@ -60,7 +67,8 @@ const service = {
     joinAccount,
     getAccountsName,
     getAccountData,
-    delAccount
+    delAccount,
+    getAccount
  
 }
 

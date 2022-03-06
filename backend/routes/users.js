@@ -53,7 +53,7 @@ router.post('/join', async (req, res) => {
     if (addAccount.AccountId === accountId ) {
      res.status(400).send( "You are already logged in to this account" );
     }
-    await User.findOneAndUpdate({_id: userId}, {$push: {userAccounts: req.body}});
+    await User.findOneAndUpdate({_id: userId}, {$push: {userAccounts: req.body.data.data}});
 })
 
 

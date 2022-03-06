@@ -27,13 +27,14 @@ useEffect(() => {
         return userId;
 }
 
-    const getMyAccount = async () =>{
+    const getMyAccount =async () =>{
+        console.log("hi");
         const userId = getId();
         console.log("hi",userId);
         const newAccountList = await userService.getUserAccounts( userId);
         setMyAccount(newAccountList.data)
         console.log("my", newAccountList.data);
-        console.log("my", newAccountList.data.accountName);
+        
        /*  nameAccountList(); */
         }
         
@@ -46,6 +47,13 @@ useEffect(() => {
             console.log(data);
           }
     
+
+        async function replaceAccount(accountId) {
+            const account = await accountService.joinAccount(accountId);
+            setMyAccount(account);
+            props.updateAccount();
+          }
+
  /* const nameAccount = (currentUserId) =>{
          accountService.getAccountsName(currentUserId);
       
@@ -60,7 +68,7 @@ return(
         <React.Fragment>
         <div className="container-fluid d-flex dHeader">
             <div className="col-lg-8 d-flex align-items-center navSmall">
-                <NavBar account={props.account} user={props.user}/>
+                <NavBar account={props.account} user={props.user} updateUser={props.updateUser} updateAccount={props.updateAccount}/>
             </div>
 
 
@@ -78,13 +86,13 @@ return(
                     { props.user &&
                     <Link to = "#"  className="nav-link dropdown-toggle text-center h3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i className="far fa-user linkAccounts avatareBtn dh"></i><br></br><span className="h5 dH avatareBtn">{props.user.name}</span></Link >}
-                    { ! props.user &&  <Link to = "#" onClick={() => useEffect} className="nav-link text-center mt-3 h3 " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    { ! props.user &&  <Link to = "#" onClick={useEffect} className="nav-link text-center mt-3 h3 " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i className="far fa-user linkAccounts avatareBtn"></i><br></br><span className="h5"></span></Link >}
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">{myAccount.map((item ,i) => (
-                            <li key={i}><Link to = "#" /* {`./item?account=${item.accountId}`} */ onClick={ ()=> accountItems(item.accountId)} className="dropdown-item" href="#">{item.accountName}</Link ></li>
+                            <li key={i}><Link to = "/showItems" account={myAccount} onClick ={ replaceAccount(item.accountId)} className="dropdown-item" href="#">{item.accountName}</Link ></li>
                             ))}
                 
-                            <li><Link to = ""  className="dropdown-item" href="#">date</Link ></li>
+                            <li><Link to = ""  className="dropdown-item" href="#"></Link ></li>
                         </ul>
                     </li> 
                 </div> 

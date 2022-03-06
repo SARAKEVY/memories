@@ -32,6 +32,7 @@ import NavBar3 from './components/navbar3';
 import JoinAccount from "./components/joinAccount";
 import DeleteAccount from "./components/deleteAccount";
 import EditAccount from "./components/editAccount";
+import ShowItems from "./components/showItems";
 import 'react-toastify/dist/ReactToastify.css';
 import Dropdown from "./components/dropdown";
 import './sass/main.css';
@@ -41,7 +42,7 @@ import './App.css';
 function App() {
 
   const [ user, setUser] = useState('');
-  const [ account, setAcconut] = useState('');
+  const [ account, setAccount] = useState('');
   
   
   useEffect(() =>{
@@ -55,17 +56,23 @@ function App() {
 
    function updateUser() {
    const myUser = userService.getCurrentUser();
-   setUser(myUser);
-   console.log("***myUser",myUser);
-   
+  if ( user !== myUser && setUser(myUser) );
+  } 
   
-    } 
-  
-    function updateAccount(){
-      const cAccount = accountService.getCurrentAccount();
-      setAcconut(cAccount);
-     console.log("account:" ,cAccount);
+    const updateAccount= () => {
+    const cAccount = accountService.getCurrentAccount();
+     if (!cAccount ){
+       setAccount('')
+      return false;
+     }
+     if( account !== cAccount){
+      setAccount(cAccount) ;
+      }
+    
+      console.log("account:" ,cAccount);
     }
+  
+  
 
 return (
   
@@ -82,8 +89,8 @@ return (
         <Routes>
           <Route path = '/home' element={<Home updateUser={updateUser} user={user}/>}/>
           <Route path = "sideNav" element={<SideNav/>}/>
-          <Route path = "account" element={<Account/>}/>
-          <Route path = "editAccount" element={<EditAccount accountId = {account}/>}/>
+          <Route path = "account" element={<Account updateUser={updateUser} updateAccount={updateAccount} user={user} account={account}/>}/>
+          <Route path = "editAccount" element={<EditAccount account = {account}/>}/>
           <Route path = "navbar3" element={<NavBar3/>}/>
           <Route path = "accountValidation" element={<AccountValidation/>}/>
           <Route path = "signup" element={<Signup/>}/>
@@ -96,13 +103,15 @@ return (
           <Route path = "navBar" element={<NavBar updateUser={updateUser} user={user} updateAccount={updateAccount} account={account} />}/>
           <Route path = "accountLogin" element={<AccountLogin/>}/>
           <Route path = "joinAccount" element={<JoinAccount updateAccount={updateAccount} user={user} account={account}/>}/>
-          <Route path = "addParticipants/:id" element={<AddParticipants/>}/>
-          <Route path ="openAccount" element = {<Account/>}/>
-          <Route path ="timel" element = {<TimeLine/>}/>
-          <Route path ="t" element = {<ImageT/>}/>
-
-            {/* <Route path = "galery" element={<Galery/>}/>  */}
-       
+          <Route path = "addParticipants" element={<AddParticipants account={account} updateAccount={updateAccount}/>}/>
+          <Route path = "timel" element={<TimeLine/>}/>  
+          <Route path = "t" element={<ImageT/>}/>  
+          <Route path = "showItems" element={<ShowItems/>}/>
+          <Route path = "navButtons" element={<NavButtons/>}/>
+          <Route path = "dropdown" element={<Dropdown/>}/>
+          <Route path ="deleteAccount" element={<DeleteAccount account={account} user={user} updateAccount={updateAccount}/>}/>
+          <Route path ="googleLogin" element={<GoogleLogin updateUser={updateUser} user={user}/>}/>
+         
          </Routes> 
       
       </main>
