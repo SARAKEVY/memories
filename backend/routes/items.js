@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
     console.log('itemService-backend ',req.body);  
 try{
     let newItem = new Item({
-      fileUrl: '',
+      fileUrl: req.body.fileUrl,
       //file:myFile.selectedFile,
      // fileName:req.body.myFile,
       figures: req.body.figures,
@@ -59,15 +59,16 @@ try{
       takenDate:req.body.takenDate,
       accountId:req.body.accountId,
     });
-    console.log('by2');
-  //  await newItem.save();
-  //  res.send(newItem);
+    
+   await newItem.save();
+   //res.send(newItem);
+   return res.status(200).send(newItem)
+   
 }catch (e) {
     console.log(e);
     res.status(500).send(e.massege);
 }
 });
-
 
 
 router.put('/:id', async (req, res) => {

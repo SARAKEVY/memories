@@ -9,14 +9,15 @@ var storage = multer.diskStorage({
   cb(null, 'uploads')
 },
 filename: function (req, file, cb) {
-  cb(null, Date.now() + '-' +file.originalname )
+  cb(null, file.originalname )
 }
 })
 
 var upload = multer({ storage: storage }).single('file')
 
 router.post('/upload',function(req, res) {
-     console.log('upload ????????',req.body)
+  console.log('צריך לפתור את בעיית התמונות הכפולות');
+    // console.log('upload ????????',req.body)
   upload(req, res, function (err) {
          if (err instanceof multer.MulterError) {
              return res.status(500).json(err)

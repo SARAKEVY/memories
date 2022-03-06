@@ -7,6 +7,7 @@ import {API_URL} from './httpService';
 export function addImage ( data ) {
 
     const imageData = new FormData() ;
+   
     imageData.append('file',data.selectedFile);
     console.log('imageService--->data',data);
     console.log('addImage***********imageData',imageData);

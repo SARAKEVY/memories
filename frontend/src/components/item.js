@@ -56,10 +56,11 @@ export default function Item(props) {
       locationService.getLocations().then(data=>{setLocationArray(data)});
       
       const myFiguresArray = [
-        { id: 'chocolate', name: 'סבא נתן' ,description: 'fdg'},
-        { id: '324', name: 'סבתא נחמה' ,description: 'fdg' },
-        { id: 'strawberry', name: 'ישי יום הולדת שמח' ,description: 'fdg' },
-        { id: 'vanilla', name: 'דודה יהודית'  ,description: 'fdg'}
+        { id: '111', name: 'אבא ישראל' ,description: 'אבא של יהושע'},
+        { id: '112', name: 'יהושע' ,description: '' },
+        { id: '113', name: 'ישראל' ,description: 'בן של יהושעי' },
+        { id: '114', name: 'עטרה'  ,description: 'בת של יהושע'},
+        { id: '115', name: 'נכדה -עטרה'  ,description: 'נכדה של יהושע'}
       ];
 
       console.log("itemId: 1,============= בשליחה לפרטים itemId!!!!!!!!!!!!!!");
@@ -108,7 +109,7 @@ export default function Item(props) {
     //if (data != undefined){
 
       const i = {
-      fileUrl: '',
+      fileUrl: selectedFile.selectedFile.name,
       //file:myFile.selectedFile,
       figures: figuresSelectValue,
       title: data.title,
@@ -117,9 +118,9 @@ export default function Item(props) {
       takenDate:takenDate,
       accountId:56545//props.accountId,
     };
-    console.log('selectedFile',selectedFile);
+   // console.log('selectedFile',selectedFile);
     await imageService.addImage(selectedFile);
-    await itemService.addItem(i).then(data=>{setObjectItem(data)}).errors(console.log('service erorr'));;
+    await itemService.addItem(i).then(data=>{setObjectItem(data)});//.errors(console.log('service erorr'));
     
     //}
     

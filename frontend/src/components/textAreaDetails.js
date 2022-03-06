@@ -10,7 +10,7 @@ export default function TextAreaDetails(props) {
     const [formData, setFormData] = useState({});
 
     useEffect(()=>{
-        detailService.getDetails().then(data=>{setDetailsArray(data)});
+        detailService.getDetailsByItem(props.itemId).then(data=>{setDetailsArray(data)});
         
       },[]); 
   
