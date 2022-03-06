@@ -98,6 +98,9 @@ return (
           <Route path = "joinAccount" element={<JoinAccount updateAccount={updateAccount} user={user} account={account}/>}/>
           <Route path = "addParticipants/:id" element={<AddParticipants/>}/>
           <Route path ="openAccount" element = {<Account/>}/>
+          <Route path ="timel" element = {<TimeLine/>}/>
+          <Route path ="t" element = {<ImageT/>}/>
+
             {/* <Route path = "galery" element={<Galery/>}/>  */}
        
          </Routes> 

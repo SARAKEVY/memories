@@ -52,25 +52,84 @@ export default function ImageT() {
 
 
     // ];
-    // useEffect(() => {
-    //     setProducts(sd);
-    // })
 
-
-
+    const items1 = [
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e07abb0bfa835972d66b45",
+          "tags": [
+            "fvdf"
+          ],
+          "figures": [],
+          "title": "השורשים שלי",
+          "description": "אילן  מפואר",
+          "createdDate": "2022-01-13T19:16:36.130Z",
+          "__v": 0,
+          "fileUrl": "https://cdn.pixabay.com/photo/2018/04/03/20/29/forest-3287976__340.jpg",
+          "locations": []
+        },
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e07ac10bfa835972d66b47",
+          "tags": [],
+          "figures": [],
+          "title": "חתונת סבא וסבתא מרוקו",
+          "description": "קיץ תרצא",
+          "createdDate": "2022-01-13T19:16:36.130Z",
+          "__v": 0,
+          "fileUrl": "https://cdn.pixabay.com/photo/2021/11/08/23/29/nature-6780354__340.jpg",
+          "locations": []
+        },
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e07d6f3f645c9a948be130",
+          "tags": [
+            "fvdf"
+          ],
+          "figures": [],
+          "title": "בר מצוה לשלמה",
+          "description": "חורף מושלג היה",
+          "createdDate": "2022-01-13T19:27:32.745Z",
+          "__v": 0,
+          "fileUrl": "https://cdn.pixabay.com/photo/2020/02/08/14/36/trees-4830285__340.jpg",
+          "locations": []
+        },
+        {
+          "takenDate": "2022-03-06T10:08:43.191Z",
+          "_id": "61e082f9d9db6a98b9410b7a",
+          "tags": [
+            "fvdf",
+            "dsvd"
+          ],
+          "figures": [],
+          "title": "מסע שורשים בטבע",
+          "description": " נסענו כל האחים לטיול ",
+          "createdDate": "2022-01-13T19:42:22.553Z",
+          "__v": 0,
+          "fileUrl": "https://cdn.pixabay.com/photo/2017/10/18/16/08/wolves-2864647__340.jpg",
+          "locations": []
+        },
+      
+      ]
     useEffect(() => {
-        return () => {
-            axios.get(`http://localhost:3500/api/items`)
-                .then(function (response) {
-                    setProducts(response.data)
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-
-        }
+        setProducts(items1);
     })
+
+
+
+    // useEffect(() => {
+    //     return () => {
+    //         axios.get(`http://localhost:3500/api/items`)
+    //             .then(function (response) {
+    //                 setProducts(response.data)
+
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error);
+    //             })
+
+    //     }
+    // })
 
 
     const formatCurrency = (value) => {
@@ -260,7 +319,7 @@ export default function ImageT() {
     // }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" style={{ width: 250, height: 200 }} />
+        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.judaicalgeria.com/medias/images/rabbi-allouche-1.jpg?fx=r_1200_800'} alt={rowData.image} className="product-image" style={{ width: 250, height: 200 }} />
     }
 
 
@@ -284,7 +343,7 @@ export default function ImageT() {
 
     const header = (
         <div className="table-header">
-            <h5 className="mx-0 my-1">Manage Products</h5>
+            <h5 className="mx-0 my-1">Display with table</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -332,9 +391,12 @@ export default function ImageT() {
                     globalFilter={globalFilter} header={header} responsiveLayout="scroll">
                     {/* <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column> */}
                     {/* <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column> */}
-                    <Column field="description" header="description" sortable style={{ minWidth: '2rem' }}></Column>
+                    <Column field="createdDate" header="Date" sortable style={{ minWidth: '10rem' }}></Column>
+                  
+                    <Column field="description" header="Description" sortable style={{ minWidth: '2rem' }}></Column>
+                    <Column field="title" header="Title" sortable style={{ minWidth: '10rem' }}></Column>
                     <Column field="fileUrl" header="Image" body={imageBodyTemplate} src={products.fileUrl} ></Column>
-                    <Column field="title" header="title" sortable style={{ minWidth: '10rem' }}></Column>
+                
                     {/* <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
                     {/* <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
                     {/* <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column> */}

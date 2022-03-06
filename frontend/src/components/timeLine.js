@@ -10,33 +10,90 @@ import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-
+import Cd from './cd';
 
 
 export default function TimeLine() {
   // const history = useHistory();
   const [items, setItems] = useState([]);
   // const [globalFilter, setGlobalFilter] = useState(null);
-
+  const items1 = [
+    {
+      "takenDate": "2022-03-06T10:08:43.191Z",
+      "_id": "61e07abb0bfa835972d66b45",
+      "tags": [
+        "fvdf"
+      ],
+      "figures": [],
+      "title": "השורשים שלי",
+      "description": "אילן  מפואר",
+      "createdDate": "2022-01-13T19:16:36.130Z",
+      "__v": 0,
+      "fileUrl": "https://cdn.pixabay.com/photo/2018/04/03/20/29/forest-3287976__340.jpg",
+      "locations": []
+    },
+    {
+      "takenDate": "2022-03-06T10:08:43.191Z",
+      "_id": "61e07ac10bfa835972d66b47",
+      "tags": [],
+      "figures": [],
+      "title": "חתונת סבא וסבתא מרוקו",
+      "description": "קיץ תרצא",
+      "createdDate": "2022-01-13T19:16:36.130Z",
+      "__v": 0,
+      "fileUrl": "https://cdn.pixabay.com/photo/2021/11/08/23/29/nature-6780354__340.jpg",
+      "locations": []
+    },
+    {
+      "takenDate": "2022-03-06T10:08:43.191Z",
+      "_id": "61e07d6f3f645c9a948be130",
+      "tags": [
+        "fvdf"
+      ],
+      "figures": [],
+      "title": "בר מצוה לשלמה",
+      "description": "חורף מושלג היה",
+      "createdDate": "2022-01-13T19:27:32.745Z",
+      "__v": 0,
+      "fileUrl": "https://cdn.pixabay.com/photo/2020/02/08/14/36/trees-4830285__340.jpg",
+      "locations": []
+    },
+    {
+      "takenDate": "2022-03-06T10:08:43.191Z",
+      "_id": "61e082f9d9db6a98b9410b7a",
+      "tags": [
+        "fvdf",
+        "dsvd"
+      ],
+      "figures": [],
+      "title": "מסע שורשים בטבע",
+      "description": " נסענו כל האחים לטיול ",
+      "createdDate": "2022-01-13T19:42:22.553Z",
+      "__v": 0,
+      "fileUrl": "https://cdn.pixabay.com/photo/2017/10/18/16/08/wolves-2864647__340.jpg",
+      "locations": []
+    },
+  
+  ]
   const IMAGE_STYLES = { Maxwidth: 250, height: 200 };
 
+  // useEffect(() => {
+  //   return () => {
+  //     // async () => {
+  //     axios.get(`http://localhost:3500/api/items`)
+  //       .then(function (response) {
+  //         setItems(response.data)
+
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //       })
+  //   }
+
+  // });
   useEffect(() => {
-    return () => {
-      // async () => {
-      axios.get(`http://localhost:3500/api/items`)
-        .then(function (response) {
-          setItems(response.data)
-
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-
-    }
-
-
-  });
-
+    setItems(items1);
+  })
 
 
   const correctDate = (today) => {
@@ -44,7 +101,7 @@ export default function TimeLine() {
     const date1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     return date1;
   }
-  
+
   // const yourDate = new Date();   const NewDate = moment(yourDate, 'DD-MM-YYYY')   ; 
   return (
 
@@ -78,10 +135,10 @@ export default function TimeLine() {
             />
             <h6
               className="vertical-timeline-element-subtitle"
-              // dangerouslySetInnerHTML={{ __html: item.description + " - in  "  }}
-              // dangerouslySetInnerHTML={{ __html: item.description + " - in " + item.takenDate.format("DD/MM/YYYY") }}
-              // {`${item.takenDate.getDate()}-${item.takenDate.getMonth() + 1}-${item.takenDate.getFullYear()}`;}
-              //  {correctDate(item.takenDate)}
+              dangerouslySetInnerHTML={{ __html: item.description + " - in  " }}
+            // dangerouslySetInnerHTML={{ __html: item.description + " - in " + item.takenDate.format("DD/MM/YYYY") }}
+            // {`${item.takenDate.getDate()}-${item.takenDate.getMonth() + 1}-${item.takenDate.getFullYear()}`;}
+            //  {correctDate(item.takenDate)}
             />
             <img src={item.fileUrl} style={IMAGE_STYLES} ></img>
             <br></br>
@@ -91,11 +148,11 @@ export default function TimeLine() {
           </VerticalTimelineElement>
         ))}
       </VerticalTimeline>
+      {/* <Cd  ></Cd> */}
 
     </div >
   );
 }
-
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<TimeLine />, rootElement);
